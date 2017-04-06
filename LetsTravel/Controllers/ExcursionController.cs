@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Domain.Concrete;
 using Domain.Entities;
+using LetsTravel.Models;
 
 namespace LetsTravel.Controllers
 {
@@ -20,52 +21,49 @@ namespace LetsTravel.Controllers
 
         public string Index()
         {
-            //using (var ctx = new TravelDbContext())
-            //{
-            //    User user = new User()
-            //    {
-            //        FirstName = "Ira",
-            //        LastName = "Bokalo",
-            //        Email = "irabokalo@gmail.com",
-            //        PhoneNumber = "068258741422",
-            //        IsAdmin = true,
-            //    };
-            //    ctx.Users.Add(user);
-            //    ctx.SaveChanges();
-            //}
+            using (var ctx = new TravelDbContext())
+            {
+                User user = new User()
+                {
+                    FirstName = "Ira",
+                    LastName = "Bokalo",
+                    Email = "irabokalo@gmail.com",
+                    PhoneNumber = "068258741422",
+                    IsAdmin = true,
+                };
+                ctx.Users.Add(user);
+                ctx.SaveChanges();
+            }
             return "Hello";
         }
 
-        [HttpPost]
-        public ActionResult AddUser()
-        {
-           User user = new User()
-           { 
-               FirstName = "Is",
-                  LastName = "Bokalo",
-                 Email = "irabokalo@gmail.com",
-                  PhoneNumber = "068258741422",
-                   IsAdmin = true
-               };
-          
-                try
-                {
-                    if (ModelState.IsValid)
-                    {
-                        context.Users.Add(user);
-                        context.SaveChanges();
-                       
-                    }
-                }
-                catch (RetryLimitExceededException /* dex */)
-                {
-                    //Log the error (uncomment dex variable name and add a line here to write a log.)
-                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-                }
-                return Json(user);
-              
 
+
+        [HttpPost]
+        public ActionResult AddExcursion(Excursion excursion)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    context.Excursions.Add(excursion);
+                    context.SaveChanges();
+                }
             }
-        }
-    
+            catch (RetryLimitExceededException)
+            {
+                ModelState.AddModelError("",
+                    "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+            }   
+             
+            return Json(excursion);
+    }
+
+    // GET: Excursions
+    public ActionResult GetExcursions()
+    {
+        //return Json(context.Excursions.ToList(), JsonRequestBehavior.AllowGet);
+        return View(context.Excursions.ToList());
+    }
+}
 }
