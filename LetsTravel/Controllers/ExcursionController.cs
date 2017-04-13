@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
+﻿using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Domain.Concrete;
 using Domain.Entities;
-using LetsTravel.Models;
 
 namespace LetsTravel.Controllers
 {
@@ -37,8 +33,6 @@ namespace LetsTravel.Controllers
             return "Hello";
         }
 
-
-
         [HttpPost]
         public ActionResult AddExcursion(Excursion excursion)
         {
@@ -54,16 +48,16 @@ namespace LetsTravel.Controllers
             {
                 ModelState.AddModelError("",
                     "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-            }   
-             
-            return Json(excursion);
-    }
+            }
 
-    // GET: Excursions
-    public ActionResult GetExcursions()
-    {
-        //return Json(context.Excursions.ToList(), JsonRequestBehavior.AllowGet);
-        return View(context.Excursions.ToList());
+            return Json(excursion);
+        }
+
+        // GET: Excursions
+        public ActionResult GetExcursions()
+        {
+            //return Json(context.Excursions.ToList(), JsonRequestBehavior.AllowGet);
+            return View(context.Excursions.ToList());
+        }
     }
-}
 }

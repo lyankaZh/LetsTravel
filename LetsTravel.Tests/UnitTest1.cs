@@ -9,6 +9,7 @@ namespace LetsTravel.Tests
         [TestMethod]
         public void TestMethod1()
         {
+
         }
     }
 }

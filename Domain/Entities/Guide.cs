@@ -4,14 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Enums
+namespace Domain.Entities
 {
-    public enum Mark
+    public class Guide
     {
-        Terribly = 1,
-        Bad,
-        Normal,
-        Good,
-        Excellent
+        public List<Excursion> OwnExcursions { get; set; }
     }
 }
