@@ -1,38 +1,28 @@
 ﻿using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web.Mvc;
+using Domain.Abstract;
 using Domain.Concrete;
 using Domain.Entities;
 
 namespace LetsTravel.Controllers
 {
+    [Authorize]
     public class ExcursionController : Controller
     {
-        private readonly TravelDbContext context;
+        private readonly IExcursionRepository repository;
 
-        public ExcursionController()
+        public ExcursionController(IExcursionRepository repository)
         {
-            context = new TravelDbContext();
+            this.repository = repository;
         }
 
         public string Index()
         {
-            using (var ctx = new TravelDbContext())
-            {
-                User user = new User()
-                {
-                    FirstName = "Ira",
-                    LastName = "Bokalo",
-                    Email = "irabokalo@gmail.com",
-                    PhoneNumber = "068258741422",
-                    IsAdmin = true,
-                };
-                ctx.Users.Add(user);
-                ctx.SaveChanges();
-            }
             return "Hello";
         }
 
+     
         [HttpPost]
         public ActionResult AddExcursion(Excursion excursion)
         {
@@ -40,8 +30,8 @@ namespace LetsTravel.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    context.Excursions.Add(excursion);
-                    context.SaveChanges();
+                    repository.InsertExcursion(excursion);
+                    repository.Save();
                 }
             }
             catch (RetryLimitExceededException)
@@ -56,8 +46,7 @@ namespace LetsTravel.Controllers
         // GET: Excursions
         public ActionResult GetExcursions()
         {
-            //return Json(context.Excursions.ToList(), JsonRequestBehavior.AllowGet);
-            return View(context.Excursions.ToList());
+            return View(repository.GetExcursions());
         }
     }
 }

@@ -11,7 +11,7 @@ namespace LetsTravel.Controllers
 {
     public class UserController : Controller
     {
-        private readonly TravelDbContext context = new TravelDbContext();
+        private readonly TravelDbContext _context = new TravelDbContext();
 
         // GET: User
         public ActionResult Index()
@@ -22,7 +22,7 @@ namespace LetsTravel.Controllers
         public ActionResult GetUsers()
         {
             //return Json(context.Excursions.ToList(), JsonRequestBehavior.AllowGet);
-            return View(context.Users.ToList());
+            return View(_context.Users.ToList());
         }
 
         [HttpPost]
@@ -32,8 +32,8 @@ namespace LetsTravel.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    context.Users.Add(user);
-                    context.SaveChanges();
+                    _context.Users.Add(user);
+                    _context.SaveChanges();
                 }
             }
             catch (RetryLimitExceededException)
