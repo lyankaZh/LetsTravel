@@ -43,6 +43,8 @@ namespace LetsTravel.Controllers
             return Json(excursion);
         }
 
+
+        [Authorize]
         // GET: Excursions
         public ActionResult GetExcursions()
         {

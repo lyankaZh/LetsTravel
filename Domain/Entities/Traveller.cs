@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Traveller
-    {
-        public string Expectations { get; set; }
-        public List<Excursion> SubscribedExcursions { get; set; }
-    }
+    //public class Traveller
+    //{
+    //    public string Expectations { get; set; }
+    //    public List<Excursion> SubscribedExcursions { get; set; }
+    //}
 }

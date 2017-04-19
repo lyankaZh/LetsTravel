@@ -2,8 +2,8 @@
 
 namespace Domain.Entities
 {
-    public class Guide
-    {
-        public List<Excursion> OwnExcursions { get; set; }
-    }
+    //public class Guide
+    //{
+    //    public List<Excursion> OwnExcursions { get; set; }
+    //}
 }

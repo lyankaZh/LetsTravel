@@ -5,7 +5,7 @@ namespace LetsTravel.Models
     public class LoginModel
     {
         [Required]
-        public string Name { get; set; }
+        public string Nickname { get; set; }
         [Required]
         public string Password { get; set; }
     }

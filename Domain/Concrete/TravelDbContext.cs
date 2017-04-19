@@ -32,17 +32,7 @@ namespace Domain.Concrete
     {
         protected override void Seed(TravelDbContext context)
         {
-            Excursion excursion = new Excursion()
-            { 
-                City = "Lviv",
-                Date = new DateTime(2017,02,01),
-                Description = "Exciting excursion to cultural center of Ukraine",
-                Duration = 2,
-                PeopleLimit = 6,
-                Price = 25,
-                Owner = 1
-            };
-            context.Excursions.Add(excursion);
+            
             AppUserManager userManager = new AppUserManager(new UserStore<User>(context));
             AppRoleManager roleManager = new AppRoleManager(new RoleStore<AppRole>(context));
 
@@ -82,7 +72,16 @@ namespace Domain.Concrete
             {
                 userManager.AddToRole(user.Id, adminRoleName);
             }
-
+            Excursion excursion = new Excursion()
+            {
+                City = "Lviv",
+                Date = new DateTime(2017, 02, 01),
+                Description = "Exciting excursion to cultural center of Ukraine",
+                Duration = 2,
+                PeopleLimit = 6,
+                Price = 25
+            };
+            context.Excursions.Add(excursion);
             base.Seed(context);
         }
     }
