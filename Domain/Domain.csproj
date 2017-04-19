@@ -112,6 +112,9 @@
     <Compile Include="Abstract\IExcursionRepository.cs" />
     <Compile Include="Concrete\ExcursionRepository.cs" />
     <Compile Include="Concrete\TravelDbContext.cs" />
+    <Compile Include="Entities\AppRole.cs" />
+    <Compile Include="Entities\AppRoleManager.cs" />
+    <Compile Include="Entities\AppUserManager.cs" />
     <Compile Include="Entities\Excursion.cs" />
     <Compile Include="Entities\Guide.cs" />
     <Compile Include="Entities\Traveller.cs" />

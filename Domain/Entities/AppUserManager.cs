@@ -1,24 +1,23 @@
-﻿using LetsTravel.Identity.Models;
-using LetsTravel.Infrastructure;
+﻿using Domain.Concrete;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 
-namespace LetsTravel.Identity
+namespace Domain.Entities
 {
-    public class AppUserManager : UserManager<AppUser>
+    public class AppUserManager : UserManager<User>
     {
 
-        public AppUserManager(IUserStore<AppUser> store): base(store)
+        public AppUserManager(IUserStore<User> store): base(store)
         {
         }
         public static AppUserManager Create(
         IdentityFactoryOptions<AppUserManager> options,
         IOwinContext context)
         {
-            AppIdentityDbContext db = context.Get<AppIdentityDbContext>();
-            AppUserManager manager = new AppUserManager(new UserStore<AppUser>(db));
+            TravelDbContext db = context.Get<TravelDbContext>();
+            AppUserManager manager = new AppUserManager(new UserStore<User>(db));
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
@@ -27,7 +26,7 @@ namespace LetsTravel.Identity
                 RequireLowercase = true
             };
 
-            manager.UserValidator = new UserValidator<AppUser>(manager)
+            manager.UserValidator = new UserValidator<User>(manager)
             {
                 RequireUniqueEmail = true
             };

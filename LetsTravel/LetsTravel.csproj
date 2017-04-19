@@ -229,11 +229,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Identity\AppRoleManager.cs" />
     <Compile Include="Identity\IdentityConfig.cs" />
-    <Compile Include="Identity\Models\AppRole.cs" />
-    <Compile Include="Identity\Models\AppUser.cs" />
-    <Compile Include="Identity\AppUserManager.cs" />
     <Compile Include="Infrastructure\AppIdentityDbContext.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\CreateModel.cs" />
@@ -265,6 +261,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Identity\Models\" />
     <Folder Include="Views\Login\" />
     <Folder Include="Views\User\" />
   </ItemGroup>

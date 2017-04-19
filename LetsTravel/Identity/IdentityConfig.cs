@@ -1,4 +1,5 @@
-﻿using LetsTravel.Infrastructure;
+﻿using Domain.Concrete;
+using Domain.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
@@ -10,7 +11,7 @@ namespace LetsTravel.Identity
     {
         public void Configuration(IAppBuilder app)
         {
-            app.CreatePerOwinContext<AppIdentityDbContext>(AppIdentityDbContext.Create);
+            app.CreatePerOwinContext<TravelDbContext>(TravelDbContext.Create);
             app.CreatePerOwinContext<AppUserManager>(AppUserManager.Create);
             app.CreatePerOwinContext<AppRoleManager>(AppRoleManager.Create);
             app.UseCookieAuthentication(new CookieAuthenticationOptions

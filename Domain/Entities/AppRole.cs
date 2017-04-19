@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace LetsTravel.Identity.Models
+namespace Domain.Entities
 {
     public class AppRole : IdentityRole
     {

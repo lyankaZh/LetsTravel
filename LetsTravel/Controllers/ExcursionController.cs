@@ -7,7 +7,7 @@ using Domain.Entities;
 
 namespace LetsTravel.Controllers
 {
-    [Authorize]
+
     public class ExcursionController : Controller
     {
         private readonly IExcursionRepository repository;

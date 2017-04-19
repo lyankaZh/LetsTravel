@@ -1,12 +1,11 @@
 ﻿using System;
-using LetsTravel.Identity.Models;
-using LetsTravel.Infrastructure;
+using Domain.Concrete;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 
-namespace LetsTravel.Identity
+namespace Domain.Entities
 {
     public class AppRoleManager : RoleManager<AppRole>, IDisposable
     {
@@ -19,7 +18,7 @@ namespace LetsTravel.Identity
         IOwinContext context)
         {
             return new AppRoleManager(new
-            RoleStore<AppRole>(context.Get<AppIdentityDbContext>()));
+            RoleStore<AppRole>(context.Get<TravelDbContext>()));
         }
     }
 }
