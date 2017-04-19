@@ -229,7 +229,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Identity\AppRoleManager.cs" />
     <Compile Include="Identity\IdentityConfig.cs" />
+    <Compile Include="Identity\Models\AppRole.cs" />
     <Compile Include="Identity\Models\AppUser.cs" />
     <Compile Include="Identity\AppUserManager.cs" />
     <Compile Include="Infrastructure\AppIdentityDbContext.cs" />
@@ -253,6 +255,7 @@
     <Content Include="Views\Admin\Create.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

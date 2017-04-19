@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using LetsTravel.Identity;
 using LetsTravel.Identity.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -27,7 +28,9 @@ namespace LetsTravel.Infrastructure
         }
         public void PerformInitialSetup(AppIdentityDbContext context)
         {
-            // initial configuration will go here
+            AppUserManager userManager = new AppUserManager(new UserStore<AppUser>(context));
+            AppRoleManager roleManager = new AppRoleManager(new RoleStore<AppRole>(context));
+
         }
     }
 }
