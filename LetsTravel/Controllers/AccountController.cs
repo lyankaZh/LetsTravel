@@ -66,7 +66,7 @@ namespace LetsTravel.Controllers
         {
             if (string.IsNullOrEmpty(returnUrl))
             {
-                returnUrl = "/Excursion/GetExcursions";
+                returnUrl = "/Account/Login";
             }
             if (ModelState.IsValid)
             {
@@ -113,7 +113,7 @@ namespace LetsTravel.Controllers
         public RedirectResult LogOut()
         {
             AuthManager.SignOut();
-            return new RedirectResult("/Account/Login");
+            return new RedirectResult("/Home/Index");
         }
 
         private IAuthenticationManager AuthManager

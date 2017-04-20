@@ -221,9 +221,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Styles\formStyles.css" />
     <Content Include="Styles\homePageStyles.css" />
     <Content Include="Styles\styles.css" />
+    <Content Include="Styles\stylesForForm.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -253,7 +253,7 @@
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Excursion\GetExcursions.cshtml" />
+    <Content Include="Views\Excursion\GuideView.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Create.cshtml" />
@@ -263,6 +263,9 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Excursion\GuestPageView.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Excursion\TravellerView.cshtml" />
+    <Content Include="Views\Excursion\AdminView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

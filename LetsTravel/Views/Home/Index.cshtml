@@ -23,10 +23,10 @@
     <nav id="siteNav" class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Logo and responsive toggle -->
-            <div class="navbar-header">             
+            <div class="navbar-header">
                 <a class="navbar-brand" href="#">
                     @*<span class="glyphicon glyphicon-fire"></span>*@
-                 <span id="text-color">Travel!</span>   
+                    <span id="text-color">Travel!</span>
                 </a>
             </div>
             <!-- Navbar links -->
@@ -36,17 +36,28 @@
                         <a href="#">Home</a>
                     </li>
                     <li>
-                      
-                        @Html.ActionLink("Excursions", "GetExcursions", "Excursion")
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Try it now<span class="caret"></span></a>
-                        <ul class="dropdown-menu" aria-labelledby="about-us">
-                            <li><a href="#">Log in</a></li>
-                        </ul>
+                        
+                            @{
+                                string buttonText = ViewBag.MenuItemName;
+                                @Html.ActionLink(buttonText, "GetExcursions", "Excursion")
+                            }
+                        
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                       
+                            @if (ViewBag.LogInOrOutText == "Log in")
+                            {
+                                @Html.ActionLink("Log In", "Login", "Account")
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Log out", "Logout", "Account")
+                            }
+                       
+
+                    </li>
+                    <li>
+                       @Html.ActionLink("About", "About")
                     </li>
                 </ul>
 
@@ -73,30 +84,26 @@
             <div class="container">
                 <h2 class="section-heading">Contact Us</h2>
                 <p><span class="glyphicon glyphicon-earphone"></span><br> +1(23) 456 7890</p>
-                <p><span class="glyphicon glyphicon-envelope"></span><br> irabokalo@example.com</p>
-                <p><span class="glyphicon glyphicon-envelope"></span><br> uliana_zh@example.com</p>
+                <p><span class="glyphicon glyphicon-envelope"></span><br> iraklepak@gmail.com</p>
+                <p><span class="glyphicon glyphicon-envelope"></span><br> ulyana.zhovtanetska@gmail.com</p>
             </div>
         </div>
 
         <!-- Copyright etc -->
         <div class="small-print">
             <div class="container">
-                <p>Copyright &copy; Let's travel.com 2017</p>
+                <p>Copyright &copy; Let's travel. 2017</p>
             </div>
         </div>
 
     </footer>
     <!-- jQuery -->
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-
     <!-- Plugin JavaScript -->
-
     <script src="~/js/jquery.easing.min.js"></script>
     <!-- Custom Javascript -->
     <script src="~/js/custom.js"></script>
-  
+
 </body>
 </html>
-

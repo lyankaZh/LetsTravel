@@ -88,10 +88,6 @@ a:-webkit-any-link {
     text-decoration: none;
 }
 
-select, select[size="0"], select[size="1"]:focus {
-    outline: 1px solid #ff7b81;
-}
-
 select, select[size="0"], select[size="1"] {
     width: 100%;
     /*outline: 1px solid #ccc;*/
@@ -115,4 +111,8 @@ border-radius: 5px;
     -ms-user-select: none;
     user-select: none;
     background-image: none;
+}
+
+select, select[size="0"], select[size="1"] {
+    border-color: rgb(204, 204, 204) !important;
 }

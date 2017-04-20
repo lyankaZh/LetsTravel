@@ -23,7 +23,7 @@ p {
 }
 
 span #text-color {
-    color: darkgray;
+    color: #777;
 }
 
 header {
@@ -58,7 +58,7 @@ header .header-content .header-content-inner p {
     margin-bottom: 50px;
     font-size: 16px;
     font-weight: 300;
-    color: darkgray;
+    color: #777;
 }
 
 @media(min-width:768px) {
@@ -237,12 +237,12 @@ header .header-content .header-content-inner p {
 
 @media(min-width:768px) {
     .navbar-default {
-        border-color: darkgray;
+        border-color: #777;
         background-color: transparent;
     }
 
     .navbar-default .navbar-header .navbar-brand {
-        color: darkgray;
+        color: #777;
         letter-spacing: 0.5em;
     }
 
@@ -435,12 +435,14 @@ img::-moz-selection {
 }
 
 .navbar-default .navbar-header .navbar-brand:hover, .navbar-default .navbar-header .navbar-brand:focus {
-    color: darkgray;
+    color: #777;
 }
 
 .navbar-default .navbar-header .navbar-brand {
-    color: darkgray;
+    color: #777;
     letter-spacing: 0.5em;
 }
 
-
+body {
+    font-size: 20px !important; 
+}

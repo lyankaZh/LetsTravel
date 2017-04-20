@@ -50,7 +50,18 @@ namespace LetsTravel.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return View(repository.GetExcursions());
+                if (User.IsInRole("Guide"))
+                {
+                    return View("GuideView",repository.GetExcursions());
+                }
+                else if (User.IsInRole("Traveller"))
+                {
+                    return View("TravellerView", repository.GetExcursions());
+                }
+                else
+                {
+                    return View("AdminView", repository.GetExcursions());
+                }
             }
             else
             {
