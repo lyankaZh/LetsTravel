@@ -45,6 +45,14 @@ namespace Domain.Concrete
             return context.Excursions.Find(excursionId);
         }
 
+        public List<Excursion> GetExcursionsByGuideId(string guideId)
+        {
+            var query = from excursion in context.Excursions
+                        where excursion.Users.Any(c => c.Id == guideId)
+                        select excursion;
+            return query.ToList();
+        }
+
         public void InsertExcursion(Excursion excursion)
         {
             context.Excursions.Add(excursion);
