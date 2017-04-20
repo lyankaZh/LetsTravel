@@ -4,6 +4,8 @@ using System.Web.Mvc;
 using Domain.Abstract;
 using Domain.Concrete;
 using Domain.Entities;
+using System.Web;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace LetsTravel.Controllers
 {
@@ -42,17 +44,15 @@ namespace LetsTravel.Controllers
 
             return Json(excursion);
         }
-
-
        
-        
         public ActionResult GetExcursions()
         {
             if (User.Identity.IsAuthenticated)
             {
                 if (User.IsInRole("Guide"))
                 {
-                    return View("GuideView",repository.GetExcursions());
+                    var user = UserManager.FindByNameAsync(User.Identity.Name).Result;
+                    return View("GuideView", repository.GetExcursionsByGuideId(user.Id));
                 }
                 else if (User.IsInRole("Traveller"))
                 {
@@ -68,5 +68,13 @@ namespace LetsTravel.Controllers
                 return View("GuestPageView", repository.GetExcursions());
             }
         }
+        private AppUserManager UserManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
+            }
+        }
     }
+
 }
