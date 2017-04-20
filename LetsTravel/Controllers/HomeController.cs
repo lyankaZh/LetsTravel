@@ -11,6 +11,25 @@ namespace LetsTravel.Controllers
 
         public ActionResult Index()
         {
+            FormCorrectTextOnMenuButtons();
+            return View();
+        }
+
+      
+
+        public ActionResult Register()
+        {
+           return new RedirectResult("/Account/Register");
+        }
+
+        public ActionResult About()
+        {
+            FormCorrectTextOnMenuButtons();
+            return View();
+        }
+
+        public void FormCorrectTextOnMenuButtons()
+        {
             if (HttpContext.User.Identity.IsAuthenticated)
             {
                 if (User.IsInRole("Admin"))
@@ -28,17 +47,7 @@ namespace LetsTravel.Controllers
                 ViewBag.MenuItemName = "Explore it";
                 ViewBag.LogInOrOutText = "Log in";
             }
-            return View();
         }
 
-        public ActionResult Register()
-        {
-           return new RedirectResult("/Account/Register");
-        }
-
-        public ActionResult About()
-        {
-            return View();
-        }
     }
 }

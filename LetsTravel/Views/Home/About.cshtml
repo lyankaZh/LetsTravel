@@ -1,17 +1,72 @@
 ﻿
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>About</title>
-</head>
-<body>
-    <div> 
+<link href="~/Styles/bootstrap.css" rel="stylesheet" />
+<link href="~/Styles/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Styles/aboutStyles.css" rel="stylesheet" />
+<!-- Page Content -->
+<div class="container">
+    <!-- Introduction Row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+               <br/>
+                 About Site:
+  
+            </h1>
+            <p>Are you a professional guide and want to conduct amazing excursions?</p>
+            <p>Or a simple traveller that want to explore a new city but just can`t find a person who will help you?</p>
+            <p>If you answered "YES!!!" at least one time, that our site is especially for you!</p>
+            <p>Just register and enjoy...)</p>
+            <br/>
+            <h4>Find each other!</h4>
+        </div>
     </div>
-</body>
-</html>
+    <!-- Team Members Row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Creators</h2>
+        </div>
+        <div class="col-lg-4 col-sm-6 text-center">
+            <img class="img-circle img-responsive img-center" src="~/Images/ira.png" alt="">
+            <h3>
+                <a href="https://vk.com/id2002ira" id ="text-about">Ira Bokalo</a>
+            </h3>
+            @*<p>What does this team member to? Keep it short! This is also a great spot for social links!</p>*@
+        </div>
+        <div class="col-lg-4 col-sm-6 text-center">
+            <img class="img-circle img-responsive img-center" src="~/Images/ulyana.jpg" alt="">
+            <h3>
+                <a href="https://vk.com/id79143623" id ="text-about">Ulyana Zhovtanetska</a>
+            </h3>
+        </div>
+        <div class="col-lg-4 col-sm-6 text-center">
+            <img class="img-circle img-responsive img-center" src="~/Images/bohdanka.jpg" alt="">
+            <h3>
+                <a href="https://vk.com/bohdanka1997" id ="text-about">Bohdana Arterchuk</a>
+                
+            </h3>
+        </div>
+        <div class="col-lg-4 col-sm-6 text-center">
+            <img class="img-circle img-responsive img-center" src="~/Images/ameli.jpg" alt="">
+            <h3>
+                <a href="https://vk.com/ameli_l" id ="text-about">Victoria Stebivka</a>
+                
+            </h3>
+        </div>
+        <div class="col-lg-4 col-sm-6 text-center">
+            <img class="img-circle img-responsive img-center" src="~/Images/orysia.png" alt="">
+            <h3>
+                <a href="https://vk.com/arisa_fito" id ="text-about">Orysia Fito</a>
+                
+            </h3>
+        </div>
+    </div>
+    <hr>
+
+</div>
+<!-- /.container -->
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
