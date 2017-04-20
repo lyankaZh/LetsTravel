@@ -22,6 +22,10 @@ p {
     line-height: 1.5;
 }
 
+span #text-color {
+    color: darkgray;
+}
+
 header {
     position: relative;
     width: 100%;
@@ -54,7 +58,7 @@ header .header-content .header-content-inner p {
     margin-bottom: 50px;
     font-size: 16px;
     font-weight: 300;
-    color: rgba(255,255,255,.7);
+    color: darkgray;
 }
 
 @media(min-width:768px) {
@@ -233,12 +237,12 @@ header .header-content .header-content-inner p {
 
 @media(min-width:768px) {
     .navbar-default {
-        border-color: rgba(255,255,255,.3);
+        border-color: darkgray;
         background-color: transparent;
     }
 
     .navbar-default .navbar-header .navbar-brand {
-        color: rgba(255,255,255,.7);
+        color: darkgray;
         letter-spacing: 0.5em;
     }
 
@@ -429,3 +433,14 @@ img::-moz-selection {
 .bg-primary {
     background-color: yellowgreen;
 }
+
+.navbar-default .navbar-header .navbar-brand:hover, .navbar-default .navbar-header .navbar-brand:focus {
+    color: darkgray;
+}
+
+.navbar-default .navbar-header .navbar-brand {
+    color: darkgray;
+    letter-spacing: 0.5em;
+}
+
+

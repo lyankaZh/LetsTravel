@@ -13,5 +13,10 @@ namespace LetsTravel.Controllers
         {
             return View();
         }
+
+        public ActionResult Register()
+        {
+           return new RedirectResult("/Account/Register");
+        }
     }
 }

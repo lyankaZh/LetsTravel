@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Business 2</title>
+    <title>Let`s Travel</title>
     <!-- Bootstrap Core CSS -->
     <link href="~/Styles/homePageStyles.css" rel="stylesheet" />
     <link href="~/Styles/bootstrap.min.css" rel="stylesheet" />
@@ -23,16 +23,10 @@
     <nav id="siteNav" class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Logo and responsive toggle -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+            <div class="navbar-header">             
                 <a class="navbar-brand" href="#">
-                    <span class="glyphicon glyphicon-fire"></span>
-                    Travel!
+                    @*<span class="glyphicon glyphicon-fire"></span>*@
+                 <span id="text-color">Travel!</span>   
                 </a>
             </div>
             <!-- Navbar links -->
@@ -42,7 +36,8 @@
                         <a href="#">Home</a>
                     </li>
                     <li>
-                        <a href="#">Excursions</a>
+                      
+                        @Html.ActionLink("Excursions", "GetExcursions", "Excursion")
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Try it now<span class="caret"></span></a>
@@ -64,7 +59,8 @@
             <div class="header-content-inner">
                 <h1>Let's travel</h1>
                 <p>People must help each other.</p>
-                <a href="#" class="btn btn-primary btn-lg">Register Now</a>
+                @Html.ActionLink("Register Now", "Register", null, new { @class = "btn btn-primary btn-lg" })
+
             </div>
         </div>
     </header>

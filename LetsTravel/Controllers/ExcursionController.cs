@@ -44,11 +44,18 @@ namespace LetsTravel.Controllers
         }
 
 
-        [Authorize]
-        // GET: Excursions
+       
+        
         public ActionResult GetExcursions()
         {
-            return View(repository.GetExcursions());
+            if (User.Identity.IsAuthenticated)
+            {
+                return View(repository.GetExcursions());
+            }
+            else
+            {
+                return View("GuestPageView", repository.GetExcursions());
+            }
         }
     }
 }
