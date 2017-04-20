@@ -94,8 +94,8 @@ select, select[size="0"], select[size="1"]:focus {
 
 select, select[size="0"], select[size="1"] {
     width: 100%;
-    outline: 1px solid #ccc;
-    color: #a9a9a9;
+    /*outline: 1px solid #ccc;*/
+    color: gray;
       height: 40px;
 border-radius: 5px;
     display: inline-block;
@@ -115,7 +115,4 @@ border-radius: 5px;
     -ms-user-select: none;
     user-select: none;
     background-image: none;
-
-
-    box-sizing: border-box;
 }
