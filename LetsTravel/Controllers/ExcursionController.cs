@@ -68,6 +68,13 @@ namespace LetsTravel.Controllers
                 return View("GuestPageView", repository.GetExcursions());
             }
         }
+
+        [Authorize]
+        public ActionResult GetAllExcursions()
+        {
+            return View("AllExcursions", repository.GetExcursions().ToList());
+        }
+
         private AppUserManager UserManager
         {
             get

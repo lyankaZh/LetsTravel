@@ -273,6 +273,7 @@
     <Content Include="Views\Excursion\TravellerView.cshtml" />
     <Content Include="Views\Excursion\AdminView.cshtml" />
     <Content Include="Views\Shared\_HomeLayout.cshtml" />
+    <Content Include="Views\Excursion\AllExcursions.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

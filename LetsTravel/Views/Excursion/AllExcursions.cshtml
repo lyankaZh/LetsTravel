@@ -1,15 +1,16 @@
 ﻿@model IEnumerable<Domain.Entities.Excursion>
-<head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script> 
-</head> 
-    @{
-        ViewBag.Title = "Excursions";
-    }
-<div class="container">
-    <h2>My Excursions</h2>
-    @foreach (var excursion in Model)
-    {
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>AllExcursions</title>
+    </head>
+    <body>
+        <h2>All Excursions</h2>
+        @foreach (var excursion in Model)
+        {
             <h2>Excursion @excursion.ExcursionId </h2>
             <div class="list-group">
                 <a href="#" class="list-group-item">
@@ -21,12 +22,9 @@
                     <p class="list-group-item-text">@excursion.PeopleLimit</p>
                     <p class="list-group-item-text">@excursion.Price</p>
                     <p class="list-group-item-text">@excursion.Route</p>
-                    <button type="button" class="btn btn-success">Subscribe</button>
-                </a>               
-       
-        </div>
-        
-    }
-</div>
+                </a>
+            </div>
 
-
+        }
+    </body>
+</html>
