@@ -19,6 +19,9 @@ namespace Domain.Entities
         public int? PeopleLimit { get; set; }
         public decimal? Price { get; set; }
         public int? Mark { get; set; }
-        public List<User> Users { get; set; } 
+
+        public string Guide { get; set; }
+
+        public virtual ICollection<User> Users { get; set; }
     }
 }

@@ -25,31 +25,31 @@ namespace LetsTravel.Controllers
             this.repository = repository;
         }
 
-        public string Index()
-        {
-            return "Hello";
-        }
+        //public string Index()
+        //{
+        //    return "Hello";
+        //}
 
      
-        [HttpPost]
-        public ActionResult AddExcursion(Excursion excursion)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    repository.InsertExcursion(excursion);
-                    repository.Save();
-                }
-            }
-            catch (RetryLimitExceededException)
-            {
-                ModelState.AddModelError("",
-                    "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-            }
+        //[HttpPost]
+        //public ActionResult AddExcursion(Excursion excursion)
+        //{
+        //    try
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            repository.InsertExcursion(excursion);
+        //            repository.Save();
+        //        }
+        //    }
+        //    catch (RetryLimitExceededException)
+        //    {
+        //        ModelState.AddModelError("",
+        //            "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+        //    }
 
-            return Json(excursion);
-        }
+        //    return Json(excursion);
+        //}
        
         public ActionResult GetExcursions()
         {
@@ -98,6 +98,7 @@ namespace LetsTravel.Controllers
         {
             if (ModelState.IsValid)
             {
+                string id = User.Identity.GetUserId();
                 Excursion excursion = new Excursion()
                 {
                     City = model.City,
@@ -105,19 +106,19 @@ namespace LetsTravel.Controllers
                     Description = model.Description,
                     Duration = model.Duration,
                     PeopleLimit = model.PeopleLimit,
-                    Route = model.Route
+                    Route = model.Route,
+                    Guide = id
                 };
                 repository.InsertExcursion(excursion);
                 repository.Save();
-                // repository.GetUsers().FirstOrDefault(i => i.Id == User.Identity.GetUserId())
-                var user = UserManager.FindByIdAsync(User.Identity.GetUserId()).Result;
-                user.Excursions.Add(excursion);
-                var result = await UserManager.UpdateAsync(user);
+                //var user = UserManager.FindByIdAsync(User.Identity.GetUserId()).Result;
+                //user.OwnedExcursions.Add(excursion);
+                //var result = await UserManager.UpdateAsync(user);
 
-                if (!result.Succeeded)
-                {
-                    AddErrors(result);
-                }
+                //if (!result.Succeeded)
+                //{
+                //    AddErrors(result);
+                //}
 
                 return GetExcursions();
             }

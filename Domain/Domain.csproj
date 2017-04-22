@@ -116,6 +116,7 @@
     <Compile Include="Entities\AppRoleManager.cs" />
     <Compile Include="Entities\AppUserManager.cs" />
     <Compile Include="Entities\Excursion.cs" />
+    <Compile Include="Entities\Subscribing.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

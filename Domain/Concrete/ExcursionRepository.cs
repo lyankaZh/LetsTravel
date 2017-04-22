@@ -49,7 +49,7 @@ namespace Domain.Concrete
         public List<Excursion> GetExcursionsByGuideId(string guideId)
         {
             var query = from excursion in context.Excursions
-                        where excursion.Users.Any(c => c.Id == guideId)
+                        where excursion.Guide == guideId
                         select excursion;
             return query.ToList();
         }
@@ -78,7 +78,13 @@ namespace Domain.Concrete
             return context.Users;
         }
 
-       
+        public IdentityUser GetUserById(string userId)
+        {
+            var query = from user in context.Users
+                        where user.Id == userId
+                        select user;
+            return query.FirstOrDefault();
+        } 
 
         public void Save()
         {
