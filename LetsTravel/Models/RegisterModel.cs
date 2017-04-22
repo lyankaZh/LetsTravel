@@ -27,6 +27,11 @@ namespace LetsTravel.Models
         public string Password { get; set; }
 
         [Required]
-        public string Role { get; set; }
+        [DisplayName("Traveller")]
+        public bool IsTraveller { get; set; }
+
+        [Required]
+        [DisplayName("Guide")]
+        public bool IsGuide { get; set; }
     }
 }

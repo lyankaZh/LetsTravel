@@ -14,6 +14,10 @@ namespace LetsTravel.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        public AccountController()
+        {
+            
+        }
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -70,12 +74,22 @@ namespace LetsTravel.Controllers
             }
             if (ModelState.IsValid)
             {
+                if (!model.IsTraveller && !model.IsGuide)
+                {
+                    ModelState.AddModelError("", "Select at least one role.");
+                    return View(model);
+                }
                 User user = await UserManager.FindByNameAsync(model.Nickname);
                 if (user == null)
                 {
                     IdentityResult creationResult = await UserManager.CreateAsync(
-                        new User  { UserName = model.Nickname, FirstName = model.FirstName,
-                                    LastName = model.LastName, Email = model.Email},
+                        new User
+                        {
+                            UserName = model.Nickname,
+                            FirstName = model.FirstName,
+                            LastName = model.LastName,
+                            Email = model.Email
+                        },
                         model.Password);
                     if (creationResult.Succeeded)
                     {
@@ -85,18 +99,25 @@ namespace LetsTravel.Controllers
                     {
                         AddErrorsFromResult(creationResult);
                         return View(model);
-                    }                   
+                    }
                 }
-
-                IdentityResult result = await UserManager.AddToRoleAsync(user.Id, model.Role);
-                if (result.Succeeded)
+                if (model.IsGuide)
                 {
-                    return new RedirectResult(returnUrl);
+                    IdentityResult result = await UserManager.AddToRoleAsync(user.Id, "Guide");
+                    if (!result.Succeeded)
+                    {
+                        return View("Error", result.Errors);
+                    }
                 }
-                else
+                if (model.IsTraveller)
                 {
-                    return View("Error", result.Errors);
+                    IdentityResult result = await UserManager.AddToRoleAsync(user.Id, "Traveller");
+                    if (!result.Succeeded)
+                    {
+                        return View("Error", result.Errors);
+                    }
                 }
+                return new RedirectResult(returnUrl);
             }
             ViewBag.returnUrl = returnUrl;
             return View(model);

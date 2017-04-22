@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Domain.Abstract;
-using Domain.Concrete;
 using Domain.Entities;
 using System.Web;
 using LetsTravel.Models;
@@ -90,11 +85,9 @@ namespace LetsTravel.Controllers
             }
         }
 
-
-
         [HttpPost]
         [Authorize(Roles = "Guide")]
-        public async Task<ActionResult> CreateExcursion(ExcursionCreationModel model)
+        public ActionResult CreateExcursion(ExcursionCreationModel model)
         {
             if (ModelState.IsValid)
             {

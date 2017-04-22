@@ -39,14 +39,17 @@
             </div>
             <div class="form-group">
                 @Html.PasswordFor(x => x.Password, new { @id = "password", placeholder = Html.DisplayNameFor(n => n.Password) })
-            </div>         
-            <div class ="form-group">
-                @{
-                    var listItems = new List<string> {"Guide", "Traveller"};
-                    @Html.DropDownListFor(model => model.Role, new SelectList(listItems), "Select Role", new {@class = "dropdown"})
-                }
             </div>
-        <button type="submit">Register!</button>
+            <h3>Who are you?</h3>
+            <div class="form-group">
+                @Html.LabelFor(d => d.IsGuide)
+                <span>@Html.CheckBoxFor(x => x.IsGuide)</span>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(d => d.IsTraveller)
+                <span>@Html.CheckBoxFor(x => x.IsTraveller)</span>
+            </div>
+            <button type="submit">Register!</button>
         }
     </div>
 </body>
