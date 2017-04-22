@@ -19,11 +19,12 @@ namespace Domain.Concrete
         }
 
         public DbSet<Excursion> Excursions { get; set; }
+        //public new DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<User>().ToTable("Users");
+            modelBuilder.Entity<IdentityUser>().ToTable("Users");
         }
     }
 

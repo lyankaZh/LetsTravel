@@ -212,6 +212,7 @@
     <Content Include="Images\ira.png" />
     <Content Include="Images\orysia.png" />
     <Content Include="Images\ulyana.jpg" />
+    <Content Include="js\createExcursion.js" />
     <Content Include="js\custom.js" />
     <Content Include="js\jquery.easing.min.js" />
     <Content Include="Styles\aboutStyles.css" />
@@ -227,6 +228,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Styles\guideStyles.css" />
     <Content Include="Styles\homePageStyles.css" />
     <Content Include="Styles\styles.css" />
     <Content Include="Styles\stylesForForm.css" />
@@ -238,6 +240,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ExcursionController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GuideController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -246,6 +249,7 @@
     <Compile Include="Identity\IdentityConfig.cs" />
     <Compile Include="Infrastructure\AppIdentityDbContext.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Models\ExcursionCreationModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\UserModel.cs" />
@@ -273,6 +277,7 @@
     <Content Include="Views\Excursion\TravellerView.cshtml" />
     <Content Include="Views\Excursion\AdminView.cshtml" />
     <Content Include="Views\Shared\_HomeLayout.cshtml" />
+    <Content Include="Views\Excursion\_PartialCreateExcursionView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -282,6 +287,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Guide\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>

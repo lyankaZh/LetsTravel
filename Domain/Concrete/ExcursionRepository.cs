@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using Domain.Abstract;
 using Domain.Entities;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Domain.Concrete
 {
@@ -55,7 +56,7 @@ namespace Domain.Concrete
 
         public void InsertExcursion(Excursion excursion)
         {
-            context.Excursions.Add(excursion);
+             context.Excursions.Add(excursion);
         }
 
         public void DeleteExcursion(int excursionId)
@@ -71,6 +72,13 @@ namespace Domain.Concrete
         {
            context.Entry(excursion).State = EntityState.Modified;
         }
+
+        public IEnumerable<IdentityUser> GetUsers()
+        {
+            return context.Users;
+        }
+
+       
 
         public void Save()
         {

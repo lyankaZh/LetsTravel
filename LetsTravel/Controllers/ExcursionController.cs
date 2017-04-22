@@ -1,10 +1,16 @@
-﻿using System.Data.Entity.Infrastructure;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using Domain.Abstract;
 using Domain.Concrete;
 using Domain.Entities;
 using System.Web;
+using LetsTravel.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace LetsTravel.Controllers
@@ -51,6 +57,7 @@ namespace LetsTravel.Controllers
             {
                 if (User.IsInRole("Guide"))
                 {
+                    ViewBag.ButtonInMenu = "Create excursion";
                     var user = UserManager.FindByNameAsync(User.Identity.Name).Result;
                     return View("GuideView", repository.GetExcursionsByGuideId(user.Id));
                 }
@@ -73,6 +80,55 @@ namespace LetsTravel.Controllers
             get
             {
                 return HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
+            }
+        }
+
+
+
+        [HttpPost]
+        [Authorize(Roles = "Guide")]
+        public async Task<ActionResult> CreateExcursion(ExcursionCreationModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Excursion excursion = new Excursion()
+                {
+                    City = model.City,
+                    Date = model.Date,
+                    Description = model.Description,
+                    Duration = model.Duration,
+                    PeopleLimit = model.PeopleLimit,
+                    Route = model.Route
+                };
+                repository.InsertExcursion(excursion);
+                repository.Save();
+                // repository.GetUsers().FirstOrDefault(i => i.Id == User.Identity.GetUserId())
+                var user = UserManager.FindByIdAsync(User.Identity.GetUserId()).Result;
+                user.Excursions.Add(excursion);
+                var result = await UserManager.UpdateAsync(user);
+
+                if (!result.Succeeded)
+                {
+                    AddErrors(result);
+                }
+
+                return GetExcursions();
+            }
+
+            return View("_PartialCreateExcursionView");
+        }
+
+        [HttpGet]
+        public ViewResult CreateExcursion()
+        {
+         return View("_PartialCreateExcursionView");   
+        }
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (string error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
             }
         }
     }

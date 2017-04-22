@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Domain.Entities;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Domain.Abstract
 {
@@ -12,6 +13,7 @@ namespace Domain.Abstract
         void DeleteExcursion(int excursionId);
         void UpdateExcursion(Excursion excursion);
         List<Excursion> GetExcursionsByGuideId(string guideId);
+        IEnumerable<IdentityUser> GetUsers();
         void Save();
     }
 }

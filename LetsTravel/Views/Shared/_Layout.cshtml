@@ -1,36 +1,4 @@
-﻿@*<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
-    <link href="~/Styles/styles.css" rel="stylesheet" />
-</head>
-<body>
-    <div class="navbar navbar-fixed-top nav-style" id="navabar">
-        <div class="container">
-            <div class="navbar-header">
-                @Html.ActionLink("Lets Travel" , "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>           
-        </div>
-    </div>
-
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Lets Travel</p>
-        </footer>
-    </div>
-
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-</body>
-</html>*@
-
+﻿
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,6 +9,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/js/createExcursion.js"></script>
+    <link href="~/Styles/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
     <style>
         /* Set black background color, white text and some padding */
         footer {
@@ -49,8 +20,15 @@
             padding: 15px;
         }
     </style>
+    <style>
+        .modal-content {
+            width: 600px !important;
+            margin: 30px auto !important;
+        }
+    </style>
 </head>
 <body>
+
 
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
@@ -65,8 +43,9 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">Messages</a></li>
+                    @Html.ActionLink("Create excursion", "CreateExcursion", "Excursion",null,  new { @class = "modal-link btn btn-success" })
                 </ul>
+
                 <form class="navbar-form navbar-right" role="search">
                     <div class="form-group input-group">
                         <input type="text" class="form-control" placeholder="Search..">
@@ -125,6 +104,9 @@
                         </div>
                     </div>
                 </div>
+                
+                
+               
 
                 @RenderBody()
             </div>
@@ -152,3 +134,39 @@
 
 </body>
 </html>
+
+
+ <div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-content">
+    </div>
+</div>
+
+<script type="text/javascript">
+        $(function () {
+            // Initialize numeric spinner input boxes
+            //$(".numeric-spinner").spinedit();
+
+            // Initalize modal dialog
+            // attach modal-container bootstrap attributes to links with .modal-link class.
+            // when a link is clicked with these attributes, bootstrap will display the href content in a modal dialog.
+            $('body').on('click', '.modal-link', function (e) {
+                e.preventDefault();
+                $(this).attr('data-target', '#modal-container');
+                $(this).attr('data-toggle', 'modal');
+            });
+
+            // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
+            $('body').on('click', '.modal-close-btn', function () {
+                $('#modal-container').modal('hide');
+            });
+
+            //clear modal cache, so that new content can be loaded
+            $('#modal-container').on('hidden.bs.modal', function () {
+                $(this).removeData('bs.modal');
+            });
+
+            $('#CancelModal').on('click', function () {
+                return false;
+            });
+        });
+</script>
