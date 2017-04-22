@@ -8,11 +8,28 @@ namespace LetsTravel.Controllers
 {
     public class HomeController : Controller
     {
-
+        [AllowAnonymous]
         public ActionResult Index()
         {
-            FormCorrectTextOnMenuButtons();
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.LogInOrOutText = "Log out";
+                if (User.IsInRole("Guide") || User.IsInRole("Traveller"))
+                {
+                    return View("GuideAndTravellerHomeView");
+                }
+                else
+                {
+                    return View("AdminHomeView");
+                }
+            }
+            else
+            {
+                ViewBag.LogInOrOutText = "Log in";
+                return View("GuestHomeView");
+            }
+            //FormCorrectTextOnMenuButtons();
+            //return View();
         }
 
       

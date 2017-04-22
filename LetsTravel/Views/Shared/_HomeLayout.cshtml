@@ -32,10 +32,11 @@
                     </li>
                     <li>
 
-                        @{
+                        @*@{
                             string buttonText = ViewBag.MenuItemName;
                             @Html.ActionLink(buttonText, "GetExcursions", "Excursion")
-                        }
+                        }*@
+                        @RenderSection("ButtonSection")
 
                     </li>
                     <li>

@@ -39,7 +39,8 @@ namespace LetsTravel.Controllers
         {
             if (string.IsNullOrEmpty(returnUrl))
             {
-                returnUrl = "/Excursion/GetExcursions";
+                //returnUrl = "/Excursion/GetExcursions";
+                returnUrl = "/Home/Index";
             }
             if (ModelState.IsValid)
             {

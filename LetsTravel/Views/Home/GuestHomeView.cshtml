@@ -1,0 +1,12 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+@Html.Partial("_RegisterButtonPartialView")
+
+@section ButtonSection
+{
+    @Html.ActionLink("Explore it!", "GetAllExcursions", "Excursion")
+}

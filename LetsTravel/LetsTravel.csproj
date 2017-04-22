@@ -278,6 +278,10 @@
     <Content Include="Views\Shared\_HomeLayout.cshtml" />
     <Content Include="Views\Excursion\AllExcursions.cshtml" />
     <Content Include="Views\Excursion\_PartialCreateExcursionView.cshtml" />
+    <Content Include="Views\Home\GuestHomeView.cshtml" />
+    <Content Include="Views\Home\AdminHomeView.cshtml" />
+    <Content Include="Views\Home\GuideAndTravellerHomeView.cshtml" />
+    <Content Include="Views\Home\_RegisterButtonPartialView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

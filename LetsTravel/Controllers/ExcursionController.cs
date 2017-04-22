@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Domain.Abstract;
@@ -58,7 +59,8 @@ namespace LetsTravel.Controllers
                 }
                 else if (User.IsInRole("Traveller"))
                 {
-                    return View("TravellerView", repository.GetExcursions());
+                    var user = UserManager.FindByNameAsync(User.Identity.Name).Result;                
+                    return View("TravellerView", user.Excursions.ToList());
                 }
                 else
                 {
@@ -71,7 +73,14 @@ namespace LetsTravel.Controllers
             }
         }
 
-        [Authorize]
+        [Authorize(Roles = "Traveller")]
+        public ActionResult Subscribe()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        [AllowAnonymous]
         public ActionResult GetAllExcursions()
         {
             return View("AllExcursions", repository.GetExcursions().ToList());

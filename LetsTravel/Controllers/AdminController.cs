@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using LetsTravel.Identity;
@@ -10,6 +11,11 @@ namespace LetsTravel.Controllers
 {
     public class AdminController : Controller
     {
+        [Authorize(Roles = "Admin")]
+        public ActionResult Moderate()
+        {
+            throw new NotImplementedException();
+        }
         //public ActionResult Index()
         //{
         //    return View(UserManager.Users);
