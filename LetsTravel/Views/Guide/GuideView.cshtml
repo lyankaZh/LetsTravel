@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Domain.Entities.Excursion>
+﻿@model IEnumerable<LetsTravel.Models.ExcursionSubscribersViewModel>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -22,18 +22,35 @@
                 <p class="list-group-item-text">@excursion.Date.ToShortDateString()</p>
                 <p class="list-group-item-text">@excursion.Description</p>
                 <p class="list-group-item-text">@excursion.Duration</p>
-                <p class="list-group-item-text">@excursion.Mark</p>
                 <p class="list-group-item-text">@excursion.PeopleLimit</p>
                 <p class="list-group-item-text">@excursion.Price</p>
                 <p class="list-group-item-text">@excursion.Route</p>
+                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">View Subscribers</button>
+                <div id="demo" class="collapse">
+                    <p class="list-group-item-text">
+                        @if (excursion.Subscribers.Count == 0)
+                        {
+                            @: No subscribers
+                        }
+                        else
+                        {
+                            foreach (var subscriber in excursion.Subscribers)
+                            {
+                                <li>
+                                    @subscriber.FirstName
+                                    @subscriber.LastName
+                                    @subscriber.Email
+                                    @subscriber.AboutMyself
+                                </li>
+                            }
+                        }
+
+                    </p>
+                </div>
             </a>
         </div>
     }
 </div>
-
-
-
-
 
 
 

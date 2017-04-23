@@ -252,6 +252,7 @@
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\ExcursionCreationModel.cs" />
     <Compile Include="Models\ExcursionForTraveller.cs" />
+    <Compile Include="Models\ExcursionSubscribersViewModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\UserModel.cs" />
