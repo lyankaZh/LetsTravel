@@ -42,23 +42,36 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
 
-                    <li class="active">
-                     @Html.ActionLink("Home", "Index", "Home")
-                   </li>
                     <li>
-                        @Html.ActionLink("View all excursions", "GetAllExcursions", "Excursion")       
+                        @Html.ActionLink("Home", "Index", "Home")
                     </li>
-                    <li>
-                        @Html.ActionLink("View my excursions", "GetExcursions", "Excursion")
+                    
+                    @if (User.IsInRole("Guide"))
+                    {
+
+                        <li>
+                            @Html.ActionLink("Own Excursions", "ShowOwnExcursions", "Guide")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Create excursion", "CreateExcursion", "Guide", null, new { @class = "modal-link btn" })
+                        </li>
+                    
+                    }
+                    @if (User.IsInRole("Traveller"))
+                    {
+                        <li>
+                            @Html.ActionLink("Subscribed Excursions", "ShowSubscribedExcursions", "Traveller")
+                        </li>
+                    }
+                    <li  class="active">
+                        @Html.ActionLink("All excursions", "GetAllExcursions", "Excursion")       
                     </li>
+
                     <span class="glyphicon glyphicon-user">
                     </span>
                         <li>
                             @Html.ActionLink("Log out", "LogOut", "Account")                  
                     </li>
-
-                    <li class="active"><a href="#">Home</a></li>
-                    @Html.ActionLink("Create excursion", "CreateExcursion", "Excursion",null,  new { @class = "modal-link btn btn-success" })
                 </ul>
 
                 <form class="navbar-form navbar-right" role="search">

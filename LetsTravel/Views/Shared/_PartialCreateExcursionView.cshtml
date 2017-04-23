@@ -22,7 +22,7 @@
 
         <h3>Please enter information about excursion!</h3>
         @Html.ValidationSummary()
-        @using (Html.BeginForm("CreateExcursion", "Excursion", FormMethod.Post))
+        @using (Html.BeginForm("CreateExcursion", "Guide", FormMethod.Post))
         {
             <div class="form-group">
                 @Html.TextBoxFor(x => x.Description, new { @id = "username", placeholder = Html.DisplayNameFor(n => n.Description) })

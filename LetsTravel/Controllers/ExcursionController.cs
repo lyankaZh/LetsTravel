@@ -47,40 +47,39 @@ namespace LetsTravel.Controllers
         //    return Json(excursion);
         //}
        
-        public ActionResult GetExcursions()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                if (User.IsInRole("Guide"))
-                {
-                    ViewBag.ButtonInMenu = "Create excursion";
-                    var user = UserManager.FindByNameAsync(User.Identity.Name).Result;
-                    return View("GuideView", repository.GetExcursionsByGuideId(user.Id));
-                }
-                else if (User.IsInRole("Traveller"))
-                {
-                    var user = UserManager.FindByNameAsync(User.Identity.Name).Result;                
-                    return View("TravellerView", user.Excursions.ToList());
-                }
-                else
-                {
-                    return View("AdminView", repository.GetExcursions());
-                }
-            }
-            else
-            {
-                return View("GuestPageView", repository.GetExcursions());
-            }
-        }
-
-        [Authorize(Roles = "Traveller")]
-        public ActionResult Subscribe()
-        {
-            throw new NotImplementedException();
-        }
-
+        //public ActionResult GetExcursions()
+        //{
+        //    if (User.Identity.IsAuthenticated)
+        //    {
+        //        if (User.IsInRole("Guide"))
+        //        {
+        //            ViewBag.ButtonInMenu = "Create excursion";
+        //            var user = UserManager.FindByNameAsync(User.Identity.Name).Result;
+        //            return View("GuideView", repository.GetExcursionsByGuideId(user.Id));
+        //        }
+        //        else if (User.IsInRole("Traveller"))
+        //        {
+        //            var user = UserManager.FindByNameAsync(User.Identity.Name).Result;                
+        //            return View("TravellerView", user.Excursions.ToList());
+        //        }
+        //        else
+        //        {
+        //            return View("AdminView", repository.GetExcursions());
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return View("GuestPageView", repository.GetExcursions());
+        //    }
+        //}
 
         [AllowAnonymous]
+        public ActionResult GetAllExcursionsForGuest()
+        {
+            return View("AllExcursionsForGuest", repository.GetExcursions().ToList());
+        }
+
+        [Authorize(Roles = "Guide, Traveller")]
         public ActionResult GetAllExcursions()
         {
             return View("AllExcursions", repository.GetExcursions().ToList());
@@ -94,45 +93,45 @@ namespace LetsTravel.Controllers
             }
         }
 
-        [HttpPost]
-        [Authorize(Roles = "Guide")]
-        public ActionResult CreateExcursion(ExcursionCreationModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                string id = User.Identity.GetUserId();
-                Excursion excursion = new Excursion()
-                {
-                    City = model.City,
-                    Date = model.Date,
-                    Description = model.Description,
-                    Duration = model.Duration,
-                    PeopleLimit = model.PeopleLimit,
-                    Route = model.Route,
-                    Guide = id
-                };
-                repository.InsertExcursion(excursion);
-                repository.Save();
-                //var user = UserManager.FindByIdAsync(User.Identity.GetUserId()).Result;
-                //user.OwnedExcursions.Add(excursion);
-                //var result = await UserManager.UpdateAsync(user);
+        //[HttpPost]
+        //[Authorize(Roles = "Guide")]
+        //public ActionResult CreateExcursion(ExcursionCreationModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        string id = User.Identity.GetUserId();
+        //        Excursion excursion = new Excursion()
+        //        {
+        //            City = model.City,
+        //            Date = model.Date,
+        //            Description = model.Description,
+        //            Duration = model.Duration,
+        //            PeopleLimit = model.PeopleLimit,
+        //            Route = model.Route,
+        //            Guide = id
+        //        };
+        //        repository.InsertExcursion(excursion);
+        //        repository.Save();
+        //        //var user = UserManager.FindByIdAsync(User.Identity.GetUserId()).Result;
+        //        //user.OwnedExcursions.Add(excursion);
+        //        //var result = await UserManager.UpdateAsync(user);
 
-                //if (!result.Succeeded)
-                //{
-                //    AddErrors(result);
-                //}
+        //        //if (!result.Succeeded)
+        //        //{
+        //        //    AddErrors(result);
+        //        //}
 
-                return GetExcursions();
-            }
+        //        return GetExcursions();
+        //    }
 
-            return View("_PartialCreateExcursionView");
-        }
+        //    return View("_PartialCreateExcursionView");
+        //}
 
-        [HttpGet]
-        public ViewResult CreateExcursion()
-        {
-         return View("_PartialCreateExcursionView");   
-        }
+        //[HttpGet]
+        //public ViewResult CreateExcursion()
+        //{
+        // return View("_PartialCreateExcursionView");   
+        //}
 
         private void AddErrors(IdentityResult result)
         {

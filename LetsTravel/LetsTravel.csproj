@@ -241,6 +241,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GuideController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TravellerController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -262,7 +263,7 @@
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Excursion\GuideView.cshtml" />
+    <Content Include="Views\Guide\GuideView.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Create.cshtml" />
@@ -273,15 +274,16 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Excursion\GuestPageView.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Excursion\TravellerView.cshtml" />
+    <Content Include="Views\Traveller\TravellerView.cshtml" />
     <Content Include="Views\Excursion\AdminView.cshtml" />
     <Content Include="Views\Shared\_HomeLayout.cshtml" />
     <Content Include="Views\Excursion\AllExcursions.cshtml" />
-    <Content Include="Views\Excursion\_PartialCreateExcursionView.cshtml" />
+    <Content Include="Views\Shared\_PartialCreateExcursionView.cshtml" />
     <Content Include="Views\Home\GuestHomeView.cshtml" />
     <Content Include="Views\Home\AdminHomeView.cshtml" />
     <Content Include="Views\Home\GuideAndTravellerHomeView.cshtml" />
     <Content Include="Views\Home\_RegisterButtonPartialView.cshtml" />
+    <Content Include="Views\Excursion\AllExcursionsForGuest.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -291,7 +293,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Guide\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
