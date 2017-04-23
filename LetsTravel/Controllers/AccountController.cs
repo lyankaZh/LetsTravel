@@ -138,20 +138,8 @@ namespace LetsTravel.Controllers
             return new RedirectResult("/Home/Index");
         }
 
-        private IAuthenticationManager AuthManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
+        private IAuthenticationManager AuthManager => HttpContext.GetOwinContext().Authentication;
 
-        private AppUserManager UserManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
-            }
-        }
+        private AppUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
     }
 }

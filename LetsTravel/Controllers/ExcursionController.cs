@@ -112,7 +112,7 @@ namespace LetsTravel.Controllers
                         {
                             Excursion = excursion,
                             CouldBeSubscribed = false,
-                            ReasonForSubscribingDisability = "There have already subcribed"
+                            ReasonForSubscribingDisability = "You have already subcribed"
                         });
                     }
                     else

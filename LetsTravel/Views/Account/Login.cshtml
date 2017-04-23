@@ -1,25 +1,4 @@
 ﻿@model LetsTravel.Models.LoginModel
-@*
-    @{
-        ViewBag.Title = "Login";
-    }
-    <h2>Log In</h2>
-
-    @Html.ValidationSummary()
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken();
-        <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
-        <div class="form-group">
-            <label>Name</label>
-            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            @Html.PasswordFor(x => x.Password, new { @class = "form-control" })
-        </div>
-        <button class="btn btn-primary" type="submit">Log In</button>
-    }*@
 
 @{
     Layout = null;
@@ -30,7 +9,7 @@
 <html>
 <head>
     <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-
+    <link href="~/Styles/ValidationStyles.css" rel="stylesheet" />
    
     <meta charset="UTF-8">
     <link href="~/Styles/stylesForForm.css" rel="stylesheet" />

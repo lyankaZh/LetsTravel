@@ -231,6 +231,7 @@
     <Content Include="Styles\homePageStyles.css" />
     <Content Include="Styles\styles.css" />
     <Content Include="Styles\stylesForForm.css" />
+    <Content Include="Styles\ValidationStyles.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
