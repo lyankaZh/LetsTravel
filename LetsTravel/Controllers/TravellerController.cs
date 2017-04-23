@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Domain.Abstract;
 using Domain.Entities;
+using LetsTravel.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
@@ -29,8 +30,7 @@ namespace LetsTravel.Controllers
         }
 
         public ActionResult Subscribe(Excursion excursion)
-        {
-           
+        {  
                 var user = (User) repository.GetUserById(User.Identity.GetUserId());
                 user.Excursions.Add(excursion);
                 repository.UpdateUser(user);

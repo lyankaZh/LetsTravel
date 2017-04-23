@@ -28,7 +28,7 @@
                     <p class="list-group-item-text">@excursion.Excursion.Route</p>
                     @if (excursion.CouldBeSubscribed)
                     {
-                        @Html.ActionLink("Subscribe", "Subscribe", "Traveller", excursion, null)
+                        @Html.ActionLink("Subscribe", "Subscribe", "Traveller", excursion.Excursion, null)
                     }
                     else
                     {
