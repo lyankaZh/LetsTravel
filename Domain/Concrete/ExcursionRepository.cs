@@ -82,6 +82,11 @@ namespace Domain.Concrete
            context.Entry(excursion).State = EntityState.Modified;
         }
 
+        public void UpdateUser(User user)
+        {
+            context.Entry(user).State = EntityState.Modified;
+        }
+
         public IEnumerable<IdentityUser> GetUsers()
         {
             return context.Users;

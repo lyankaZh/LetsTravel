@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<LetsTravel.Models.ExcursionForTraveller>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AllExcursions</title>
+</head>
+<body>
+    <h2>All Excursions</h2>
+    @foreach (var excursion in Model)
+    {
+        <h2>Excursion @excursion.Excursion.ExcursionId </h2>
+            <div class="list-group">
+                <a href="#" class="list-group-item">
+                    <h4 class="list-group-item-heading">@excursion.Excursion.City</h4>
+                    <p class="list-group-item-text">@excursion.Excursion.Date.ToShortDateString()</p>
+                    <p class="list-group-item-text">@excursion.Excursion.Description</p>
+                    <p class="list-group-item-text">@excursion.Excursion.Duration</p>
+                    <p class="list-group-item-text">@excursion.Excursion.Mark</p>
+                    <p class="list-group-item-text">@excursion.Excursion.PeopleLimit</p>
+                    <p class="list-group-item-text">@excursion.Excursion.Price</p>
+                    <p class="list-group-item-text">@excursion.Excursion.Route</p>
+                    @if (excursion.CouldBeSubscribed)
+                    {
+                        @Html.ActionLink("Subscribe", "Subscribe", "Traveller", excursion, null)
+                    }
+                    else
+                    {
+                        <h3>
+                            @excursion.ReasonForSubscribingDisability
+                        </h3>
+                    }
+                </a>
+
+            </div>
+
+    }
+</body>
+</html>

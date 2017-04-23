@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -82,8 +83,56 @@ namespace LetsTravel.Controllers
         [Authorize(Roles = "Guide, Traveller")]
         public ActionResult GetAllExcursions()
         {
-            return View("AllExcursions", repository.GetExcursions().ToList());
+            if (User.IsInRole("Traveller"))
+            {
+                List<ExcursionForTraveller> excursionsToDisplay = new List<ExcursionForTraveller>();
+                foreach (var excursion in repository.GetExcursions())
+                {
+                    if (excursion.Guide == User.Identity.GetUserId())
+                    {
+                        excursionsToDisplay.Add(new ExcursionForTraveller()
+                        {
+                            Excursion = excursion,
+                            CouldBeSubscribed = false,
+                            ReasonForSubscribingDisability = "It is your excursion"
+                        });
+                    }
+                    else if (excursion.Users.Count == excursion.PeopleLimit)
+                    {
+                        excursionsToDisplay.Add(new ExcursionForTraveller()
+                        {
+                            Excursion = excursion,
+                            CouldBeSubscribed = false,
+                            ReasonForSubscribingDisability = "There are no free places"
+                        });
+                    }
+                    else if (excursion.Users.FirstOrDefault(x => x.Id == User.Identity.GetUserId()) != null)
+                    {
+                        excursionsToDisplay.Add(new ExcursionForTraveller()
+                        {
+                            Excursion = excursion,
+                            CouldBeSubscribed = false,
+                            ReasonForSubscribingDisability = "There have already subcribed"
+                        });
+                    }
+                    else
+                    {
+                        excursionsToDisplay.Add(new ExcursionForTraveller()
+                        {
+                            Excursion = excursion,
+                            CouldBeSubscribed = true
+                        });
+                    }
+                }
+                                         
+                return View("AllExcursionsForTraveller", excursionsToDisplay);
+            }
+            else
+            {
+                return View("AllExcursionsForGuide", repository.GetExcursions().ToList());
+            }
         }
+
 
         private AppUserManager UserManager
         {
@@ -140,6 +189,14 @@ namespace LetsTravel.Controllers
                 ModelState.AddModelError("", error);
             }
         }
+
+        //public ActionResult Subscribe(Excursion excursion)
+        //{
+        //    var user = UserManager.FindByNameAsync(User.Identity.Name).Result;
+        //    user.Excursions.Add(excursion);
+        //    //return ShowSubscribedExcursions();
+        //    return View("AllExcursions");
+        //}
     }
 
 }

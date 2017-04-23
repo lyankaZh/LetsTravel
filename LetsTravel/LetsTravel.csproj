@@ -250,6 +250,7 @@
     <Compile Include="Infrastructure\AppIdentityDbContext.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\ExcursionCreationModel.cs" />
+    <Compile Include="Models\ExcursionForTraveller.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\UserModel.cs" />
@@ -272,18 +273,18 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Excursion\GuestPageView.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Traveller\TravellerView.cshtml" />
     <Content Include="Views\Excursion\AdminView.cshtml" />
     <Content Include="Views\Shared\_HomeLayout.cshtml" />
-    <Content Include="Views\Excursion\AllExcursions.cshtml" />
+    <Content Include="Views\Excursion\AllExcursionsForTraveller.cshtml" />
     <Content Include="Views\Shared\_PartialCreateExcursionView.cshtml" />
     <Content Include="Views\Home\GuestHomeView.cshtml" />
     <Content Include="Views\Home\AdminHomeView.cshtml" />
     <Content Include="Views\Home\GuideAndTravellerHomeView.cshtml" />
     <Content Include="Views\Home\_RegisterButtonPartialView.cshtml" />
     <Content Include="Views\Excursion\AllExcursionsForGuest.cshtml" />
+    <Content Include="Views\Excursion\AllExcursionsForGuide.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -12,6 +12,7 @@ namespace Domain.Abstract
         void InsertExcursion(Excursion excursion);
         void DeleteExcursion(int excursionId);
         void UpdateExcursion(Excursion excursion);
+        void UpdateUser(User excursion);
         List<Excursion> GetExcursionsByGuideId(string guideId);
         IEnumerable<IdentityUser> GetUsers();
         IdentityUser GetUserById(string userId);
