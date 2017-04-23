@@ -17,7 +17,11 @@ namespace Domain.Entities
         }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string AboutMyself { get; set; }
+        public string AboutMyself { get; set;}
+
+        public byte[] ImageData { get; set; }
+        public string ImageMimeType { get; set; }
+
         public virtual List<Excursion> Excursions { get; set; }
     }
 }

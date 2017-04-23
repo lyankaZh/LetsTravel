@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNet.Identity
+@model Domain.Entities.User
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p><a href="#">My Profile</a></p>
+
+
+@if (Model.ImageData != null)
+{
+    <div>
+        <img class="img-thumbnail" width="75" height="75"
+             src="@Url.Action("GetImage", "User", new {Model.Id})" />
+    </div>
+}
+else
+{
+    <img src="~/Images/defaultImage.png" />
+}
+
+
