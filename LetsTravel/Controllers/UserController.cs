@@ -6,11 +6,63 @@ using System.Web;
 using System.Web.Mvc;
 using Domain.Concrete;
 using Domain.Entities;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace LetsTravel.Controllers
 {
     public class UserController : Controller
     {
+        private ExcursionRepository repository;
+
+        public UserController(ExcursionRepository repo)
+        {
+            repository = repo;
+        }
+
+        [HttpPost]
+        public ActionResult LoadImage(HttpPostedFileBase image = null)
+        {
+
+            if (image != null)
+            {
+                string userId = User.Identity.GetUserId();
+                var user = (User)repository.GetUserById(userId);
+                user.ImageMimeType = image.ContentType;
+                user.ImageData = new byte[image.ContentLength];
+                image.InputStream.Read(user.ImageData, 0, image.ContentLength);
+                repository.UpdateUser(user);
+                repository.Save();
+            }
+            return View("/Views/Excursion/AllExcursionsForTraveller.cshtml");
+        }
+
+        public FileContentResult GetImage(string userId)
+        {
+            var user = (User)repository.GetUsers().FirstOrDefault(p => p.Id == userId);
+            if (user != null)
+            {
+                return File(user.ImageData, user.ImageMimeType);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public ActionResult ShowProfile()
+        {
+            var user = (User)repository.GetUserById(User.Identity.GetUserId());
+            return View("ProfileView", user);
+        }
+
+        private AppUserManager UserManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
+            }
+        }
         //private readonly TravelDbContext _context = new TravelDbContext();
 
         //// GET: User

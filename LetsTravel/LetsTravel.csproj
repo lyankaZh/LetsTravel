@@ -208,6 +208,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Images\ameli.jpg" />
     <Content Include="Images\bohdanka.jpg" />
+    <Content Include="Images\defaultImage.png" />
     <Content Include="Images\header.jpg" />
     <Content Include="Images\ira.png" />
     <Content Include="Images\orysia.png" />
@@ -287,6 +288,7 @@
     <Content Include="Views\Home\_RegisterButtonPartialView.cshtml" />
     <Content Include="Views\Excursion\AllExcursionsForGuest.cshtml" />
     <Content Include="Views\Excursion\AllExcursionsForGuide.cshtml" />
+    <Content Include="Views\User\ProfileView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -296,7 +298,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj">
