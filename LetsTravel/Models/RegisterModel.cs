@@ -9,21 +9,21 @@ namespace LetsTravel.Models
 {
     public class RegisterModel
     {
-        [Required]
+        [Required(ErrorMessage = "Please enter a nickname")]
         public string Nickname { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter an email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter your first name")]
         [DisplayName("First Name")]
         public string FirstName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter your last name")]
         [DisplayName("Last Name")]
         public string LastName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter your password")]
         public string Password { get; set; }
 
         [Required]
