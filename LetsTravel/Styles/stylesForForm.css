@@ -116,3 +116,30 @@ border-radius: 5px;
 select, select[size="0"], select[size="1"] {
     border-color: rgb(204, 204, 204) !important;
 }
+
+.textarea 
+{
+     width : 314px !important;
+    height : 50px !important;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.text-box
+{
+    width : 314px !important;
+    height : 50px !important;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.multi-line 
+{
+    width : 314px !important;
+    height : 50px !important;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+#About 
+{
+    font-family: Montserrat !important;
+}

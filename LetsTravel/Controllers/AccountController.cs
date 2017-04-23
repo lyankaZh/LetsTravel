@@ -89,7 +89,8 @@ namespace LetsTravel.Controllers
                             UserName = model.Nickname,
                             FirstName = model.FirstName,
                             LastName = model.LastName,
-                            Email = model.Email
+                            Email = model.Email,
+                            AboutMyself = model.About
                         },
                         model.Password);
                     if (creationResult.Succeeded)

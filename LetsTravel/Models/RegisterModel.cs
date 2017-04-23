@@ -33,5 +33,9 @@ namespace LetsTravel.Models
         [Required]
         [DisplayName("Guide")]
         public bool IsGuide { get; set; }
+
+        [DisplayName("About myself")]
+        [DataType(DataType.MultilineText)]
+        public string About { get; set; }
     }
 }

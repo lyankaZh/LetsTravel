@@ -18,7 +18,27 @@
 </head>
 
 <body>
+    <style>
+        .textarea {
+            width: 314px !important;
+            height: 50px !important;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: none
+        }
 
+        .text-box {
+            width: 314px !important;
+            height: 50px !important;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: none
+        }
+
+        #About {
+            font-family: Montserrat !important;
+        }
+    </style>
     <div class="login-block">
         <h3>Please enter your information!</h3>
         @Html.ValidationSummary()
@@ -39,6 +59,9 @@
             </div>
             <div class="form-group">
                 @Html.PasswordFor(x => x.Password, new { @id = "password", placeholder = Html.DisplayNameFor(n => n.Password) })
+            </div>
+            <div class="form-group">
+                @Html.EditorFor(x => x.About, new { htmlAttributes = new { placeholder = Html.DisplayNameFor(n => n.About) } })
             </div>
             <h3>Who are you?</h3>
             <div class="form-group">
