@@ -4,8 +4,32 @@
     font-family: Montserrat;
 }
 
+.modal-body important! {
+    position: relative;
+    padding: 30px;
+}
 
+.form-group {
+    margin-bottom: 5px;
+     font-family: "Times New Roman", Times, serif;
+}
 
+#username {
+       width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    
+}
+
+#font-added{
+     font-family: "Times New Roman", Times, serif;
+         font-size: 20px;
+    margin-left: 100px;
+    font-weight: 300;
+}
 .login-block {
     width: 320px;
     padding: 20px;
