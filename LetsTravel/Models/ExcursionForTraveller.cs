@@ -10,7 +10,6 @@ namespace LetsTravel.Models
     {
         public Excursion Excursion { get; set; }
         public bool CouldBeSubscribed { get; set;}
-        public string ReasonForSubscribingDisability { get; set; }
-        
+        public string ReasonForSubscribingDisability { get; set; }      
     }
 }
