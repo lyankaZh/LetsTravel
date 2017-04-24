@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model IEnumerable<Domain.Entities.Excursion>
+@model IEnumerable<LetsTravel.Models.ExcursionWithGuideInfoViewModel>
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
@@ -23,10 +23,20 @@
                 <p class="list-group-item-text">@excursion.Date.ToShortDateString()</p>
                 <p class="list-group-item-text">@excursion.Description</p>
                 <p class="list-group-item-text">@excursion.Duration</p>
-                <p class="list-group-item-text">@excursion.Mark</p>
                 <p class="list-group-item-text">@excursion.PeopleLimit</p>
                 <p class="list-group-item-text">@excursion.Price</p>
                 <p class="list-group-item-text">@excursion.Route</p>
+                <button type="button" class="btn btn-info" data-toggle="collapse" data-target=@excursion.ModalId>View Guide info</button>
+                <div id=@excursion.ExcursionId class="collapse">
+                    <p class="list-group-item-text">
+                   @excursion.Guide.FirstName
+                        @excursion.Guide.LastName
+                        @excursion.Guide.AboutMyself
+                        @excursion.Guide.Email
+                    </p>
+                </div>
+                    @Html.ActionLink("UnSubscribe", "UnSubscribe", "Traveller", excursion, null)
+          
             </a>
         </div>
     }

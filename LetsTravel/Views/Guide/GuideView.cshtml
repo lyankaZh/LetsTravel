@@ -25,8 +25,8 @@
                 <p class="list-group-item-text">@excursion.PeopleLimit</p>
                 <p class="list-group-item-text">@excursion.Price</p>
                 <p class="list-group-item-text">@excursion.Route</p>
-                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">View Subscribers</button>
-                <div id="demo" class="collapse">
+                <button type="button" class="btn btn-info" data-toggle="collapse" data-target= @excursion.ModalId>View Subscribers</button>
+                <div id="@excursion.ExcursionId" class="collapse">
                     <p class="list-group-item-text">
                         @if (excursion.Subscribers.Count == 0)
                         {
@@ -35,16 +35,13 @@
                         else
                         {
                             foreach (var subscriber in excursion.Subscribers)
-                            {
-                                <li>
+                            {                              
                                     @subscriber.FirstName
                                     @subscriber.LastName
                                     @subscriber.Email
-                                    @subscriber.AboutMyself
-                                </li>
+                                    @subscriber.AboutMyself                           
                             }
                         }
-
                     </p>
                 </div>
             </a>

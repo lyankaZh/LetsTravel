@@ -80,7 +80,8 @@ namespace Domain.Concrete
                 Description = "Exciting excursion to cultural center of Ukraine",
                 Duration = 2,
                 PeopleLimit = 6,
-                Price = 25
+                Price = 25,
+                Guide = user.Id
             };
             context.Excursions.Add(excursion);
             base.Seed(context);
