@@ -7,6 +7,7 @@ using Domain.Entities;
 using LetsTravel.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using System.Collections.Generic;
 
 namespace LetsTravel.Controllers
 {
@@ -52,9 +53,25 @@ namespace LetsTravel.Controllers
         public ActionResult ShowOwnExcursions()
         {
             var user = UserManager.FindByNameAsync(User.Identity.Name).Result;
-            return View("GuideView", repository.GetExcursionsByGuideId(user.Id));
+            var excursionsToDisplay = new List <ExcursionSubscribersViewModel> ();        
+            foreach (var excursion in repository.GetExcursionsByGuideId(user.Id))
+            {
+                var excursionToDisplay = new ExcursionSubscribersViewModel();
+                excursionToDisplay.ExcursionId = excursion.ExcursionId;
+                excursionToDisplay.City = excursion.City;
+                excursionToDisplay.Date = excursion.Date;
+                excursionToDisplay.Description = excursion.Description;
+                excursionToDisplay.Duration = excursion.Duration;
+                excursionToDisplay.PeopleLimit = excursion.PeopleLimit;
+                excursionToDisplay.Price = excursion.Price;
+                excursionToDisplay.Route = excursion.Route;
+                excursionToDisplay.Subscribers = repository.GetSubscribersByExcursionId(excursion.ExcursionId, User.Identity.GetUserId());
+                excursionToDisplay.ModalId = "#" + excursion.ExcursionId.ToString(); 
+                excursionsToDisplay.Add(excursionToDisplay);
+            }         
+            return View("GuideView", excursionsToDisplay);
         }
-
+         
         private AppUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
     }
 }

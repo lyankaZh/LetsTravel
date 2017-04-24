@@ -255,6 +255,8 @@
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\ExcursionCreationModel.cs" />
     <Compile Include="Models\ExcursionForTraveller.cs" />
+    <Compile Include="Models\ExcursionSubscribersViewModel.cs" />
+    <Compile Include="Models\ExcursionWithGuideInfoViewModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ProfileModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
