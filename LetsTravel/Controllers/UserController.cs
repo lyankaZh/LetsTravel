@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Domain.Concrete;
 using Domain.Entities;
+using LetsTravel.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
@@ -53,7 +54,27 @@ namespace LetsTravel.Controllers
         public ActionResult ShowProfile()
         {
             var user = (User)repository.GetUserById(User.Identity.GetUserId());
-            return View("ProfileView", user);
+            ProfileModel model = new ProfileModel()
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                AboutMyself = user.AboutMyself,
+                ImageData = user.ImageData,
+                ImageMimeType = user.ImageMimeType,
+
+            };
+            if (User.IsInRole("Traveller"))
+            {
+                model.SubscribedExcursionsAmount = user.Excursions.Count;
+            }
+            if (User.IsInRole("Guide"))
+            {
+                model.OwnedExcursionsAmount = (from u in repository.GetExcursions() where u.Guide == user.Id select u).Count();
+            }
+            return View("ProfileView", model);
         }
 
         private AppUserManager UserManager

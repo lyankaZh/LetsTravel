@@ -212,6 +212,7 @@
     <Content Include="Images\header.jpg" />
     <Content Include="Images\ira.png" />
     <Content Include="Images\orysia.png" />
+    <Content Include="Images\profileBackground.jpg" />
     <Content Include="Images\ulyana.jpg" />
     <Content Include="js\custom.js" />
     <Content Include="js\jquery.easing.min.js" />
@@ -230,6 +231,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Styles\guideStyles.css" />
     <Content Include="Styles\homePageStyles.css" />
+    <Content Include="Styles\profileStyles.css" />
     <Content Include="Styles\styles.css" />
     <Content Include="Styles\stylesForForm.css" />
     <Content Include="Styles\ValidationStyles.css" />
@@ -254,6 +256,7 @@
     <Compile Include="Models\ExcursionCreationModel.cs" />
     <Compile Include="Models\ExcursionForTraveller.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\ProfileModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

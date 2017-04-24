@@ -1,22 +1,59 @@
-﻿@using Microsoft.AspNet.Identity
-@model Domain.Entities.User
+﻿@model LetsTravel.Models.ProfileModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<p><a href="#">My Profile</a></p>
 
+<link href="~/Styles/profileStyles.css" rel="stylesheet" />
+<link href="~/Styles/bootstrap.css" rel="stylesheet" />
 
-@if (Model.ImageData != null)
-{
-    <div>
-        <img class="img-thumbnail" width="75" height="75"
-             src="@Url.Action("GetImage", "User", new {Model.Id})" />
+<html>
+<head>
+    <title>Profile</title>
+</head>
+<body>
+    <div class="row">
+
+        
+            <div class="section-vcardbody section-home container-fluid" id="section-home">
+                <div class="vcard-profile-pic">
+                    @if (Model.ImageData != null)
+                    {
+                        <div>
+                            <img class="img-thumbnail" width="75" height="75"
+                                 src="@Url.Action("GetImage", "User", new {Model.Id})" />
+                        </div>
+                    }
+                    else
+                    {
+                        <img src="~/Images/defaultImage.png" />
+                    }
+                </div>
+
+                <div class="vcard-profile-description">
+                    <h1 class="profile-title">@Model.UserName </h1>
+                    <div class="vcard-profile-description-text" id="font-style">
+                        <p>First Name: @Model.FirstName</p>
+                        <p>Last Name: @Model.LastName</p>
+                        <p>Email: @Model.Email</p>
+                        @if (User.IsInRole("Guide"))
+                        {
+                            <p>Amount of excursions: @Model.OwnedExcursionsAmount</p>
+                        }
+                        @if (User.IsInRole("Traveller"))
+                        {
+                            <p>Amount of subscribed excursions: @Model.SubscribedExcursionsAmount</p>
+                        }
+                        @if (Model.Mark != 0)
+                        {
+                            <p>Average Mark: @Model.Mark</p>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        
     </div>
-}
-else
-{
-    <img src="~/Images/defaultImage.png" />
-}
 
-
+</body>
+</html>
