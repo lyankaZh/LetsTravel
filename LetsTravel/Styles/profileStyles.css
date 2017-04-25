@@ -1,8 +1,10 @@
 ﻿body {
     background-image: url('../Images/profileBackground.jpg');
-    
+     overflow-y: auto ! important;
+        overflow-x: auto ! important;
     -webkit-font-smoothing: subpixel-antialiased;
-    background-repeat: no-repeat;
+    background-size:     cover;                     
+    background-repeat:   repeat;
     background-size: 100% 100%;
     line-height: 1.42857143;
     color: #333;
@@ -23,28 +25,19 @@ html {
     position: absolute;
     margin-top: 30px;
     left: 30%;
-    height: 570px;
     width: 40%;
-    padding: 45px;
+    padding: 10px;
     padding-bottom: 20px;
-}
-
-.vcard-profile-pic {
-    width: 200px;
-    height: 200px;
-    overflow: hidden;
-    margin: 0 auto;
-    margin-bottom: 20px;
-    position: relative;
-}
-.section-vcardbody {
+    max-height: 470px;
+    min-height: 100px;
+    height: 100vh;
     width: 99%;
     margin: 0 auto;
     overflow-y: auto;
     background-color: white;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 20px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 10px;
     border-top: 6px solid;
     -webkit-transition: all 0.6s ease-in-out;
     -moz-transition: all 0.6s ease-in-out;
@@ -52,10 +45,18 @@ html {
     border-radius: 0px;
     -moz-border-radius: 0px;
     -webkit-border-radius: 0px;
-    border-bottom: 15px solid #f4f4f4;
+    border-bottom: 15px solid white;
+    overflow-y: auto;
 }
 
-
+.vcard-profile-pic {
+    width: 150px;
+    height: 170px;
+    overflow: hidden;
+    margin: 0 auto;
+    margin-bottom: 0px;
+    position: relative;
+}
 
 div {
     display: block;
@@ -64,7 +65,7 @@ div {
 
 .vcard-profile-description {
     text-align: left;
-    padding-left: 20pt;
+    padding-left: 5pt;
 }
 
 .profile-title {
@@ -85,16 +86,16 @@ div {
     margin-bottom: 20px;
 }
 .vcard-profile-description-text {
-    padding: 10px;
-    padding-top: 10px;
+    padding: 0px;
+    padding-top: 0px;
     margin-bottom: 5px;
     text-align:left
 }
 
 img {
     vertical-align: middle;
-    height: 200px;
-    width: 200px;
+    height: 150px;
+    width: 150px;
     border-radius: 50%;
 }
 

@@ -295,6 +295,7 @@
     <Content Include="Views\Excursion\AllExcursionsForGuest.cshtml" />
     <Content Include="Views\Excursion\AllExcursionsForGuide.cshtml" />
     <Content Include="Views\User\ProfileView.cshtml" />
+    <Content Include="Views\User\EditProfileView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
