@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using Domain.Concrete;
@@ -75,6 +76,56 @@ namespace LetsTravel.Controllers
                 model.OwnedExcursionsAmount = (from u in repository.GetExcursions() where u.Guide == user.Id select u).Count();
             }
             return View("ProfileView", model);
+        }
+
+        public ActionResult Edit()
+        {
+            User user = UserManager.FindByIdAsync(User.Identity.GetUserId()).Result;
+            return View("EditProfileView", user);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(User model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = (User)repository.GetUserById(model.Id);
+                var amountOfUsersWithSameNick =
+                    (from u in repository.GetUsers() where u.UserName == model.UserName && u.UserName!= user.UserName
+                     select u).Count();
+                if (amountOfUsersWithSameNick >= 1 )
+                {
+                    ModelState.AddModelError("", "Such nickname already exists");
+                    return Edit();
+                }
+                var amountOfUsersWithSameEmail =
+                    (from u in repository.GetUsers() where u.Email == model.Email && u.Email != user.Email
+                     select u).Count();
+
+                if (amountOfUsersWithSameEmail >= 1)
+                {
+                    ModelState.AddModelError("", "Such email already exists");
+                    return Edit();
+                }
+              
+                user.UserName = model.UserName;
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Email = model.Email;
+                if (!string.IsNullOrEmpty(model.AboutMyself))
+                {
+                    user.AboutMyself = model.AboutMyself;
+                }
+                repository.UpdateUser(user);
+                repository.Save();
+                return ShowProfile();
+            }
+            return Edit();
+        }
+
+        public ActionResult Delete()
+        {
+            throw new NotImplementedException();
         }
 
         private AppUserManager UserManager

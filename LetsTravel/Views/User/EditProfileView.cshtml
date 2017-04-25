@@ -1,0 +1,116 @@
+﻿@model Domain.Entities.User
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Styles/profileStyles.css" rel="stylesheet" />
+    <link href="~/Styles/ValidationStyles.css" rel="stylesheet" />
+    <title>Edit</title>
+    <style>
+        .textarea {
+            width: 314px !important;
+            height: 50px !important;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: none;
+        }
+
+        .text-box {
+            width: 314px !important;
+            height: 50px !important;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: none;
+        }
+
+        #About {
+            font-family: Montserrat !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="row">
+
+
+        <div class="section-vcardbody section-home container-fluid" id="section-home">
+            <div class="vcard-profile-pic">
+                @if (Model.ImageData != null)
+                {
+                    <div>
+                        <img class="img-thumbnail" width="75" height="75"
+                             src="@Url.Action("GetImage", "User", new {Model.Id})" />
+                    </div>
+                }
+                else
+                {
+                    <img src="~/Images/defaultImage.png" />
+                }
+            </div>
+
+            <div class="vcard-profile-description">
+                <div class="vcard-profile-description-text" id="font-style">
+
+                    @using (Html.BeginForm("Edit", "User", FormMethod.Post))
+                    {
+                        @Html.ValidationSummary()
+                        <div class="vcard-profile-description-text" id="font-style">
+                            @Html.HiddenFor(x => x.Id)
+                            <p><label>Nickname: </label>
+                            </p>
+                            <p>
+                                @Html.EditorFor(x => Model.UserName)
+                            </p>
+
+                            <p><label>First Name: </label>
+                            </p>
+                            <p>
+                                @Html.EditorFor(x => Model.FirstName)
+                            </p>
+
+                            <p><label>Last Name: </label>
+                            </p>
+                            <p>
+                                @Html.EditorFor(x => Model.LastName)
+                            </p>
+
+                            <p><label>Email: </label>
+                            </p>
+                            <p>
+                                @Html.EditorFor(x => Model.Email)
+                            </p>
+
+                            <p><label>About: </label>
+                            </p>
+                            <p>
+                                @if (string.IsNullOrEmpty(Model.AboutMyself))
+                                {
+                                    @Html.Editor(" ")
+                                }
+                                else
+                                {
+                                    @Html.EditorFor(x => Model.AboutMyself)
+                                }
+                            </p>
+
+                            <input type="submit" value="Save" class="btn btn-success"/>
+                            @Html.ActionLink("Cancel", "ShowProfile", "User", null, new {@class = "btn btn-default"})
+
+                        </div>
+                    }
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+</body>
+</html>

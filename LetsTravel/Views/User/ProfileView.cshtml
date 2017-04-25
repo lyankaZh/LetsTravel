@@ -14,45 +14,52 @@
 <body>
     <div class="row">
 
-        
-            <div class="section-vcardbody section-home container-fluid" id="section-home">
-                <div class="vcard-profile-pic">
-                    @if (Model.ImageData != null)
-                    {
-                        <div>
-                            <img class="img-thumbnail" width="75" height="75"
-                                 src="@Url.Action("GetImage", "User", new {Model.Id})" />
-                        </div>
-                    }
-                    else
-                    {
-                        <img src="~/Images/defaultImage.png" />
-                    }
-                </div>
 
-                <div class="vcard-profile-description">
-                    <h1 class="profile-title">@Model.UserName </h1>
-                    <div class="vcard-profile-description-text" id="font-style">
-                        <p>First Name: @Model.FirstName</p>
-                        <p>Last Name: @Model.LastName</p>
-                        <p>Email: @Model.Email</p>
-                        @if (User.IsInRole("Guide"))
-                        {
-                            <p>Amount of excursions: @Model.OwnedExcursionsAmount</p>
-                        }
-                        @if (User.IsInRole("Traveller"))
-                        {
-                            <p>Amount of subscribed excursions: @Model.SubscribedExcursionsAmount</p>
-                        }
-                        @if (Model.Mark != 0)
-                        {
-                            <p>Average Mark: @Model.Mark</p>
-                        }
+        <div class="section-vcardbody section-home container-fluid" id="section-home">
+            <div class="vcard-profile-pic">
+                @if (Model.ImageData != null)
+                {
+                    <div>
+                        <img class="img-thumbnail" width="75" height="75"
+                             src="@Url.Action("GetImage", "User", new {Model.Id})" />
                     </div>
-
-                </div>
+                }
+                else
+                {
+                    <img src="~/Images/defaultImage.png" />
+                }
             </div>
-        
+
+            <div class="vcard-profile-description">
+                <h1 class="profile-title">@Model.UserName </h1>
+                <div class="vcard-profile-description-text" id="font-style">
+                    <p>First Name: @Model.FirstName</p>
+                    <p>Last Name: @Model.LastName</p>
+                    <p>Email: @Model.Email</p>
+                    @if (User.IsInRole("Guide"))
+                    {
+                        <p>Amount of excursions: @Model.OwnedExcursionsAmount</p>
+                    }
+                    @if (User.IsInRole("Traveller"))
+                    {
+                        <p>Amount of subscribed excursions: @Model.SubscribedExcursionsAmount</p>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.AboutMyself))
+                    {
+                        <p>About: @Model.AboutMyself</p>
+                    }
+                    @if (Model.Mark != 0)
+                    {
+                        <p>Average Mark: @Model.Mark</p>
+                    }
+                </div>
+
+            </div>
+
+            @Html.ActionLink("Edit Profile", "Edit","User", null, new { @class = "btn btn-success" })
+            @Html.ActionLink("Delete Profile", "Delete", "User", null, new { @class = "btn btn-danger" })
+        </div>
+
     </div>
 
 </body>

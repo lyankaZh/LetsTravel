@@ -8,6 +8,7 @@ using Domain.Abstract;
 using Domain.Entities;
 using LetsTravel.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace LetsTravel.Controllers
@@ -43,7 +44,7 @@ namespace LetsTravel.Controllers
                 excursionToDisplay.ExcursionId = excursion.ExcursionId;
                 excursionToDisplay.ModalId = "#" + excursion.ExcursionId.ToString();
                 excursionToDisplay.Guide = (User)repository.GetUsers().First(u => u.Id == excursion.Guide);    
-                subscribedExcursions.Add(excursionToDisplay);                               
+                subscribedExcursions.Add(excursionToDisplay);                       
             }
             return View("TravellerView", subscribedExcursions);
         }
