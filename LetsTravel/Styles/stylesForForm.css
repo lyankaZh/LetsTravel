@@ -24,6 +24,10 @@
     
 }
 
+::-webkit-input-placeholder {
+  padding-left: 30px;
+}
+
 #font-added{
      font-family: "Times New Roman", Times, serif;
          font-size: 20px;

@@ -24,7 +24,6 @@
         @Html.ValidationSummary()
         @using (Html.BeginForm())
         {
-           @*@Html.AntiForgeryToken()*@
             <div class="form-group">            
                 @Html.TextBoxFor(x => x.Nickname,  new { @id = "username", placeholder = Html.DisplayNameFor(n => n.Nickname) })
             </div>

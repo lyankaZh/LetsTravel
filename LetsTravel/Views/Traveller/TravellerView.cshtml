@@ -8,39 +8,52 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <link href="~/Styles/bootstrap.css" rel="stylesheet" />
+    <link href="~/Styles/excursionCardStyles.css" rel="stylesheet" />
 </head>
 @{
     ViewBag.Title = "Excursions";
 }
 
-<div class="container">
-    <h2>My Excursions</h2>
+
+    <span class="profile-title">My Excursions:</span>
     @foreach (var excursion in Model)
     {
-        <div class="list-group">
-            <a href="#" class="list-group-item">
-                <h4 class="list-group-item-heading">@excursion.City</h4>
-                <p class="list-group-item-text">@excursion.Date.ToShortDateString()</p>
-                <p class="list-group-item-text">@excursion.Description</p>
-                <p class="list-group-item-text">@excursion.Duration</p>
-                <p class="list-group-item-text">@excursion.PeopleLimit</p>
-                <p class="list-group-item-text">@excursion.Price</p>
-                <p class="list-group-item-text">@excursion.Route</p>
-                <button type="button" class="btn btn-info" data-toggle="collapse" data-target=@excursion.ModalId>View Guide info</button>
-                <div id=@excursion.ExcursionId class="collapse">
-                    <p class="list-group-item-text">
-                   @excursion.Guide.FirstName
-                        @excursion.Guide.LastName
-                        @excursion.Guide.AboutMyself
-                        @excursion.Guide.Email
-                    </p>
+        <div class="section-vcardbody section-home ps-container" id="section-home" data-ps-id="e1e33774-dcb3-1f4c-b285-f77d195d9137">
+            <!-- Description -->
+            <div class="vcard-profile-description">
+                <!-- Profile title -->
+                <h1 class="profile-title">Hi! <span class="color1">Excursion @excursion.ExcursionId</span>
+                </h1>
+                <h2 class="profile-subtitle">City: @excursion.City</h2>
+
+                <div class="vcard-profile-description-text">
+                    <p>Date: @excursion.Date.ToShortDateString()</p>
+                    <p>Description: @excursion.Description</p>
+                    <p>Duration: @excursion.Duration</p>
+                    <p>Limit of people: @excursion.PeopleLimit</p>
+                    <p>Price: @excursion.Price $</p>
+                    <p>Route: @excursion.Route</p>
                 </div>
+                <div class="vcard-profile-description-feature">
+                    <!-- item -->
+                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target=@excursion.ModalId>View Guide info</button>
+                    <div id=@excursion.ExcursionId class="collapse">
+                        <p class="list-group-item-text">
+                            <label>First Name:</label> @excursion.Guide.FirstName
+                            <br />
+                            <label>Last Name:</label>  @excursion.Guide.LastName
+                            <br />
+                            <label>Email:</label>  @excursion.Guide.Email
+                            <br />
+                            <label>About me:</label>  @excursion.Guide.AboutMyself
+                        </p>
+                    </div>
                     @Html.ActionLink("UnSubscribe", "UnSubscribe", "Traveller", excursion, null)
-          
-            </a>
+
+                </div>
+            </div>
         </div>
-    }
-</div>
+    }   
 
 
 
