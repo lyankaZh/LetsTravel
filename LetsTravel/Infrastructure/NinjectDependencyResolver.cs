@@ -26,6 +26,7 @@ namespace LetsTravel.Infrastructure
         private void AddBindings()
         {
             kernel.Bind<IExcursionRepository>().To<ExcursionRepository>();
+            kernel.Bind<IUserRepository>().To<UserRepository>();
         }
     }
 }

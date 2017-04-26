@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net.Sockets;
 using Domain.Abstract;
 using Domain.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -95,7 +96,7 @@ namespace Domain.Concrete
 
         public void DeleteUser(string userId)
         {
-            User userToDelete = (User)context.Users.Find(userId);
+            var userToDelete = context.Users.Find(userId);
             if (userToDelete != null)
             {
                 context.Users.Remove(userToDelete);
@@ -114,14 +115,15 @@ namespace Domain.Concrete
 
         public IEnumerable<IdentityUser> GetUsers()
         {
-            return context.Users;
+            var users = from user in context.Users select (User) user;
+            return users.ToList();
         }
 
-        public IdentityUser GetUserById(string userId)
+        public User GetUserById(string userId)
         {
             var query = from user in context.Users
                         where user.Id == userId
-                        select user;
+                        select (User)user;
             return query.FirstOrDefault();
         } 
 

@@ -253,7 +253,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Identity\IdentityConfig.cs" />
-    <Compile Include="Infrastructure\AppIdentityDbContext.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\ExcursionCreationModel.cs" />
     <Compile Include="Models\ExcursionForTraveller.cs" />

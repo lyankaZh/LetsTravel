@@ -15,11 +15,11 @@ namespace LetsTravel.Controllers
 
     public class ExcursionController : Controller
     {
-        private readonly IExcursionRepository repository;
+        private readonly IExcursionRepository excursionRepository;
 
         public ExcursionController(IExcursionRepository repository)
         {
-            this.repository = repository;
+            excursionRepository = repository;
         }
 
         //public string Index()
@@ -77,7 +77,7 @@ namespace LetsTravel.Controllers
         [AllowAnonymous]
         public ActionResult GetAllExcursionsForGuest()
         {
-            return View("AllExcursionsForGuest", repository.GetExcursions().ToList());
+            return View("AllExcursionsForGuest", excursionRepository.GetExcursions().ToList());
         }
 
         [Authorize(Roles = "Guide, Traveller")]
@@ -86,7 +86,7 @@ namespace LetsTravel.Controllers
             if (User.IsInRole("Traveller"))
             {
                 List<ExcursionForTraveller> excursionsToDisplay = new List<ExcursionForTraveller>();
-                foreach (var excursion in repository.GetExcursions())
+                foreach (var excursion in excursionRepository.GetExcursions())
                 {
                     if (excursion.Guide == User.Identity.GetUserId())
                     {
@@ -129,7 +129,7 @@ namespace LetsTravel.Controllers
             }
             else
             {
-                return View("AllExcursionsForGuide", repository.GetExcursions().ToList());
+                return View("AllExcursionsForGuide", excursionRepository.GetExcursions().ToList());
             }
         }
 
