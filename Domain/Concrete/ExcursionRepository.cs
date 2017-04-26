@@ -93,6 +93,15 @@ namespace Domain.Concrete
             }          
         }
 
+        public void DeleteUser(string userId)
+        {
+            User userToDelete = (User)context.Users.Find(userId);
+            if (userToDelete != null)
+            {
+                context.Users.Remove(userToDelete);
+            }
+        }
+
         public void UpdateExcursion(Excursion excursion)
         {
            context.Entry(excursion).State = EntityState.Modified;

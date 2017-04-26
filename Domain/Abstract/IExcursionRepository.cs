@@ -17,6 +17,7 @@ namespace Domain.Abstract
         IEnumerable<IdentityUser> GetUsers();
         IdentityUser GetUserById(string userId);
         List<User> GetSubscribersByExcursionId(int excursionId, string guideId);
+        void DeleteUser(string userId);
         void Save();
     }
 }

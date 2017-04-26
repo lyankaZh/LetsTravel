@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace LetsTravel.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         private ExcursionRepository repository;
@@ -123,9 +124,47 @@ namespace LetsTravel.Controllers
             return Edit();
         }
 
-        public ActionResult Delete()
+        [HttpPost]
+        public ActionResult Delete(string id)
         {
-            throw new NotImplementedException();
+            var user = repository.GetUserById(id);
+            if (user != null)
+            {
+                bool isGuide = User.IsInRole("Guide");
+                bool isTraveller = User.IsInRole("Traveller");
+                if (isTraveller)
+                {
+                    //TO DO - unsubscribe only from future excursions
+                    if (((User) repository.GetUserById(id)).Excursions.Count > 0)
+                    {
+                        TempData["deleteTravellerErrorMessage"] =
+                            "Before deleting profile unsubscribe from all excursions";
+                        return ShowProfile();
+                    }
+                }
+                if (isGuide)
+                {
+                    //дозволити видалення коли є екскурсії, на які ніхто не підписався. в такому разі видаляємо і екскурсії
+                    //якщо є активні екскурсії, на які хто-небудь підписався - заборонити видаляти
+                    var excursionsOfGuideWithDependencies = from exc in repository.GetExcursionsByGuideId(id)
+                        where exc.Users.Count > 0
+                        select exc;
+                    if (excursionsOfGuideWithDependencies.Any())
+                    {
+                        TempData["deleteGuideErrorMessage"] =
+                            "You can`t delete your profile because you have active excursions with subscribers";
+                        return ShowProfile();
+                    }
+                    foreach (var excursion in repository.GetExcursionsByGuideId(id))
+                    {
+                        repository.DeleteExcursion(excursion.ExcursionId);
+                    }
+                }
+                HttpContext.GetOwinContext().Authentication.SignOut();
+                repository.DeleteUser(id);
+                repository.Save();
+            }
+            return new RedirectResult("/Home/Index");
         }
 
         private AppUserManager UserManager

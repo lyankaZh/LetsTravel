@@ -105,3 +105,18 @@ img {
     font-weight: bold;
     font-family: "Libre Baskerville", serif !important;
 }
+
+ .display-in-line 
+        {
+            display: inline-flex !important;
+        }
+ .btn-with-padding {
+     padding-right: 2px !important;
+ }
+ #normal-button {
+     display: inline-flex;
+ }
+ 
+ .btn-success {
+     margin-right: 10px !important;
+ }

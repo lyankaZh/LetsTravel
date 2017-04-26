@@ -6,16 +6,25 @@
 
 <link href="~/Styles/profileStyles.css" rel="stylesheet" />
 <link href="~/Styles/bootstrap.css" rel="stylesheet" />
-
+<link href="~/Styles/ValidationStyles.css" rel="stylesheet" />
 <html>
 <head>
     <title>Profile</title>
 </head>
+
 <body>
     <div class="row">
 
 
         <div class="section-vcardbody section-home container-fluid" id="section-home">
+            @if (TempData["deleteGuideErrorMessage"] != null)
+            {
+                <div class="alert alert-danger">@TempData["deleteGuideErrorMessage"]</div>
+            }
+            @if (TempData["deleteTravellerErrorMessage"] != null)
+            {
+                <div class="alert alert-danger">@TempData["deleteTravellerErrorMessage"]</div>
+            }
             <div class="vcard-profile-pic">
                 @if (Model.ImageData != null)
                 {
@@ -31,6 +40,7 @@
             </div>
 
             <div class="vcard-profile-description">
+                @Html.HiddenFor(x => Model.Id)
                 <h1 class="profile-title">@Model.UserName </h1>
                 <div class="vcard-profile-description-text" id="font-style">
                     <p>First Name: @Model.FirstName</p>
@@ -56,10 +66,23 @@
 
             </div>
 
-            @Html.ActionLink("Edit Profile", "Edit","User", null, new { @class = "btn btn-success" })
-            @Html.ActionLink("Delete Profile", "Delete", "User", null, new { @class = "btn btn-danger" })
-        </div>
+            
+            <div  id ="normal-button">
+                @Html.ActionLink("Edit Profile", "Edit", "User", null, new { @class = "btn btn-success" })
 
+                @using (Html.BeginForm("Delete", "User"))
+                {
+                    @Html.HiddenFor(x => Model.Id)
+                    <input type="submit"
+                           class="btn btn-danger"
+                           onclick="return confirm('Are you sure you wish to delete this article?');"
+                           value="Delete" />
+                }
+            </div>
+               
+            
+
+        </div>
     </div>
 
 </body>
