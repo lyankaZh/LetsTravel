@@ -49,7 +49,7 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
 
-                    <li>
+                    <li >
                         @Html.ActionLink("Home", "Index", "Home")
                     </li>
 
@@ -66,7 +66,7 @@
                     @if (User.IsInRole("Guide"))
                     {
                         <li>
-                            @Html.ActionLink("Create excursion", "CreateExcursion", "Guide", null, new { @class = "modal-link btn " })
+                            @Html.ActionLink("Create excursion", "CreateExcursion", "Guide", null, new { @class = "modal-link" })
                         </li>
 
                     }
@@ -121,6 +121,12 @@
 </script>
 
 <script type="text/javascript">
+    
+    $(document).ready(function () {
+        $('li.active').removeClass('active');
+        $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
+    });
+
     $(function () {
         // Initialize numeric spinner input boxes
         //$(".numeric-spinner").spinedit();

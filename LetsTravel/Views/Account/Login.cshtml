@@ -17,14 +17,13 @@
 
 </head>
 
-<body>
+<body class="body-login-back">
 
     <div class="login-block">
         <h1>Welcome</h1>
         @Html.ValidationSummary()
         @using (Html.BeginForm())
         {
-           @*@Html.AntiForgeryToken()*@
             <div class="form-group">            
                 @Html.TextBoxFor(x => x.Nickname,  new { @id = "username", placeholder = Html.DisplayNameFor(n => n.Nickname) })
             </div>

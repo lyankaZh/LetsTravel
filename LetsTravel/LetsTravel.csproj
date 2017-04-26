@@ -207,9 +207,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Images\ameli.jpg" />
+    <Content Include="Images\bg.gif" />
     <Content Include="Images\bohdanka.jpg" />
     <Content Include="Images\defaultImage.png" />
-    <Content Include="Images\excursionImage.jpg" />
     <Content Include="Images\header.jpg" />
     <Content Include="Images\ira.png" />
     <Content Include="Images\orysia.png" />

@@ -1,4 +1,17 @@
-﻿
+﻿#back-stage {
+    background: #08aeac
+}
+#animate-area {
+    width: 560px;
+    height: 400px;
+    background-image: url('../Images/bg.gif');
+    background-position: 0px 0px;
+    background-repeat: repeat-x;
+    animation: animatedBackground 40s linear infinite;
+    -ms-animation: animatedBackground 40s linear infinite;
+    -moz-animation: animatedBackground 40s linear infinite;
+    -webkit-animation: animatedBackground 40s linear infinite;
+}
 .color1 {
   color: #08aeac;
 }
@@ -38,7 +51,6 @@
 body {
   font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: subpixel-antialiased;
-  background: url('../img/bg1.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -116,11 +128,10 @@ ading-wrapper {
 }
 @media (min-width:992px) {
   .section-vcardbody {
-    position: absolute;
     margin-top: 30px;
     left: 30%;
-    height: 570px;
-    width: 40%;
+    max-height: 570px;
+    width: 70%;
     padding: 45px;
     padding-bottom: 20px;
   }
@@ -191,14 +202,8 @@ ading-wrapper {
     margin-top: 180px;
   }
 }
-.ps-scrollbar-y-rail {
-  opacity: 0.9 !important;
-  right: 4px!important;
-}
 
-/* ==========================================================
-! 08. Home
-========================================================== */
+
 .section-home {
   z-index: 88;
   opacity: 1;
@@ -212,19 +217,29 @@ ading-wrapper {
   margin-bottom: 20px;
   position: relative;
 }
-.vcard-profile-pic img {
-  width: 100%;
-  border-radius: 100%;
-  -moz-border-radius: 100%;
-  -webkit-border-radius: 100%;
-  border: 6px solid #ddd;
-  -webkit-transition: all 0.6s ease-in-out;
-  -moz-transition: all 0.6s ease-in-out;
-  transition: all 0.6s ease-in-out;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
+#container
+{
+    width: 40%!important;
+}
+.section-vcardbody-width {
+    width: 29%;
+    margin: 0 auto;
+    overflow-y: scroll;
+    background:  repeat-x right top #f4f4f4;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-top: 6px solid #111;
+    -webkit-transition: all 0.6s ease-in-out;
+    -moz-transition: all 0.6s ease-in-out;
+    transition: all 0.6s ease-in-out;
+    border-radius: 0px;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -webkit-box-shadow: 0px 6px 18px 0px rgba(0, 0, 0, 0.46);
+    -moz-box-shadow: 0px 6px 18px 0px rgba(0, 0, 0, 0.46);
+    box-shadow: 0px 6px 18px 0px rgba(0, 0, 0, 0.46);
+    border-bottom: 15px solid #f4f4f4;
 }
 .profileActive {
   opacity: 1!important;
@@ -319,34 +334,7 @@ h3, .h3 {
   margin-bottom: 8px;
   letter-spacing: -1px;
 }
-.section-item-title-2 {
-  font-weight: bold;
-  color: #021533;
-  color: #333;
-  padding-left: 0;
-  margin-left: 0;
-  font-size: 18px;
-  line-height: 22px;
-  margin: 0;
-  margin-bottom: 8px;
-  letter-spacing: -1px;
-  border-bottom: 1px dotted #021533;
-  padding-bottom: 5px;
-  font-size: 15px;
-}
-.graduation-time,
-.job {
-  line-height: 15px;
-  font-style: italic;
-  color: #555;
-  font-size: 10px;
-  margin-top: 5px;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 5px;
-}
-.graduation-description p {
-  font-size: 12px;
-}
+
 /*============================================================================
   >>  10. SECTION: Resume
   ============================================================================
@@ -370,209 +358,8 @@ h3, .h3 {
   border-top: 1px solid #ccc;
   padding-top: 10px;
 }
-.testimonials {
-  text-align: center;
-  font-size: 18px;
-}
-.testimonial-item {
-  width: 100%;
-  margin: 0 auto;
-}
-@media (min-width: 768px) {
-  .testimonial-item {
-    padding: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-}
-.quote-text {
-  font-style: italic;
-}
-.testimonial-credits {
-  margin-top: 30px;
-}
-.testimonial-author {
-  font-size: 15px;
-  margin-bottom: 0;
-  margin-top: 15px;
-  font-weight: bold;
-}
-.testimonial-content {
-  background: url('../img/bgmask2.png') no-repeat center center #08aeac;
-  color: #ffffff;
-  padding: 20px;
-  border-radius: 10px;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  width: 100%;
-  position: relative;
-}
-.testimonial-content p {
-  font-size: 13px;
-  line-height: 16px;
-}
-.testimonial-content:after {
-  content: '';
-  display: block;
-  width: 10px;
-  height: 10px;
-  position: absolute;
-  left: 50%;
-  bottom: -5px;
-  margin-left: -5px;
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
-  z-index: 888;
-  background: #08aeac;
-}
-.testimonial-picture {
-  width: 110px;
-  height: 110px;
-  overflow: hidden;
-  margin: 0 auto;
-}
-.testimonial-picture img {
-  width: 100%;
-  border-radius: 100%;
-  -moz-border-radius: 100%;
-  -webkit-border-radius: 100%;
-  border: 6px solid #ddd;
-}
-.testimonial-firm {
-  font-size: 10px;
-  margin-bottom: 0;
-  text-transform: uppercase;
-  font-style: italic;
-  font-weight: lighter;
-}
-.owl-carousel {
-  cursor: -webkit-grab;
-  cursor: -moz-grab;
-}
-.owl-carousel:focus {
-  cursor: -webkit-grab;
-  cursor: -moz-grab;
-}
-.owl-carousel:active {
-  cursor: -webkit-grab;
-  cursor: -moz-grab;
-}
-.owl-carousel:hover {
-  cursor: -webkit-grab;
-  cursor: -moz-grab;
-}
-/*============================================================================
-  >>  11. Owl Carousel
-  ============================================================================
-*/
-.owl-carousel .owl-item {
-  cursor: -webkit-grab;
-}
-.owl-carousel .owl-item:focus {
-  cursor: -webkit-grabbing;
-  cursor: -moz-grabbing;
-}
-.owl-carousel .owl-item:active {
-  cursor: -webkit-grabbing;
-  cursor: -moz-grabbing;
-}
-.owl-carousel .owl-item img {
-  width: 100%;
-}
-.grabbing {
-  cursor: -webkit-grabbing !important;
-  cursor: -moz-grabbing !important;
-}
-.owl-controls-wrapper2:hover .owl-controls {
-  opacity: 1;
-}
-.owl-controls-wrapper2 .owl-controls {
-  opacity: 0.4;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-  width: 100%;
-  position: absolute;
-  top: auto;
-  bottom: 0;
-  left: 0;
-  padding: 5px;
-  padding-left: 20px;
-  padding-right: 20px;
-  background: rgba(0, 0, 0, 0.4);
-  color: #ffffff !important;
-  border-radius: 0 0 20px 20px;
-  -moz-border-radius: 0 0 20px 20px;
-  -webkit-border-radius: 0 0 20px 20px;
-}
-.owl-controls-wrapper2 .owl-controls a {
-  color: #ffffff !important;
-}
-.owl-controls-wrapper2 .owl-controls .owl-page {
-  background-color: #ffffff;
-}
-.owl-controls-wrapper2 .owl-controls .owl-page.active {
-  background: #021533;
-}
-.owl-controls-wrapper2 .owl-pagination,
-.owl-controls-wrapper2 .owl-buttons {
-  width: 50%;
-  float: left;
-}
-.owl-controls-wrapper2 .owl-buttons {
-  text-align: right;
-}
-.owl-controls-wrapper2 .owl-buttons > div {
-  display: inline-block;
-  margin-left: 5px;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-  font-size: 14px;
-}
-.owl-controls-wrapper2 .owl-buttons > div:hover {
-  color: #021533;
-}
-.owl-controls-wrapper2 .owl-mtop .owl-wrapper-outer {
-  padding-top: 40px;
-}
-.owl-controls-wrapper2 .owl-wrapper-outer {
-  position: relative;
-}
-.owl-controls-wrapper2 .owl-controls {
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.owl-controls-wrapper2 .owl-controls .owl-page {
-  cursor: pointer;
-  width: 8px;
-  height: 8px;
-  border-radius: 100%;
-  -moz-border-radius: 100%;
-  -webkit-border-radius: 100%;
-  margin-right: 3px;
-  display: inline-block;
-  background: #333;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-}
-.owl-controls-wrapper2 .owl-controls .owl-page:hover {
-  opacity: 0.8;
-}
-.owl-controls-wrapper2 .owl-controls .owl-page.active {
-  background: #021533;
-}
-.owl-pagination .owl-page span {
-  background: #021533;
-}
-.owl-pagination .active span {
-  background: #021533 !important;
-}
+
+
 /* ==========================================================
 ! 12. SECTION: SKILLS
 ========================================================== */
@@ -601,10 +388,7 @@ h3, .h3 {
   color: #888;
   font-size: 14px;
 }
-.skills-list {
-  list-style: none;
-  margin-bottom: 40px;
-}
+
 .progress-bar {
   background: #08aeac;
   width: 20%;
@@ -615,68 +399,7 @@ h3, .h3 {
 .progress-bar-3 {
   background: #d9212a;
 }
-/* ==========================================================
-! 13. SECTION: Portfolio
-========================================================== */
-.project-item {
-  padding: 0;
-  width: 100%;
-  overflow: hidden;
-  margin-bottom: 10px;
-  position: relative;
-  opacity: 1;
-  -webkit-transition: all 0.8s ease-in-out;
-  -moz-transition: all 0.8s ease-in-out;
-  transition: all 0.8s ease-in-out;
-  transform: translateY(0px);
-  -webkit-transform: translateY(0px);
-  -moz-transform: translateY(0px);
-}
-.project-item a {
-  cursor: url('../img/projects2.cur'), projetos !important;
-  border-radius: 6px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-}
-.project-thumbnail {
-  display: block;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  background-position: center center;
-  height: 250px;
-  text-align: center;
-  color: #ffffff;
-  padding: 15px;
-}
-.project-thumbnail:hover {
-  color: #ffffff;
-}
-.project-thumbnail:hover .project-description-wrapper {
-  opacity: 1;
-  transform: translateY(0px);
-  -webkit-transform: translateY(0px);
-  -moz-transform: translateY(0px);
-}
-.project-thumbnail:hover .project-title,
-.project-thumbnail:hover span.see-more {
-  transform: translateY(0px);
-  -webkit-transform: translateY(0px);
-  -moz-transform: translateY(0px);
-}
-.project-description-wrapper {
-  display: block;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  -webkit-transition: all 0.4s ease-in-out;
-  -moz-transition: all 0.4s ease-in-out;
-  transition: all 0.4s ease-in-out;
-  color: #ffffff;
-  position: relative;
-  background: rgba(0, 0, 0, 0.7);
-}
+
 .project-description {
   position: absolute;
   top: 50%;
@@ -721,76 +444,8 @@ span.see-more {
   -webkit-transform: translateY(10px);
   -moz-transform: translateY(10px);
 }
-/* ==========================================================
-! 14. BLOG
-========================================================== */
-.blog-item {
-  margin-bottom: 15px;
-  padding: 9px;
-  border-top: 4px solid #132644;
-  padding-top: 20px;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.6);
-}
-.blog-item-wrapper {
-  /* border: 1px solid #ddd;
-  border-top: 3px solid @color1;
-  padding: 15px;
-  padding-top: 20px;
-  padding-bottom: 5px;*/
-  padding-bottom: 20px;
-  border-bottom: 1px solid #ccc;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-}
-.blog-item-title {
-  font-size: 18px;
-  line-height: 26px;
-  padding-bottom: 0;
-  margin-bottom: 6px;
-  color: #021533;
-  border-bottom: 1px dotted #021533;
-  padding-bottom: 4px;
-  font-weight: bold;
-}
-.blog-item-title a {
-  color: #021533;
-}
-.blog-item-title a:hover {
-  text-decoration: none;
-}
-.blog-item-thumb a {
-  cursor: url('../img/projects.cur'), projetos !important;
-  -moz-cursor: url('../img/projects.cur'), projetos !important;
-}
-.blog-item-thumb img {
-  width: 100%;
-}
-.blog-item-title-hr {
-  border: 0;
-  border-top: 3px solid #021533;
-  width: 20%;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  margin-left: 0;
-}
-.blog-item-description p {
-  font-size: 12px;
-}
-.blog-item-description a {
-  color: #555555 !important;
-}
-.blog-item-description a:hover {
-  text-decoration: none;
-}
-.blog-item-link {
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-.blog-item-link .btn-default {
-  font-size: 11px !important;
-}
+
+
 .section-header-image {
   margin-bottom: 40px;
 }
@@ -800,20 +455,4 @@ span.see-more {
 .section-pagination {
   font-size: 12px;
   padding-bottom: 20px;
-}
-.section-pagination a {
-  display: inline-block;
-  padding: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-  color: #ffffff;
-  background: #08aeac;
-  font-weight: bold;
-  -webkit-transition: all 0.2s;
-  -moz-transition: all 0.2s;
-  transition: all 0.2s;
-}
-.section-pagination a:hover {
-  background: #021533;
-  text-decoration: none;
 }
