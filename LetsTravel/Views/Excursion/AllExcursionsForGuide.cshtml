@@ -9,26 +9,36 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link href="~/Styles/excursionCardStyles.css" rel="stylesheet" />
     <title>AllExcursions</title>
 </head>
 <body>
-    <h2>All Excursions</h2>
+    <h2 align="left"><span class="profile-title">All Excursions:</span></h2>
     @foreach (var excursion in Model)
     {
-        <h2>Excursion @excursion.ExcursionId </h2>
-        <div class="list-group">
-            <a href="#" class="list-group-item">
-                <h4 class="list-group-item-heading">@excursion.City</h4>
-                <p class="list-group-item-text">@excursion.Date.ToShortDateString()</p>
-                <p class="list-group-item-text">@excursion.Description</p>
-                <p class="list-group-item-text">@excursion.Duration</p>
-                <p class="list-group-item-text">@excursion.Mark</p>
-                <p class="list-group-item-text">@excursion.PeopleLimit</p>
-                <p class="list-group-item-text">@excursion.Price</p>
-                <p class="list-group-item-text">@excursion.Route</p>
+        <div class="section-vcardbody section-home ps-container" id="section-home" data-ps-id="e1e33774-dcb3-1f4c-b285-f77d195d9137">
+            <!-- Description -->
+            <div class="vcard-profile-description">
+                <!-- Profile title -->
+                <h1 class="profile-title">Hi! <span class="color1">Excursion @excursion.ExcursionId</span></h1>
+                <h2 class="profile-subtitle">City: @excursion.City</h2>
 
-            </a>
-
+                <div class="vcard-profile-description-text">
+                    <p>Date: @excursion.Date.ToShortDateString()</p>
+                    <p>Description: @excursion.Description</p>
+                    <p>Duration: @excursion.Duration</p>
+                    <p>Mark: @excursion.Mark</p>
+                    <p>Limit of people: @excursion.PeopleLimit</p>
+                    <p>Price: @excursion.Price $</p>
+                    <p>Route: @excursion.Route</p>
+                </div>
+                <div class="vcard-profile-description-feature">
+                    <!-- item -->
+                    <div class="vcard-profile-description-ft-item">
+                      
+                    </div>
+                </div>
+            </div>
         </div>
     }
 </body>

@@ -209,6 +209,7 @@
     <Content Include="Images\ameli.jpg" />
     <Content Include="Images\bohdanka.jpg" />
     <Content Include="Images\defaultImage.png" />
+    <Content Include="Images\excursionImage.jpg" />
     <Content Include="Images\header.jpg" />
     <Content Include="Images\ira.png" />
     <Content Include="Images\orysia.png" />
@@ -229,6 +230,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Styles\excursionCardStyles.css" />
     <Content Include="Styles\guideStyles.css" />
     <Content Include="Styles\homePageStyles.css" />
     <Content Include="Styles\profileStyles.css" />
