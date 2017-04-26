@@ -15,9 +15,9 @@ namespace LetsTravel.Controllers
 
     public class ExcursionController : Controller
     {
-        private readonly IExcursionRepository excursionRepository;
+        private readonly ITravelRepository excursionRepository;
 
-        public ExcursionController(IExcursionRepository repository)
+        public ExcursionController(ITravelRepository repository)
         {
             excursionRepository = repository;
         }

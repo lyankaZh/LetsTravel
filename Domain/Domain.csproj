@@ -109,11 +109,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\IExcursionRepository.cs" />
-    <Compile Include="Abstract\IUserRepository.cs" />
-    <Compile Include="Concrete\ExcursionRepository.cs" />
+    <Compile Include="Abstract\ITravelRepository.cs" />
+    <Compile Include="Concrete\TravelRepository.cs" />
     <Compile Include="Concrete\TravelDbContext.cs" />
-    <Compile Include="Concrete\UserRepository.cs" />
     <Compile Include="Entities\AppRole.cs" />
     <Compile Include="Entities\AppRoleManager.cs" />
     <Compile Include="Entities\AppUserManager.cs" />

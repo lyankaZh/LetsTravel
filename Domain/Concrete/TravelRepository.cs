@@ -9,12 +9,12 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Domain.Concrete
 {
-    public class ExcursionRepository : IExcursionRepository
+    public class TravelRepository : ITravelRepository
     {
         private TravelDbContext context;
         private bool disposed = false;
 
-        public ExcursionRepository(TravelDbContext context)
+        public TravelRepository(TravelDbContext context)
         {
             this.context = context;
         }
@@ -115,15 +115,15 @@ namespace Domain.Concrete
 
         public IEnumerable<IdentityUser> GetUsers()
         {
-            var users = from user in context.Users select (User) user;
+            var users = from user in context.Users select  user;
             return users.ToList();
         }
 
-        public User GetUserById(string userId)
+        public IdentityUser GetUserById(string userId)
         {
             var query = from user in context.Users
                         where user.Id == userId
-                        select (User)user;
+                        select user;
             return query.FirstOrDefault();
         } 
 

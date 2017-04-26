@@ -16,9 +16,9 @@ namespace LetsTravel.Controllers
     [Authorize]
     public class UserController : Controller
     {
-        private ExcursionRepository repository;
+        private TravelRepository repository;
 
-        public UserController(ExcursionRepository repo)
+        public UserController(TravelRepository repo)
         {
             repository = repo;
         }
@@ -40,9 +40,10 @@ namespace LetsTravel.Controllers
             return View("/Views/Excursion/AllExcursionsForTraveller.cshtml");
         }
 
-        public FileContentResult GetImage(string userId)
+
+        public FileContentResult GetImage(string id)
         {
-            var user = (User)repository.GetUsers().FirstOrDefault(p => p.Id == userId);
+            var user = (User)repository.GetUsers().FirstOrDefault(p => p.Id == id);
             if (user != null)
             {
                 return File(user.ImageData, user.ImageMimeType);
@@ -86,7 +87,7 @@ namespace LetsTravel.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(User model)
+        public ActionResult Edit(User model, HttpPostedFileBase image = null)
         {
             if (ModelState.IsValid)
             {
@@ -116,6 +117,12 @@ namespace LetsTravel.Controllers
                 if (!string.IsNullOrEmpty(model.AboutMyself))
                 {
                     user.AboutMyself = model.AboutMyself;
+                }
+                if (image != null)
+                {
+                    user.ImageMimeType = image.ContentType;
+                    user.ImageData = new byte[image.ContentLength];
+                    image.InputStream.Read(user.ImageData, 0, image.ContentLength);
                 }
                 repository.UpdateUser(user);
                 repository.Save();

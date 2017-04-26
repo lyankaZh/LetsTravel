@@ -14,9 +14,9 @@ namespace LetsTravel.Controllers
     [Authorize(Roles = "Guide")]
     public class GuideController : Controller
     {
-        private readonly IExcursionRepository repository;
+        private readonly ITravelRepository repository;
 
-        public GuideController(IExcursionRepository repository)
+        public GuideController(ITravelRepository repository)
         {
             this.repository = repository;
         }

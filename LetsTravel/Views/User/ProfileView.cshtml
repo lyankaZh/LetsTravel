@@ -26,16 +26,14 @@
                 <div class="alert alert-danger">@TempData["deleteTravellerErrorMessage"]</div>
             }
             <div class="vcard-profile-pic">
+                
                 @if (Model.ImageData != null)
                 {
-                    <div>
-                        <img class="img-thumbnail" width="75" height="75"
-                             src="@Url.Action("GetImage", "User", new {Model.Id})" />
-                    </div>
+                    <img src="@Url.Action("GetImage", "User", new {id = Model.Id})" />
                 }
                 else
                 {
-                    <img src="~/Images/defaultImage.png" />
+                    <img src="~/Images/defaultImage.png"/>
                 }
             </div>
 
