@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Domain.Entities.User>
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="~/Styles/adminStyles.css" rel="stylesheet" />
+</head>
+
+<body>
+    @if (TempData["userDeleted"] != null)
+            {
+        <div class="alert alert-danger">@TempData["userDeleted"]</div>
+    }
+    <table>
+        <tr>
+            <th>Nickname</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Delete option</th>
+        </tr>
+        @foreach (var user in Model)
+        {
+            if (user.UserName != "Admin")
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.Email</td>
+                    <td>
+                        @using (Html.BeginForm("DeleteUser", "Admin"))
+                        {
+                            @Html.Hidden("userId", user.Id)
+                            <input type="submit"
+                                   class="btn btn-default btn-xs"
+                                   onclick="return confirm('Are you sure?');"
+                                   value="Delete"/>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+
+</body>
+</html>

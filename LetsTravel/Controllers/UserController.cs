@@ -16,7 +16,7 @@ namespace LetsTravel.Controllers
     [Authorize]
     public class UserController : Controller
     {
-        private TravelRepository repository;
+        private readonly TravelRepository repository;
 
         public UserController(TravelRepository repo)
         {

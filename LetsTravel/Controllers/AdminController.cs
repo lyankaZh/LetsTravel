@@ -1,21 +1,113 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using LetsTravel.Identity;
+using Domain.Concrete;
+using Domain.Entities;
 using LetsTravel.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace LetsTravel.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
-        [Authorize(Roles = "Admin")]
-        public ActionResult Moderate()
+        private readonly TravelRepository repository;
+
+        public AdminController(TravelRepository repo)
         {
-            throw new NotImplementedException();
+            repository = repo;
         }
+
+        public ActionResult ShowUsersForAdmin()
+        {
+            var users = from user in repository.GetUsers() select (User)user;
+            var usersToDisplay = new List<User>();
+            foreach (var user in users)
+            {
+                usersToDisplay.Add(user);
+            }
+            return View("Users",usersToDisplay);
+        }
+
+        public ActionResult ShowExcursionsForAdmin()
+        {
+            var excursions = from exc in repository.GetExcursions() select exc;
+            var excursionsToDisplay = new List<ExcursionModelForAdmin>();
+            foreach (var exc in excursions)
+            {
+                var guide = (User)repository.GetUserById(exc.Guide);
+                excursionsToDisplay.Add(
+                    new ExcursionModelForAdmin()
+                    {
+                       ExcursionId = exc.ExcursionId,
+                       City = exc.City,
+                       Date = exc.Date,
+                       Price = exc.Price,
+                       GuideNickname = guide.UserName,
+                       GuideFirstName = guide.FirstName,
+                       GuideLastName = guide.LastName
+                    });
+            }
+            return View("Excursions", excursionsToDisplay);
+        }
+
+
+        [HttpPost]
+        public ActionResult DeleteUser(string userId)
+        {
+            User user = (User)repository.GetUserById(userId);
+            if (user != null)
+            {
+                if (UserManager.IsInRole(user.Id, "Guide"))
+                {
+                    var excursionsOfGuide = repository.GetExcursionsByGuideId(user.Id);
+                    foreach (var excursion in excursionsOfGuide)
+                    {
+                        foreach (var u in excursion.Users)
+                        {
+                            u.Excursions.Remove(excursion);
+                        }
+                        repository.DeleteExcursion(excursion.ExcursionId);
+                    }
+                }
+                if (UserManager.IsInRole(user.Id, "Traveller"))
+                {
+                    foreach (var excursion in user.Excursions)
+                    {
+                        excursion.Users.Remove(user);
+                    }
+                    user.Excursions.Clear();
+                }
+                repository.DeleteUser(userId);
+                repository.Save();
+                TempData["userDeleted"] = "User has been deleted";
+            }
+
+            return ShowUsersForAdmin();
+        }
+
+
+        [HttpPost]
+        public ActionResult DeleteExcursion(int excursionId)
+        {
+            var excursion = repository.GetExcursionById(excursionId);
+            if (excursion != null)
+            {
+                foreach (var user in excursion.Users)
+                {
+                    user.Excursions.Remove(excursion);
+                }
+                repository.DeleteExcursion(excursionId);
+                repository.Save();
+                TempData["excursionDeleted"] = "Excursion has been deleted";
+            }
+            return ShowExcursionsForAdmin();
+        }
+
+
+        private AppUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
         //public ActionResult Index()
         //{
         //    return View(UserManager.Users);
@@ -118,7 +210,7 @@ namespace LetsTravel.Controllers
         //        AppUser user = new AppUser { UserName = model.Name, Email = model.Email };
         //        IdentityResult result = await UserManager.CreateAsync(user,
         //        model.Password);
-               
+
         //    if (result.Succeeded)
         //        {
         //            return RedirectToAction("Index");

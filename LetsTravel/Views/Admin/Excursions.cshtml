@@ -1,0 +1,59 @@
+﻿@model IEnumerable<LetsTravel.Models.ExcursionModelForAdmin>
+@{
+    ViewBag.Title = "Excursions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="~/Styles/adminStyles.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    @if (TempData["excursionDeleted"] != null)
+    {
+        <div class="alert alert-danger">@TempData["excursionDeleted"]</div>
+    }
+    <div>
+        <table>
+            <tr>
+                <th>City</th>
+                <th>Date</th>
+                <th>Price</th>
+                <th>Nick of guide</th>
+                <th>Name of guide</th>
+                <th>Surname of guide</th>
+                <th>Delete option</th>
+            </tr>
+            @foreach (var excursion in Model)
+            {
+                <tr>
+
+                    <td>@excursion.City</td>
+                    <td>@excursion.Date.ToShortDateString()</td>
+                    <td>@excursion.Price</td>
+                    <td>@excursion.GuideNickname</td>
+                    <td>@excursion.GuideFirstName</td>
+                    <td>@excursion.GuideLastName</td>
+                    
+                    <td>
+                        @using (Html.BeginForm("DeleteExcursion", "Admin"))
+                        {
+                            @Html.Hidden("excursionId", excursion.ExcursionId)
+                            <input type="submit"
+                                   class="btn btn-default btn-xs"
+                                   onclick="return confirm('Are you sure you?');"
+                                   value="Delete" />
+                        }
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</body>
+</html>

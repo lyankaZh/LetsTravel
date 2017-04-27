@@ -33,6 +33,7 @@ namespace LetsTravel.Controllers
                     Date = model.Date,
                     Description = model.Description,
                     Duration = model.Duration,
+                    Price = model.Price,
                     PeopleLimit = model.PeopleLimit,
                     Route = model.Route,
                     Guide = id
@@ -69,7 +70,7 @@ namespace LetsTravel.Controllers
                 excursionToDisplay.ModalId = "#" + excursion.ExcursionId.ToString(); 
                 excursionsToDisplay.Add(excursionToDisplay);
             }         
-            return View("GuideView", excursionsToDisplay);
+            return View("OwnExcursionsGuideView", excursionsToDisplay);
         }
          
         private AppUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<AppUserManager>();

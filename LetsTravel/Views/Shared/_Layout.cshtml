@@ -1,9 +1,7 @@
-﻿@using Microsoft.AspNet.Identity
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Lets travel</title>
+    <title>Let's travel</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -26,6 +24,7 @@
             width: 600px !important;
             margin: 30px auto !important;
         }
+
         .modal-link {
             text-align: left !important;
         }
@@ -49,14 +48,31 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
 
-                    <li >
+                    <li>
                         @Html.ActionLink("Home", "Index", "Home")
                     </li>
 
                     <li>
-                        @Html.ActionLink("Profile", "ShowProfile", "User")
+                        @if (User.IsInRole("Guide") || User.IsInRole("Traveller"))
+                        {
+                            @Html.ActionLink("Profile", "ShowProfile", "User")
+                        }
                     </li>
 
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>
+                            @Html.ActionLink("User Management", "ShowUsersForAdmin", "Admin")
+
+                        </li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>
+                            @Html.ActionLink("Excursion Management", "ShowExcursionsForAdmin", "Admin")
+                        </li>
+                    }
                     @if (User.IsInRole("Guide"))
                     {
                         <li>
@@ -77,6 +93,7 @@
                         </li>
                     }
                     <li>
+
                         @Html.ActionLink("All excursions", "GetAllExcursions", "Excursion")
                     </li>
                     <li>
@@ -118,7 +135,7 @@
 </script>
 
 <script type="text/javascript">
-    
+
     $(document).ready(function () {
         $('li.active').removeClass('active');
         $('a[href="' + location.pathname + '"]').closest('li').addClass('active');

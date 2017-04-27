@@ -15,11 +15,11 @@ namespace LetsTravel.Controllers
 
     public class ExcursionController : Controller
     {
-        private readonly ITravelRepository excursionRepository;
+        private readonly ITravelRepository repository;
 
         public ExcursionController(ITravelRepository repository)
         {
-            excursionRepository = repository;
+            this.repository = repository;
         }
 
         //public string Index()
@@ -77,27 +77,30 @@ namespace LetsTravel.Controllers
         [AllowAnonymous]
         public ActionResult GetAllExcursionsForGuest()
         {
-            return View("AllExcursionsForGuest", excursionRepository.GetExcursions().ToList());
+            return View("AllExcursionsForGuest", repository.GetExcursions().ToList());
         }
 
-        [Authorize(Roles = "Guide, Traveller")]
+        [Authorize(Roles = "Guide, Traveller, Admin")]
         public ActionResult GetAllExcursions()
         {
             if (User.IsInRole("Traveller"))
             {
                 List<ExcursionForTraveller> excursionsToDisplay = new List<ExcursionForTraveller>();
-                foreach (var excursion in excursionRepository.GetExcursions())
+                foreach (var excursion in repository.GetExcursions())
                 {
-                    if (excursion.Guide == User.Identity.GetUserId())
+                    if (User.IsInRole("Guide"))
                     {
-                        excursionsToDisplay.Add(new ExcursionForTraveller()
+                        if (excursion.Guide == User.Identity.GetUserId())
                         {
-                            Excursion = excursion,
-                            CouldBeSubscribed = false,
-                            ReasonForSubscribingDisability = "It is your excursion"
-                        });
+                            excursionsToDisplay.Add(new ExcursionForTraveller()
+                            {
+                                Excursion = excursion,
+                                CouldBeSubscribed = false,
+                                ReasonForSubscribingDisability = "It is your excursion"
+                            });
+                        }
                     }
-                    else if (excursion.Users.Count == excursion.PeopleLimit)
+                    if (excursion.Users.Count == excursion.PeopleLimit)
                     {
                         excursionsToDisplay.Add(new ExcursionForTraveller()
                         {
@@ -127,10 +130,12 @@ namespace LetsTravel.Controllers
                                          
                 return View("AllExcursionsForTraveller", excursionsToDisplay);
             }
-            else
+            else if (User.IsInRole("Guide"))
             {
-                return View("AllExcursionsForGuide", excursionRepository.GetExcursions().ToList());
+                return View("AllExcursionsForGuide", repository.GetExcursions().ToList());
             }
+            return View("AllExcursionsForAdmin", repository.GetExcursions().ToList());
+
         }
 
 

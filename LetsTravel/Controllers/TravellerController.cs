@@ -69,8 +69,8 @@ namespace LetsTravel.Controllers
             repository.UpdateUser(user);
             repository.Save();
             return ShowSubscribedExcursions();
-
         }
+
 
         private AppUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
 

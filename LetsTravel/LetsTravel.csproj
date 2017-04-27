@@ -218,6 +218,7 @@
     <Content Include="js\custom.js" />
     <Content Include="js\jquery.easing.min.js" />
     <Content Include="Styles\aboutStyles.css" />
+    <Content Include="Styles\adminStyles.css" />
     <Content Include="Styles\bootstrap.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Styles\bootstrap.min.css" />
@@ -256,6 +257,7 @@
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\ExcursionCreationModel.cs" />
     <Compile Include="Models\ExcursionForTraveller.cs" />
+    <Compile Include="Models\ExcursionModelForAdmin.cs" />
     <Compile Include="Models\ExcursionSubscribersViewModel.cs" />
     <Compile Include="Models\ExcursionWithGuideInfoViewModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -272,12 +274,9 @@
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Guide\GuideView.cshtml" />
+    <Content Include="Views\Guide\OwnExcursionsGuideView.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\Create.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -295,6 +294,10 @@
     <Content Include="Views\Excursion\AllExcursionsForGuide.cshtml" />
     <Content Include="Views\User\ProfileView.cshtml" />
     <Content Include="Views\User\EditProfileView.cshtml" />
+    <Content Include="Views\Excursion\AllExcursionsForAdmin.cshtml" />
+    <Content Include="Views\Shared\_GuestExcursionsPartial.cshtml" />
+    <Content Include="Views\Admin\Users.cshtml" />
+    <Content Include="Views\Admin\Excursions.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

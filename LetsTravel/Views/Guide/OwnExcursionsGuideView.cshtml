@@ -3,17 +3,19 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<html>
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <link href="~/Styles/bootstrap.css" rel="stylesheet" />
     <link href="~/Styles/excursionCardStyles.css" rel="stylesheet" />
+    <title>Own excursions</title>
 </head>
 @{
     ViewBag.Title = "Excursions";
 }
 
-
+<body>
     <h2 align="left"><span class="profile-title">Own Excursions:</span></h2>
     @foreach (var excursion in Model)
     {
@@ -34,36 +36,33 @@
                 </div>
                 <div class="vcard-profile-description-feature">
                     <!-- item -->
-                    
-                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target=@excursion.ModalId>View Subscribers</button>
-                        <div id="@excursion.ExcursionId" class="collapse">
-                            <p class="list-group-item-text">
-                                @if (excursion.Subscribers.Count == 0)
-                                {
-                                    @: No subscribers
+
+                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target=@excursion.ModalId>View Subscribers</button>
+                    <div id="@excursion.ExcursionId" class="collapse">
+                        <p class="list-group-item-text">
+                            @if (excursion.Subscribers.Count == 0)
+                            {
+                                @: No subscribers
                         }
-                                else
+                            else
+                            {
+                                foreach (var subscriber in excursion.Subscribers)
                                 {
-                                    foreach (var subscriber in excursion.Subscribers)
-                                    {
-                                        <label>First Name:</label> @subscriber.FirstName
-                                        <br/>
-                                        <label>Last Name:</label>  @subscriber.LastName
-                                        <br />
-                                        <label>Email:</label>  @subscriber.Email
-                                        <br />
-                                        <label>About me:</label>  @subscriber.AboutMyself
-                                    }
+                                    <label>First Name:</label> @subscriber.FirstName
+                                    <br />
+                                    <label>Last Name:</label>  @subscriber.LastName
+                                    <br />
+                                    <label>Email:</label>  @subscriber.Email
+                                    <br />
+                                    <label>About me:</label>  @subscriber.AboutMyself
                                 }
-                            </p>
-                        </div>
-                 
+                            }
+                        </p>
+                    </div>
+
                 </div>
             </div>
         </div>
     }
-
-
-
-
-
+</body>
+</html>
