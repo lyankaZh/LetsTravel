@@ -59,7 +59,7 @@
                         <img src="~/Images/defaultImage.png" />
                     }
 
-                   
+
 
                 </div>
 
@@ -111,14 +111,13 @@
                                 <label>About: </label>
                             </p>
                             <p>
-                                @if (string.IsNullOrEmpty(Model.AboutMyself))
+                                @if (Model.AboutMyself == null)
                                 {
-                                    @Html.TextAreaFor(x => "", new { @id = "About" })
+                                    Model.AboutMyself = "";
                                 }
-                                else
-                                {
-                                    @Html.TextAreaFor(x => Model.AboutMyself, new { @id = "About" })
-                                }
+
+                                @Html.TextAreaFor(x => Model.AboutMyself, new { @id = "About" })
+
                             </p>
 
                             <input type="submit" value="Save" class="btn btn-success" />

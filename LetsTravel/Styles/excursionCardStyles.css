@@ -66,13 +66,14 @@ a:focus {
   font-weight: bold;
   color: #ffffff;
   background: #08aeac;
-  border-radius: 0;
+  border-radius: 5px;
   font-size: 12px;
   padding: 10px 20px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
   margin-bottom: 2px;
+  margin-right: 10px !important;
 }
 
 ading-wrapper {
@@ -456,3 +457,7 @@ span.see-more {
   font-size: 12px;
   padding-bottom: 20px;
 }
+
+#normal-button {
+     display: inline-flex !important;
+ }

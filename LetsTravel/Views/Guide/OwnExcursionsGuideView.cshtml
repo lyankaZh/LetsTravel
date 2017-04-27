@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LetsTravel.Models.ExcursionSubscribersViewModel>
+﻿@model IEnumerable<LetsTravel.Models.ExcursionModel>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,6 +10,18 @@
     <link href="~/Styles/bootstrap.css" rel="stylesheet" />
     <link href="~/Styles/excursionCardStyles.css" rel="stylesheet" />
     <title>Own excursions</title>
+
+    <style>
+        .btn-success {
+            background: #449d44 !important;
+            border-radius: 5px !important;
+        }
+
+        .btn-danger {
+            background: #c9302c !important;
+            border-radius: 5px !important;
+        }
+    </style>
 </head>
 @{
     ViewBag.Title = "Excursions";
@@ -17,6 +29,10 @@
 
 <body>
     <h2 align="left"><span class="profile-title">Own Excursions:</span></h2>
+    @if (TempData["excursionDeleted"] != null)
+    {
+        <div class="alert alert-danger">@TempData["excursionDeleted"]</div>
+    }
     @foreach (var excursion in Model)
     {
         <div class="section-vcardbody section-home ps-container" id="section-home" data-ps-id="e1e33774-dcb3-1f4c-b285-f77d195d9137">
@@ -36,25 +52,38 @@
                 </div>
                 <div class="vcard-profile-description-feature">
                     <!-- item -->
+                    <div id="normal-button">
+                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target=@excursion.ModalId>View Subscribers</button>
+                        
+                        @Html.ActionLink("Edit Excursion", "EditExcursion", "Guide", excursion, new { @class = "btn btn-success btn-style" })
 
-                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target=@excursion.ModalId>View Subscribers</button>
+                        @using (Html.BeginForm("DeleteExcursion", "Guide"))
+                        {
+                            @Html.Hidden("excursionId", excursion.ExcursionId)
+                            <input type="submit"
+                                   class="btn btn-danger"
+                                   onclick="return confirm('Are you sure you wish to delete this excursion?');"
+                                   value="Delete" />
+                        }
+                       
+                    </div>
                     <div id="@excursion.ExcursionId" class="collapse">
                         <p class="list-group-item-text">
                             @if (excursion.Subscribers.Count == 0)
                             {
                                 @: No subscribers
-                        }
+                                }
                             else
                             {
                                 foreach (var subscriber in excursion.Subscribers)
                                 {
                                     <label>First Name:</label> @subscriber.FirstName
                                     <br />
-                                    <label>Last Name:</label>  @subscriber.LastName
-                                    <br />
-                                    <label>Email:</label>  @subscriber.Email
-                                    <br />
-                                    <label>About me:</label>  @subscriber.AboutMyself
+                                        <label>Last Name:</label>  @subscriber.LastName
+                                        <br />
+                                        <label>Email:</label>  @subscriber.Email
+                                        <br />
+                                        <label>About me:</label>  @subscriber.AboutMyself
                                 }
                             }
                         </p>

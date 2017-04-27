@@ -8,7 +8,14 @@ namespace LetsTravel.Models
 {
     public class ExcursionForTraveller
     {
-        public Excursion Excursion { get; set; }
+        public int ExcursionId { get; set; }
+        public string City { get; set; }
+        public string Route { get; set; }
+        public DateTime Date { get; set; }
+        public double Duration { get; set; }
+        public string Description { get; set; }
+        public int PeopleLimit { get; set; }
+        public int Price { get; set; }
         public bool CouldBeSubscribed { get; set;}
         public string ReasonForSubscribingDisability { get; set; }      
     }

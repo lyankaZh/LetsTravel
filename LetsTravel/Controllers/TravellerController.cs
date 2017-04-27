@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -29,7 +30,7 @@ namespace LetsTravel.Controllers
 
             var user = UserManager.FindByNameAsync(User.Identity.Name).Result;
             var subscribedExcursions = new List<ExcursionWithGuideInfoViewModel>();
-            
+
             foreach (var excursion in user.Excursions.ToList())
             {
                 var excursionToDisplay = new ExcursionWithGuideInfoViewModel();
@@ -39,36 +40,37 @@ namespace LetsTravel.Controllers
                 excursionToDisplay.Description = excursion.Description;
                 excursionToDisplay.Duration = excursion.Duration;
                 excursionToDisplay.PeopleLimit = excursion.PeopleLimit;
-                excursionToDisplay.Price = excursion.Price;
+                excursionToDisplay.Price = (int)excursion.Price;
                 excursionToDisplay.Route = excursion.Route;
                 excursionToDisplay.ExcursionId = excursion.ExcursionId;
                 excursionToDisplay.ModalId = "#" + excursion.ExcursionId.ToString();
-                excursionToDisplay.Guide = (User)repository.GetUsers().First(u => u.Id == excursion.Guide);    
-                subscribedExcursions.Add(excursionToDisplay);                       
+                excursionToDisplay.Guide = (User)repository.GetUsers().First(u => u.Id == excursion.Guide);
+                subscribedExcursions.Add(excursionToDisplay);
             }
             return View("TravellerView", subscribedExcursions);
         }
 
-        public ActionResult Subscribe(Excursion excursion)
-        {  
-                var user = (User) repository.GetUserById(User.Identity.GetUserId());
-                user.Excursions.Add(excursion);
-                repository.UpdateUser(user);
-                excursion.Users.Add(user);
-                repository.UpdateExcursion(excursion);
-                repository.Save();
-                return ShowSubscribedExcursions();
-            
+        public ActionResult Subscribe(ExcursionForTraveller model)
+        {
+            var user = (User)repository.GetUserById(User.Identity.GetUserId());
+            var excursion = repository.GetExcursionById(model.ExcursionId);
+            user.Excursions.Add(excursion);
+            repository.UpdateUser(user);
+            excursion.Users.Add(user);
+            repository.UpdateExcursion(excursion);
+            repository.Save();
+            return RedirectToAction("ShowSubscribedExcursions");
+
         }
 
         public ActionResult UnSubscribe(ExcursionWithGuideInfoViewModel excursion)
         {
             var user = (User)repository.GetUserById(User.Identity.GetUserId());
-            var excursionToDelete = user.Excursions.Find(x=>x.ExcursionId == excursion.ExcursionId);
+            var excursionToDelete = user.Excursions.Find(x => x.ExcursionId == excursion.ExcursionId);
             user.Excursions.Remove(excursionToDelete);
             repository.UpdateUser(user);
             repository.Save();
-            return ShowSubscribedExcursions();
+            return RedirectToAction("ShowSubscribedExcursions");
         }
 
 

@@ -91,6 +91,7 @@ namespace Domain.Concrete
                 Duration = 2,
                 PeopleLimit = 6,
                 Price = 25,
+                Route = "Old castles",
                 Guide = guide.Id
             };
             context.Excursions.Add(excursion);

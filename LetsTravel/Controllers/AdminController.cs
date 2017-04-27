@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Domain.Abstract;
 using Domain.Concrete;
 using Domain.Entities;
 using LetsTravel.Models;
@@ -13,14 +14,14 @@ namespace LetsTravel.Controllers
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
-        private readonly TravelRepository repository;
+        private readonly ITravelRepository repository;
 
-        public AdminController(TravelRepository repo)
+        public AdminController(ITravelRepository repo)
         {
             repository = repo;
         }
 
-        public ActionResult ShowUsersForAdmin()
+        public ViewResult ShowUsersForAdmin()
         {
             var users = from user in repository.GetUsers() select (User)user;
             var usersToDisplay = new List<User>();
@@ -85,7 +86,7 @@ namespace LetsTravel.Controllers
                 TempData["userDeleted"] = "User has been deleted";
             }
 
-            return ShowUsersForAdmin();
+            return RedirectToAction("ShowUsersForAdmin");
         }
 
 
@@ -103,7 +104,7 @@ namespace LetsTravel.Controllers
                 repository.Save();
                 TempData["excursionDeleted"] = "Excursion has been deleted";
             }
-            return ShowExcursionsForAdmin();
+            return RedirectToAction("ShowExcursionsForAdmin");
         }
 
 

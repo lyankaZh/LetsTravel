@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using Domain.Entities;
 
 namespace LetsTravel.Models
 {
-    public class ExcursionCreationModel
+    public class ExcursionModel
     {
+        public int ExcursionId { get; set; }
         [Required(ErrorMessage = "Please enter a city")]
         public string City { get; set; }
 
@@ -20,6 +22,7 @@ namespace LetsTravel.Models
         [Required(ErrorMessage = "Please enter a duration")]
         public double Duration { get; set; }
 
+        [DataType(DataType.MultilineText)]
         [Required(ErrorMessage = "Please enter a description")]
         public string Description { get; set; }
 
@@ -27,6 +30,11 @@ namespace LetsTravel.Models
         public int PeopleLimit { get; set; }
 
         [Required(ErrorMessage = "Please enter a price")]
-        public decimal Price { get; set; }
+        public int Price { get; set; }
+
+        public List<User> Subscribers { get; set; }
+        public string ModalId { get; set; }
+
+
     }
 }

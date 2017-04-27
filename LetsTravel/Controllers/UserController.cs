@@ -98,7 +98,7 @@ namespace LetsTravel.Controllers
                 if (amountOfUsersWithSameNick >= 1 )
                 {
                     ModelState.AddModelError("", "Such nickname already exists");
-                    return Edit();
+                    return RedirectToAction("Edit");
                 }
                 var amountOfUsersWithSameEmail =
                     (from u in repository.GetUsers() where u.Email == model.Email && u.Email != user.Email
@@ -107,7 +107,7 @@ namespace LetsTravel.Controllers
                 if (amountOfUsersWithSameEmail >= 1)
                 {
                     ModelState.AddModelError("", "Such email already exists");
-                    return Edit();
+                    return RedirectToAction("Edit");
                 }
               
                 user.UserName = model.UserName;
@@ -118,6 +118,10 @@ namespace LetsTravel.Controllers
                 {
                     user.AboutMyself = model.AboutMyself;
                 }
+                else
+                {
+                    user.AboutMyself = null;
+                }
                 if (image != null)
                 {
                     user.ImageMimeType = image.ContentType;
@@ -126,7 +130,7 @@ namespace LetsTravel.Controllers
                 }
                 repository.UpdateUser(user);
                 repository.Save();
-                return ShowProfile();
+                return RedirectToAction("ShowProfile");
             }
             return Edit();
         }
@@ -146,7 +150,7 @@ namespace LetsTravel.Controllers
                     {
                         TempData["deleteTravellerErrorMessage"] =
                             "Before deleting profile unsubscribe from all excursions";
-                        return ShowProfile();
+                        return RedirectToAction("ShowProfile");
                     }
                 }
                 if (isGuide)
@@ -160,7 +164,7 @@ namespace LetsTravel.Controllers
                     {
                         TempData["deleteGuideErrorMessage"] =
                             "You can`t delete your profile because you have active excursions with subscribers";
-                        return ShowProfile();
+                        return RedirectToAction("ShowProfile");
                     }
                     foreach (var excursion in repository.GetExcursionsByGuideId(id))
                     {

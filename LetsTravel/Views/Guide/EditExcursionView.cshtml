@@ -1,0 +1,118 @@
+﻿@model LetsTravel.Models.ExcursionModel
+@{
+    ViewBag.Title = "EditExcursionView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Styles/profileStyles.css" rel="stylesheet" />
+    <link href = "~/Styles/ValidationStyles.css" rel = "stylesheet" />
+}
+
+<html>
+<head>
+    <style>
+        .textarea {
+            width: 314px !important;
+            height: 50px;
+            border-radius: 5px !important;
+            border: 1px solid #ccc !important;
+            resize: none !important;
+        }
+
+        .text-box {
+            width: 314px !important;
+            height: 50px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: none !important;
+        }
+
+        #Description {
+            font-family: Montserrat !important;
+            width: 314px !important;
+            height: 100px !important;
+            border-radius: 5px !important;
+            border: 1px solid #ccc !important;
+            resize: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="row">
+
+        @using (Html.BeginForm("Edit", "Guide", FormMethod.Post))
+        {
+            
+            <div class="section-vcardbody section-home container-fluid" id="section-home">
+                <div class="vcard-profile-description">
+                    <div class="vcard-profile-description-text" id="font-style">
+
+                        @Html.HiddenFor(x => x.ExcursionId)
+                        @Html.ValidationSummary()
+                        <p>
+                            <label>City: </label>
+                        </p>
+                        <p>
+                            @Html.EditorFor(x => Model.City)
+                        </p>
+
+                        <p>
+                            <label>Date: </label>
+                        </p>
+                        <p>
+                            @Html.EditorFor(x => Model.Date)
+                        </p>
+
+                        <p>
+                            <label>Duration: </label>
+                        </p>
+                        <p>
+                            @Html.EditorFor(x => Model.Duration)
+                        </p>
+
+                        <p>
+                            <label>Limit of people: </label>
+                        </p>
+                        <p>
+                            @Html.EditorFor(x => Model.PeopleLimit)
+                        </p>
+                        
+                        <p>
+                            <label>Route: </label>
+                        </p>
+                        <p>
+                            @Html.EditorFor(x => Model.Route)
+                        </p>
+
+                        <p>
+                            <label>Price: </label>
+                        </p>
+                        <p>
+                            @Html.EditorFor(x => Model.Price)
+                        </p>
+
+                        <p>
+                            <label>Description: </label>
+                        </p>
+                        <p>
+
+                            @Html.TextAreaFor(x => Model.Description, new { @id = "Description" })
+
+                        </p>
+
+                        <input type="submit" value="Save" class="btn btn-success" />
+                        @Html.ActionLink("Cancel", "ShowOwnExcursions", "Guide", null, new { @class = "btn btn-default" })
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+        }
+    </div>
+
+</body>
+
+</html>

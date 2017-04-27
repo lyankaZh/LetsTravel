@@ -94,7 +94,14 @@ namespace LetsTravel.Controllers
                         {
                             excursionsToDisplay.Add(new ExcursionForTraveller()
                             {
-                                Excursion = excursion,
+                                ExcursionId = excursion.ExcursionId,
+                                City = excursion.City,
+                                Date = excursion.Date,
+                                Description = excursion.Description,
+                                Duration = excursion.Duration,
+                                Price = (int)excursion.Price,
+                                PeopleLimit = excursion.PeopleLimit,
+                                Route = excursion.Route,
                                 CouldBeSubscribed = false,
                                 ReasonForSubscribingDisability = "It is your excursion"
                             });
@@ -104,7 +111,14 @@ namespace LetsTravel.Controllers
                     {
                         excursionsToDisplay.Add(new ExcursionForTraveller()
                         {
-                            Excursion = excursion,
+                            ExcursionId = excursion.ExcursionId,
+                            City = excursion.City,
+                            Date = excursion.Date,
+                            Description = excursion.Description,
+                            Duration = excursion.Duration,
+                            Price = (int)excursion.Price,
+                            PeopleLimit = excursion.PeopleLimit,
+                            Route = excursion.Route,
                             CouldBeSubscribed = false,
                             ReasonForSubscribingDisability = "There are no free places"
                         });
@@ -113,7 +127,14 @@ namespace LetsTravel.Controllers
                     {
                         excursionsToDisplay.Add(new ExcursionForTraveller()
                         {
-                            Excursion = excursion,
+                            ExcursionId = excursion.ExcursionId,
+                            City = excursion.City,
+                            Date = excursion.Date,
+                            Description = excursion.Description,
+                            Duration = excursion.Duration,
+                            Price = (int)excursion.Price,
+                            PeopleLimit = excursion.PeopleLimit,
+                            Route = excursion.Route,
                             CouldBeSubscribed = false,
                             ReasonForSubscribingDisability = "You have already subcribed"
                         });
@@ -122,7 +143,14 @@ namespace LetsTravel.Controllers
                     {
                         excursionsToDisplay.Add(new ExcursionForTraveller()
                         {
-                            Excursion = excursion,
+                            ExcursionId = excursion.ExcursionId,
+                            City = excursion.City,
+                            Date = excursion.Date,
+                            Description = excursion.Description,
+                            Duration = excursion.Duration,
+                            Price = (int)excursion.Price,
+                            PeopleLimit = excursion.PeopleLimit,
+                            Route = excursion.Route,
                             CouldBeSubscribed = true
                         });
                     }
