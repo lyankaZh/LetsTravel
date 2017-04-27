@@ -1,17 +1,7 @@
 ﻿#back-stage {
     background: #08aeac
 }
-#animate-area {
-    width: 560px;
-    height: 400px;
-    background-image: url('../Images/bg.gif');
-    background-position: 0px 0px;
-    background-repeat: repeat-x;
-    animation: animatedBackground 40s linear infinite;
-    -ms-animation: animatedBackground 40s linear infinite;
-    -moz-animation: animatedBackground 40s linear infinite;
-    -webkit-animation: animatedBackground 40s linear infinite;
-}
+
 .color1 {
   color: #08aeac;
 }
@@ -56,39 +46,6 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
-/* ==========================================================
-! 03. Buttons
-========================================================== */
-a:focus {
-  outline: none;
-}
-.btn {
-  font-weight: bold;
-  color: #ffffff;
-  background: #08aeac;
-  border-radius: 5px;
-  font-size: 12px;
-  padding: 10px 20px;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-  margin-bottom: 2px;
-  margin-right: 10px !important;
-}
-
-ading-wrapper {
-  width: 250px;
-  position: fixed;
-  top: 40%;
-  left: 50%;
-  margin-left: -125px;
-}
-.tp-loader {
-  z-index: 10000;
-  position: relative;
-}
-
-
 
 
 
@@ -133,8 +90,8 @@ ading-wrapper {
     left: 30%;
     max-height: 570px;
     width: 70%;
-    padding: 45px;
-    padding-bottom: 20px;
+    padding: 20px;
+    padding-bottom: 0px;
   }
 }
 @media (min-width: 1400px) {
@@ -168,7 +125,7 @@ ading-wrapper {
     top: 605px;
     left: 30%;
     display: block;
-    width: 40%;
+    width: 20%;
     height: 20px;
     background: #333;
     z-index: 77;
@@ -223,7 +180,7 @@ ading-wrapper {
     width: 40%!important;
 }
 .section-vcardbody-width {
-    width: 29%;
+    width: 20%;
     margin: 0 auto;
     overflow-y: scroll;
     background:  repeat-x right top #f4f4f4;
@@ -279,8 +236,6 @@ ading-wrapper {
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-
-  background: url('../img/bg-btn.png') no-repeat center center #08aeac;
 }
 h3, .h3 {
     font-size: 14px;
@@ -361,34 +316,6 @@ h3, .h3 {
 }
 
 
-/* ==========================================================
-! 12. SECTION: SKILLS
-========================================================== */
-.skills-list {
-  padding-left: 0;
-  margin-left: 0;
-}
-.progress {
-  position: relative;
-  height: 25px;
-  margin-bottom: 10px;
-}
-.progress > .progress-type {
-  position: absolute;
-  left: 0px;
-  font-size: 13px;
-  padding: 3px 30px 2px 10px;
-  color: #ffffff;
-  background-color: rgba(25, 25, 25, 0.2);
-}
-.progress > .progress-completed {
-  position: absolute;
-  right: 0px;
-  font-weight: 800;
-  padding: 3px 10px 2px;
-  color: #888;
-  font-size: 14px;
-}
 
 .progress-bar {
   background: #08aeac;
@@ -427,23 +354,6 @@ h3, .h3 {
   opacity: 0.5;
   margin-top: 10px;
   margin-bottom: 10px;
-}
-.project-thumbnail {
-  display: block;
-  color: #ffffff;
-  position: relative;
-}
-span.see-more {
-  font-style: italic;
-  text-transform: lowercase;
-  letter-spacing: 3px;
-  font-size: 12px;
-  -webkit-transition: all 0.4s ease-in-out;
-  -moz-transition: all 0.4s ease-in-out;
-  transition: all 0.4s ease-in-out;
-  transform: translateY(10px);
-  -webkit-transform: translateY(10px);
-  -moz-transform: translateY(10px);
 }
 
 
