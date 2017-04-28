@@ -75,13 +75,13 @@ namespace LetsTravel.Controllers
         //}
 
         [AllowAnonymous]
-        public ActionResult GetAllExcursionsForGuest()
+        public ViewResult GetAllExcursionsForGuest()
         {
             return View("AllExcursionsForGuest", repository.GetExcursions().ToList());
         }
 
         [Authorize(Roles = "Guide, Traveller, Admin")]
-        public ActionResult GetAllExcursions()
+        public ViewResult GetAllExcursions()
         {
             if (User.IsInRole("Traveller"))
             {

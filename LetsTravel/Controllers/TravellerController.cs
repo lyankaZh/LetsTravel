@@ -60,7 +60,6 @@ namespace LetsTravel.Controllers
             repository.UpdateExcursion(excursion);
             repository.Save();
             return RedirectToAction("ShowSubscribedExcursions");
-
         }
 
         public ActionResult UnSubscribe(ExcursionWithGuideInfoViewModel excursion)
