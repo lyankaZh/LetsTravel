@@ -50,11 +50,11 @@
                     <p>Price: @excursion.Price $</p>
                     <p>Route: @excursion.Route</p>
                 </div>
-                <div class="vcard-profile-description-feature">
+                <div class="vcard-profile-description-text">
                     <!-- item -->
                     <div id="normal-button">
                         <button type="button" class="btn btn-info" data-toggle="collapse" data-target=@excursion.ModalId>View Subscribers</button>
-                        
+
                         @Html.ActionLink("Edit Excursion", "EditExcursion", "Guide", excursion, new { @class = "btn btn-success btn-style" })
 
                         @using (Html.BeginForm("DeleteExcursion", "Guide"))
@@ -65,7 +65,7 @@
                                    onclick="return confirm('Are you sure you wish to delete this excursion?');"
                                    value="Delete" />
                         }
-                       
+
                     </div>
                     <div id="@excursion.ExcursionId" class="collapse">
                         <p class="list-group-item-text">
@@ -79,8 +79,8 @@
                                 {
                                     <label>First Name:</label> @subscriber.FirstName
                                     <br />
-                                        <label>Last Name:</label>  @subscriber.LastName
-                                        <br />
+                                    <label>Last Name:</label>  @subscriber.LastName
+                                    <br />
                                         <label>Email:</label>  @subscriber.Email
                                         <br />
                                         <label>About me:</label>  @subscriber.AboutMyself

@@ -230,6 +230,7 @@
     <Content Include="Images\ameli.jpg" />
     <Content Include="Images\bg.gif" />
     <Content Include="Images\bohdanka.jpg" />
+    <Content Include="Images\cardsBackground.jpg" />
     <Content Include="Images\defaultImage.png" />
     <Content Include="Images\header.jpg" />
     <Content Include="Images\ira.png" />
