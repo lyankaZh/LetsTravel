@@ -31,18 +31,21 @@
                 <p>Price: @excursion.Price $</p>
                 <p>Route: @excursion.Route</p>               
             </div>
-            <div class="vcard-profile-description-feature">
+            <div class="vcard-profile-description-text">
                 <!-- item -->
                 <div class="vcard-profile-description-ft-item">
                     @if (excursion.CouldBeSubscribed)
                 {
-                        @Html.ActionLink("Subscribe", "Subscribe", "Traveller", excursion, null)
+                        @Html.ActionLink("Subscribe", "Subscribe", "Traveller", excursion, new { @class = "btn btn-success" })
                     }
                     else
                     {
-                        <h3>
-                            @excursion.ReasonForSubscribingDisability
-                        </h3>
+                        <h2>
+                            <span class="label label-info">
+                                @excursion.ReasonForSubscribingDisability
+                            </span> 
+                         
+                        </h2>
                     }
                 </div>
             </div>

@@ -15,8 +15,8 @@
     ViewBag.Title = "Excursions";
 }
 
+  <h2 align="left"><span class="profile-title">My Excursions:</span>
 
-    <span class="profile-title">My Excursions:</span>
     @foreach (var excursion in Model)
     {
         <div class="section-vcardbody section-home ps-container" id="section-home" data-ps-id="e1e33774-dcb3-1f4c-b285-f77d195d9137">
@@ -35,7 +35,7 @@
                     <p>Price: @excursion.Price $</p>
                     <p>Route: @excursion.Route</p>
                 </div>
-                <div class="vcard-profile-description-feature">
+                <div class="vcard-profile-description-text">
                     <!-- item -->
                     <button type="button" class="btn btn-info" data-toggle="collapse" data-target=@excursion.ModalId>View Guide info</button>
                     <div id=@excursion.ExcursionId class="collapse">
@@ -49,7 +49,8 @@
                             <label>About me:</label>  @excursion.Guide.AboutMyself
                         </p>
                     </div>
-                    @Html.ActionLink("UnSubscribe", "UnSubscribe", "Traveller", excursion, null)
+                    @*@Html.ActionLink("Cancel", "ShowOwnExcursions", "Guide", null, new { @class = "btn btn-default" })*@
+                    @Html.ActionLink("UnSubscribe", "UnSubscribe", "Traveller", excursion, new { @class = "btn btn-danger" })
 
                 </div>
             </div>
