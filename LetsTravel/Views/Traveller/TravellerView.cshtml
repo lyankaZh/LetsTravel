@@ -3,6 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@using Castle.Core.Internal
 @model IEnumerable<LetsTravel.Models.ExcursionWithGuideInfoViewModel>
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -19,7 +20,7 @@
 
     @foreach (var excursion in Model)
     {
-        <div class="section-vcardbody section-home ps-container" id="section-home" data-ps-id="e1e33774-dcb3-1f4c-b285-f77d195d9137">
+        <div class="section-vcardbody section-home" id="section-home" data-ps-id="e1e33774-dcb3-1f4c-b285-f77d195d9137">
             <!-- Description -->
             <div class="vcard-profile-description">
                 <!-- Profile title -->
@@ -37,16 +38,22 @@
                 </div>
                 <div class="vcard-profile-description-text">
                     <!-- item -->
-                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target=@excursion.ModalId>View Guide info</button>
+                    <button class="btn btn-info" data-toggle="collapse" data-target=@excursion.ModalId>View Guide info</button>
                     <div id=@excursion.ExcursionId class="collapse">
                         <p class="list-group-item-text">
+                            <label>Nickname:</label> @excursion.Guide.UserName
+                            <br />
                             <label>First Name:</label> @excursion.Guide.FirstName
-                            <br />
-                            <label>Last Name:</label>  @excursion.Guide.LastName
-                            <br />
-                            <label>Email:</label>  @excursion.Guide.Email
-                            <br />
+                            <br/>
+                            <label>Last Name:</label> @excursion.Guide.LastName
+                            <br/>
+                            <label>Email:</label> @excursion.Guide.Email
+                            <br/>
+                            @if(!@excursion.Guide.AboutMyself.IsNullOrEmpty())
+                            {
                             <label>About me:</label>  @excursion.Guide.AboutMyself
+                            }
+                           
                         </p>
                     </div>
                     @*@Html.ActionLink("Cancel", "ShowOwnExcursions", "Guide", null, new { @class = "btn btn-default" })*@

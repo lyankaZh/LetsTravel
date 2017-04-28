@@ -39,12 +39,13 @@
 ! 02. GENERAL 
 ========================================================== */
 body {
-  font-family: 'Montserrat', sans-serif;
-  -webkit-font-smoothing: subpixel-antialiased;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+    font-family: 'Montserrat', sans-serif;
+    -webkit-font-smoothing: subpixel-antialiased;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-image: url('../Images/cardsBackground.jpg');
 }
 
 
