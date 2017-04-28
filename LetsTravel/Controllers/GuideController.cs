@@ -44,14 +44,15 @@ namespace LetsTravel.Controllers
                 repository.Save();
                 return RedirectToAction("ShowOwnExcursions");
             }
-            return View("_PartialCreateExcursionView");
+            return View("CreateExcursionView");
         }
 
         [HttpGet]
         public ViewResult CreateExcursion()
         {
-            return View("_PartialCreateExcursionView");
+            return View("CreateExcursionView");
         }
+
 
         public ActionResult ShowOwnExcursions()
         {

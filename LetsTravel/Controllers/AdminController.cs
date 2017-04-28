@@ -32,7 +32,7 @@ namespace LetsTravel.Controllers
             return View("Users",usersToDisplay);
         }
 
-        public ActionResult ShowExcursionsForAdmin()
+        public ViewResult ShowExcursionsForAdmin()
         {
             var excursions = from exc in repository.GetExcursions() select exc;
             var excursionsToDisplay = new List<ExcursionModelForAdmin>();

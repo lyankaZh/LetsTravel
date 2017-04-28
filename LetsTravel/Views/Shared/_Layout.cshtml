@@ -82,7 +82,7 @@
                     @if (User.IsInRole("Guide"))
                     {
                         <li>
-                            @Html.ActionLink("Create excursion", "CreateExcursion", "Guide", null, new { @class = "modal-link" })
+                            @Html.ActionLink("Create excursion", "CreateExcursion", "Guide")
                         </li>
 
                     }
@@ -125,14 +125,8 @@
 </html>
 
 
-<div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-content">
-    </div>
-</div>
 
-<script>
 
-</script>
 
 <script type="text/javascript">
 
@@ -140,8 +134,8 @@
         $('li.active').removeClass('active');
         $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
     });
-
-    $(function () {
+    </script>
+    @*$(function () {
         // Initialize numeric spinner input boxes
         //$(".numeric-spinner").spinedit();
 
@@ -168,4 +162,4 @@
             return false;
         });
     });
-</script>
+</script>*@

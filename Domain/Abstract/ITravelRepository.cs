@@ -13,7 +13,9 @@ namespace Domain.Abstract
         void DeleteExcursion(int excursionId);
         void UpdateExcursion(Excursion excursion);
         void UpdateUser(User excursion);
+
         List<Excursion> GetExcursionsByGuideId(string guideId);
+        
         IEnumerable<IdentityUser> GetUsers();
         IdentityUser GetUserById(string userId);
         List<User> GetSubscribersByExcursionId(int excursionId, string guideId);
