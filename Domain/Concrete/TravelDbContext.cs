@@ -6,7 +6,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Domain.Concrete
 {
-    public class TravelDbContext: IdentityDbContext
+    public class TravelDbContext: IdentityDbContext<User>
     {
         public TravelDbContext(): base("TravelDb") 
         {
@@ -24,7 +24,7 @@ namespace Domain.Concrete
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<IdentityUser>().ToTable("Users");
+            modelBuilder.Entity<User>().ToTable("Users");
         }
     }
 

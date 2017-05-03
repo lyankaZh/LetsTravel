@@ -23,7 +23,7 @@ namespace LetsTravel.Controllers
 
         public ViewResult ShowUsersForAdmin()
         {
-            var users = from user in repository.GetUsers() select (User)user;
+            var users = from user in repository.GetUsers() select user;
             var usersToDisplay = new List<User>();
             foreach (var user in users)
             {
@@ -38,7 +38,7 @@ namespace LetsTravel.Controllers
             var excursionsToDisplay = new List<ExcursionModelForAdmin>();
             foreach (var exc in excursions)
             {
-                var guide = (User)repository.GetUserById(exc.Guide);
+                var guide = repository.GetUserById(exc.Guide);
                 excursionsToDisplay.Add(
                     new ExcursionModelForAdmin()
                     {
@@ -58,7 +58,7 @@ namespace LetsTravel.Controllers
         [HttpPost]
         public ActionResult DeleteUser(string userId)
         {
-            User user = (User)repository.GetUserById(userId);
+            User user = repository.GetUserById(userId);
             if (user != null)
             {
                 if (UserManager.IsInRole(user.Id, "Guide"))

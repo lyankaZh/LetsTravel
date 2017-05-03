@@ -56,7 +56,7 @@ namespace LetsTravel.Controllers
         public ViewResult ShowOwnExcursions()
         {
             //var user = UserManager.FindByNameAsync(User.Identity.Name).Result;
-            var user = (User)repository.GetUserById(User.Identity.GetUserId());
+            var user = repository.GetUserById(User.Identity.GetUserId());
             var excursionsToDisplay = new List<ExcursionModel>();
             foreach (var excursion in repository.GetExcursions().Where(x => x.Guide == user.Id))
             {

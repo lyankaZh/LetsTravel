@@ -24,7 +24,7 @@ namespace LetsTravel.Controllers
         public ViewResult ShowSubscribedExcursions()
         {
             //var user = UserManager.FindByNameAsync(User.Identity.Name).Result;
-            var user = (User)repository.GetUserById(User.Identity.GetUserId());
+            var user = repository.GetUserById(User.Identity.GetUserId());
             var subscribedExcursions = new List<ExcursionWithGuideInfoViewModel>();
 
             foreach (var excursion in user.Excursions.ToList())
@@ -40,7 +40,7 @@ namespace LetsTravel.Controllers
                 excursionToDisplay.Route = excursion.Route;
                 excursionToDisplay.ExcursionId = excursion.ExcursionId;
                 excursionToDisplay.ModalId = "#" + excursion.ExcursionId;
-                excursionToDisplay.Guide = (User)repository.GetUsers().First(u => u.Id == excursion.Guide);
+                excursionToDisplay.Guide = repository.GetUsers().First(u => u.Id == excursion.Guide);
                 subscribedExcursions.Add(excursionToDisplay);
             }
             if (subscribedExcursions.Count == 0)
@@ -52,7 +52,7 @@ namespace LetsTravel.Controllers
 
         public RedirectToRouteResult Subscribe(ExcursionForTraveller model)
         {
-            var user = (User)repository.GetUserById(User.Identity.GetUserId());
+            var user = repository.GetUserById(User.Identity.GetUserId());
             var excursion = repository.GetExcursionById(model.ExcursionId);
             user.Excursions.Add(excursion);
             repository.UpdateUser(user);
@@ -64,7 +64,7 @@ namespace LetsTravel.Controllers
 
         public RedirectToRouteResult UnSubscribe(ExcursionWithGuideInfoViewModel excursion)
         {
-            var user = (User)repository.GetUserById(User.Identity.GetUserId());
+            var user = repository.GetUserById(User.Identity.GetUserId());
             var excursionToDelete = user.Excursions.Find(x => x.ExcursionId == excursion.ExcursionId);
             user.Excursions.Remove(excursionToDelete);
             repository.UpdateUser(user);

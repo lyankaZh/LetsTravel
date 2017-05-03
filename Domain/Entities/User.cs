@@ -22,9 +22,6 @@ namespace Domain.Entities
         public byte[] ImageData { get; set; }
         public string ImageMimeType { get; set; }
 
-        public int Age { get; set; }
-            
-
         public virtual List<Excursion> Excursions { get; set; }
     }
 }

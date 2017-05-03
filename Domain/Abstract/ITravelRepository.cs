@@ -15,8 +15,8 @@ namespace Domain.Abstract
 
         List<Excursion> GetExcursionsByGuideId(string guideId);
         
-        IEnumerable<IdentityUser> GetUsers();
-        IdentityUser GetUserById(string userId);
+        IEnumerable<User> GetUsers();
+        User GetUserById(string userId);
         void UpdateUser(User excursion);
         void DeleteUser(string userId);
         void Save();

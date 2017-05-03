@@ -113,13 +113,13 @@ namespace Domain.Concrete
             context.Entry(user).State = EntityState.Modified;
         }
 
-        public IEnumerable<IdentityUser> GetUsers()
+        public IEnumerable<User> GetUsers()
         {
             var users = from user in context.Users select  user;
             return users.ToList();
         }
 
-        public IdentityUser GetUserById(string userId)
+        public User GetUserById(string userId)
         {
             var query = from user in context.Users
                         where user.Id == userId
