@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using Domain.Abstract;
 using Domain.Entities;
@@ -8,7 +6,8 @@ using LetsTravel.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System.Collections.Generic;
-using System.Globalization;
+using System.Linq;
+using System.Web.WebPages;
 
 namespace LetsTravel.Controllers
 {
@@ -28,7 +27,7 @@ namespace LetsTravel.Controllers
             if (ModelState.IsValid)
             {
                 string id = User.Identity.GetUserId();
-                
+
                 Excursion excursion = new Excursion()
                 {
                     City = model.City,
@@ -54,11 +53,12 @@ namespace LetsTravel.Controllers
         }
 
 
-        public ActionResult ShowOwnExcursions()
+        public ViewResult ShowOwnExcursions()
         {
-            var user = UserManager.FindByNameAsync(User.Identity.Name).Result;
+            //var user = UserManager.FindByNameAsync(User.Identity.Name).Result;
+            var user = (User)repository.GetUserById(User.Identity.GetUserId());
             var excursionsToDisplay = new List<ExcursionModel>();
-            foreach (var excursion in repository.GetExcursionsByGuideId(user.Id))
+            foreach (var excursion in repository.GetExcursions().Where(x => x.Guide == user.Id))
             {
                 var excursionToDisplay = new ExcursionModel();
                 excursionToDisplay.ExcursionId = excursion.ExcursionId;
@@ -69,9 +69,13 @@ namespace LetsTravel.Controllers
                 excursionToDisplay.PeopleLimit = excursion.PeopleLimit;
                 excursionToDisplay.Price = (int)excursion.Price;
                 excursionToDisplay.Route = excursion.Route;
-                excursionToDisplay.Subscribers = repository.GetSubscribersByExcursionId(excursion.ExcursionId, User.Identity.GetUserId());
+                excursionToDisplay.Subscribers = excursion.Users.ToList();
                 excursionToDisplay.ModalId = "#" + excursion.ExcursionId;
                 excursionsToDisplay.Add(excursionToDisplay);
+            }
+            if (excursionsToDisplay.Count == 0)
+            {
+                ViewBag.NoExcursions = "You don't have any excursions yet";
             }
             return View("OwnExcursionsGuideView", excursionsToDisplay);
         }
@@ -96,7 +100,7 @@ namespace LetsTravel.Controllers
             return RedirectToAction("ShowOwnExcursions");
         }
 
-        public ActionResult EditExcursion(ExcursionModel model)
+        public ViewResult EditExcursion(ExcursionModel model)
         {
             return View("EditExcursionView", model);
         }
@@ -129,48 +133,6 @@ namespace LetsTravel.Controllers
                 }
             }
             return View("EditExcursionView", model);
-            //if (ModelState.IsValid)
-            //{
-            //    User user = (User)repository.GetUserById(model.Id);
-            //    var amountOfUsersWithSameNick =
-            //        (from u in repository.GetUsers()
-            //         where u.UserName == model.UserName && u.UserName != user.UserName
-            //         select u).Count();
-            //    if (amountOfUsersWithSameNick >= 1)
-            //    {
-            //        ModelState.AddModelError("", "Such nickname already exists");
-            //        return Edit();
-            //    }
-            //    var amountOfUsersWithSameEmail =
-            //        (from u in repository.GetUsers()
-            //         where u.Email == model.Email && u.Email != user.Email
-            //         select u).Count();
-
-            //    if (amountOfUsersWithSameEmail >= 1)
-            //    {
-            //        ModelState.AddModelError("", "Such email already exists");
-            //        return Edit();
-            //    }
-
-            //    user.UserName = model.UserName;
-            //    user.FirstName = model.FirstName;
-            //    user.LastName = model.LastName;
-            //    user.Email = model.Email;
-            //    if (!string.IsNullOrEmpty(model.AboutMyself))
-            //    {
-            //        user.AboutMyself = model.AboutMyself;
-            //    }
-            //    if (image != null)
-            //    {
-            //        user.ImageMimeType = image.ContentType;
-            //        user.ImageData = new byte[image.ContentLength];
-            //        image.InputStream.Read(user.ImageData, 0, image.ContentLength);
-            //    }
-            //    repository.UpdateUser(user);
-            //    repository.Save();
-            //    return ShowProfile();
-            //}
-            //return Edit();
         }
 
         private AppUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<AppUserManager>();

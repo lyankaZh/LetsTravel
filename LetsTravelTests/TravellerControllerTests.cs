@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Security.Principal;
 using System.Web.Mvc;
 using Domain.Abstract;
 using Domain.Entities;
 using LetsTravel.Controllers;
 using LetsTravel.Models;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -184,8 +182,10 @@ namespace LetsTravelTests
             mock.Setup(x => x.GetUserById(It.IsAny<string>())).Returns(user);
           
 
-            var result = (List<ExcursionWithGuideInfoViewModel>)travellerController.ShowSubscribedExcursions().ViewData.Model;
-            Assert.AreEqual(0, result.Count);   
+            var result = travellerController.ShowSubscribedExcursions();
+            var listOfExcursions = (List<ExcursionWithGuideInfoViewModel>) result.ViewData.Model;
+            Assert.AreEqual(0, listOfExcursions.Count);   
+            Assert.AreEqual("You haven't subscribed to any excursion yet", result.ViewBag.NoExcursions);
         }
     }
 }

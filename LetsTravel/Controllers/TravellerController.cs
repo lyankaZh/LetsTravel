@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Domain.Abstract;
 using Domain.Entities;
 using LetsTravel.Models;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace LetsTravel.Controllers
@@ -46,6 +42,10 @@ namespace LetsTravel.Controllers
                 excursionToDisplay.ModalId = "#" + excursion.ExcursionId;
                 excursionToDisplay.Guide = (User)repository.GetUsers().First(u => u.Id == excursion.Guide);
                 subscribedExcursions.Add(excursionToDisplay);
+            }
+            if (subscribedExcursions.Count == 0)
+            {
+                ViewBag.NoExcursions = "You haven't subscribed to any excursion yet";
             }
             return View("TravellerView", subscribedExcursions);
         }
