@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
 using System.Web.Mvc;
 using Domain.Abstract;
 using Domain.Entities;
 using LetsTravel.Controllers;
 using LetsTravel.Models;
-using Microsoft.AspNet.Identity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -16,9 +14,20 @@ namespace LetsTravelTests
     [TestClass]
     public class GuideControllerTests
     {
+        Mock<ControllerContext> controllerContext = new Mock<ControllerContext>();
+        Mock<IPrincipal> principal = new Mock<IPrincipal>();
+
+        public void SetIdentityMocks()
+        {
+            principal.Setup(p => p.IsInRole("Guide")).Returns(true);
+            principal.SetupGet(x => x.Identity.Name).Returns("guide");
+            controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
+        }
+
         [TestMethod]
         public void CreateExcursionGetTest()
         {
+            SetIdentityMocks();
             Mock<ITravelRepository> repository = new Mock<ITravelRepository>();
 
             GuideController controller = new GuideController(repository.Object);
@@ -30,19 +39,8 @@ namespace LetsTravelTests
         [TestMethod]
         public void CreateExcursionPostTest()
         {
-            Mock<ControllerContext> controllerContext = new Mock<ControllerContext>();
-            Mock<IPrincipal> principal = new Mock<IPrincipal>();
-            principal.Setup(p => p.IsInRole("Guide")).Returns(true);
-            principal.SetupGet(x => x.Identity.Name).Returns("guide");
-
-            controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
-
+            SetIdentityMocks();
             Mock<ITravelRepository> repository = new Mock<ITravelRepository>();
-            var guide = new User()
-            {
-                Id = "guide",
-                UserName = "guide"
-            };
 
             GuideController controller = new GuideController(repository.Object)
             {
@@ -51,9 +49,8 @@ namespace LetsTravelTests
 
             ExcursionModel excursionModel = new ExcursionModel
             {
-                ExcursionId = 1,
                 City = "Lviv",
-                Date = new DateTime(2017,5,4),
+                Date = new DateTime(2017, 5, 4),
                 Description = "Great excursion",
                 Duration = 5,
                 PeopleLimit = 10,
@@ -64,26 +61,34 @@ namespace LetsTravelTests
             var result = (RedirectToRouteResult)controller.CreateExcursion(excursionModel);
             repository.Verify(x => x.InsertExcursion(It.Is<Excursion>(y => y.City == "Lviv" &&
                               y.Description == "Great excursion" && y.Route == "Route")),
-                                Times.Once );
+                                Times.Once);
             Assert.AreEqual("ShowOwnExcursions", result.RouteValues["action"]);
-
         }
 
         [TestMethod]
         public void CreateExcursionPostWithInvalidModelTest()
         {
-            
+            SetIdentityMocks();
+            Mock<ITravelRepository> repository = new Mock<ITravelRepository>();
+
+
+            GuideController controller = new GuideController(repository.Object)
+            {
+                ControllerContext = controllerContext.Object
+            };
+            controller.ModelState.AddModelError("error", "error");
+
+            var result = (ViewResult)controller.CreateExcursion(null);
+            repository.Verify(x => x.InsertExcursion(It.Is<Excursion>(y => y.City == "Lviv" &&
+                              y.Description == "Great excursion" && y.Route == "Route")),
+                                Times.Never);
+            Assert.AreEqual("CreateExcursionView", result.ViewName);
         }
+
         [TestMethod]
         public void ShowOwnExcursionsTest()
         {
-            Mock<ControllerContext> controllerContext = new Mock<ControllerContext>();
-            Mock<IPrincipal> principal = new Mock<IPrincipal>();
-            principal.Setup(p => p.IsInRole("Guide")).Returns(true);
-            principal.SetupGet(x => x.Identity.Name).Returns("guide");
-
-            controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
-
+            SetIdentityMocks();
             Mock<ITravelRepository> repository = new Mock<ITravelRepository>();
             var guide = new User()
             {
@@ -106,7 +111,7 @@ namespace LetsTravelTests
                         ExcursionId = 1,
                         Guide = "guide",
                         Users = users
-                        
+
                     },
                     new Excursion
                     {
@@ -139,13 +144,7 @@ namespace LetsTravelTests
         [TestMethod]
         public void ShowOwnExcursionIfNoSuchTest()
         {
-            Mock<ControllerContext> controllerContext = new Mock<ControllerContext>();
-            Mock<IPrincipal> principal = new Mock<IPrincipal>();
-            principal.Setup(p => p.IsInRole("Guide")).Returns(true);
-            principal.SetupGet(x => x.Identity.Name).Returns("guide");
-
-            controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
-
+            SetIdentityMocks();
             Mock<ITravelRepository> repository = new Mock<ITravelRepository>();
             var guide = new User()
             {
@@ -167,7 +166,7 @@ namespace LetsTravelTests
                         ExcursionId = 2,
                         Guide = "anotherGuide",
                         Users = users
-                    }                  
+                    }
                 });
 
             GuideController controller = new GuideController(repository.Object)
@@ -176,7 +175,7 @@ namespace LetsTravelTests
             };
 
             var result = controller.ShowOwnExcursions();
-            var ownExcursionsList = (List<ExcursionModel>) result.ViewData.Model;
+            var ownExcursionsList = (List<ExcursionModel>)result.ViewData.Model;
             Assert.AreEqual(0, ownExcursionsList.Count);
             Assert.AreEqual("You don't have any excursions yet", result.ViewBag.NoExcursions);
         }
@@ -200,23 +199,187 @@ namespace LetsTravelTests
         [TestMethod]
         public void Edit()
         {
+            SetIdentityMocks();
+            Mock<ITravelRepository> repository = new Mock<ITravelRepository>();
+            repository.Setup(x => x.GetExcursionById(1)).Returns(
+                new Excursion
+                {
+                    ExcursionId = 1,
+                    City = "Lviv",
+                    Date = new DateTime(2017, 5, 4),
+                    Description = "Great excursion",
+                    Duration = 5,
+                    PeopleLimit = 10,
+                    Price = 60,
+                    Route = "Route",
+                    Users = new List<User>()
+                });
+
+            GuideController controller = new GuideController(repository.Object)
+            {
+                ControllerContext = controllerContext.Object
+            };
+
+            ExcursionModel excursionModel = new ExcursionModel
+            {
+                ExcursionId = 1,
+                City = "Ternopil",
+                ModalId = "#1"
+            };
+
+            var result = (RedirectToRouteResult)controller.Edit(excursionModel);
+            repository.Verify(x => x.UpdateExcursion(It.Is<Excursion>(y => y.ExcursionId == 1)),
+                                Times.Once);
+            Assert.AreEqual("ShowOwnExcursions", result.RouteValues["action"]);
+        }
+
+        [TestMethod]
+        public void EditWithInvalidModel()
+        {
+            SetIdentityMocks();
+            Mock<ITravelRepository> repository = new Mock<ITravelRepository>();
+            repository.Setup(x => x.GetExcursionById(1)).Returns(
+                new Excursion
+                {
+                    ExcursionId = 1,
+                    City = "Lviv",
+                    Date = new DateTime(2017, 5, 4),
+                    Description = "Great excursion",
+                    Duration = 5,
+                    PeopleLimit = 10,
+                    Price = 60,
+                    Route = "Route",
+                    Users = new List<User>()
+                });
+
+            GuideController controller = new GuideController(repository.Object)
+            {
+                ControllerContext = controllerContext.Object
+            };
+
+            ExcursionModel excursionModel = new ExcursionModel
+            {
+                ExcursionId = 1,
+                City = "Ternopil"
+            };
+            controller.ModelState.AddModelError("error", "error");
+
+            var result = (ViewResult)controller.Edit(excursionModel);
+            repository.Verify(x => x.UpdateExcursion(It.Is<Excursion>(y => y.ExcursionId == 1)),
+                                Times.Never);
+            Assert.AreEqual("EditExcursionView", result.ViewName);
+            Assert.AreEqual(excursionModel, result.ViewData.Model);
+        }
+
+        [TestMethod]
+        public void EditWithIncorrectPeopleLimitTest()
+        {
+            SetIdentityMocks();
+            Mock<ITravelRepository> repository = new Mock<ITravelRepository>();
+            repository.Setup(x => x.GetExcursionById(1)).Returns(
+                new Excursion
+                {
+                    ExcursionId = 1,
+                    City = "Lviv",
+                    Date = new DateTime(2017, 5, 4),
+                    Description = "Great excursion",
+                    Duration = 5,
+                    PeopleLimit = 10,
+                    Price = 60,
+                    Route = "Route",
+                    Users = new List<User>
+                    {
+                        new User()
+                    }
+                });
+
+            GuideController controller = new GuideController(repository.Object)
+            {
+                ControllerContext = controllerContext.Object
+            };
+
+            ExcursionModel excursionModel = new ExcursionModel
+            {
+                ExcursionId = 1,
+                City = "Ternopil",
+                PeopleLimit = 0
+            };
+
+            var result = (ViewResult)controller.Edit(excursionModel);
+            repository.Verify(x => x.UpdateExcursion(It.Is<Excursion>(y => y.ExcursionId == 1)),
+                                Times.Never);
+            Assert.AreEqual("EditExcursionView", result.ViewName);
+            Assert.AreEqual(excursionModel, result.ViewData.Model);
+            Assert.AreEqual("There are more subscribers than in new limit of people value", controller.ModelState[""].Errors[0].ErrorMessage);
             
         }
 
+
+
         [TestMethod]
-        public void EditWithSubscribersTest()
+        public void DeleteExcursionWithoutSubscribersTest()
         {
+            SetIdentityMocks();
+            Mock<ITravelRepository> repository = new Mock<ITravelRepository>();
+            repository.Setup(x => x.GetExcursionById(1)).Returns(
+                new Excursion()
+                {
+                    ExcursionId = 1,
+                    City = "Lviv",
+                    Users = new List<User>() });
+          
+            GuideController controller = new GuideController(repository.Object)
+            {
+                ControllerContext = controllerContext.Object
+            };
+
+            var result = controller.DeleteExcursion(1);
+            repository.Verify(x => x.DeleteExcursion(1), Times.Once);
+            Assert.AreEqual("Excursion has been deleted", controller.TempData["excursionDeleted"]);
         }
 
-
         [TestMethod]
-        public void DeleteTest()
+        public void DeleteNullTest()
         {
+            SetIdentityMocks();
+            Mock<ITravelRepository> repository = new Mock<ITravelRepository>();
+            
+            repository.Setup(x => x.GetExcursionById(1)).Returns((Excursion) null);
+
+            GuideController controller = new GuideController(repository.Object)
+            {
+                ControllerContext = controllerContext.Object
+            };
+
+            var result = (RedirectToRouteResult)controller.DeleteExcursion(1);
+            repository.Verify(x => x.DeleteExcursion(1), Times.Never);
+            Assert.AreEqual("ShowOwnExcursions", result.RouteValues["action"]);
         }
 
         [TestMethod]
-        public void DeleteWithSubscribersTest()
+        public void DeleteExcursionWithSubscribersTest()
         {
+            SetIdentityMocks();
+            Mock<ITravelRepository> repository = new Mock<ITravelRepository>();
+            repository.Setup(x => x.GetExcursionById(1)).Returns(
+                new Excursion()
+                {
+                    ExcursionId = 1,
+                    City = "Lviv",
+                    Users = new List<User>
+                    { 
+                        new User()
+                    }
+                });
+
+            GuideController controller = new GuideController(repository.Object)
+            {
+                ControllerContext = controllerContext.Object
+            };
+
+            var result = controller.DeleteExcursion(1);
+            repository.Verify(x => x.DeleteExcursion(1), Times.Never);
+            Assert.AreEqual("You can`t delete this excursion because it has subscribers", controller.TempData["excursionDeleted"]);
         }
     }
 }

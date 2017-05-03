@@ -1,18 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Web;
 using Domain.Abstract;
 using Domain.Entities;
 using LetsTravel.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Web.Mvc;
-using System.Web.Security;
-using Domain.Concrete;
 using LetsTravel.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Owin;
 using Moq;
 
 namespace LetsTravelTests

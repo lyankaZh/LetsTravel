@@ -129,12 +129,9 @@ namespace LetsTravel.Controllers
                     repository.UpdateExcursion(excursion);
                     repository.Save();
                     return RedirectToAction("ShowOwnExcursions");
-
                 }
             }
             return View("EditExcursionView", model);
         }
-
-        private AppUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
     }
 }

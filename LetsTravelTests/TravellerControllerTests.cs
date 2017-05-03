@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Security.Principal;
 using System.Web.Mvc;
 using Domain.Abstract;
 using Domain.Entities;
 using LetsTravel.Controllers;
 using LetsTravel.Models;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -14,24 +14,41 @@ namespace LetsTravelTests
     [TestClass]
     public class TravellerControllerTests
     {
-        [TestMethod]
-        public void SubscribeTest()
+        Mock<ControllerContext> controllerContext = new Mock<ControllerContext>();
+        Mock<IPrincipal> principal = new Mock<IPrincipal>();
+
+        public void SetIdentityMocks()
         {
-            var controllerContext = new Mock<ControllerContext>();
-            var principal = new Mock<IPrincipal>();
             principal.Setup(p => p.IsInRole("Traveller")).Returns(true);
             principal.SetupGet(x => x.Identity.Name).Returns("user1");
             controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
-
+        }
+        [TestMethod]
+        public void SubscribeTest()
+        {
+            SetIdentityMocks();
             Mock<ITravelRepository> mock = new Mock<ITravelRepository>();
             mock.Setup(x => x.GetUserById(It.IsAny<string>())).Returns(
-                new User { UserName = "user1", Email = "email1@com", FirstName = "Jack", LastName = "Coper", Excursions = new List<Excursion>() }
+                new User
+                {
+                    UserName = "user1",
+                    Email = "email1@com",
+                    FirstName = "Jack",
+                    LastName = "Coper",
+                    Excursions = new List<Excursion>()
+                }
             );
             mock.Setup(x => x.GetExcursionById(1)).Returns(
                 new Excursion()
                 {
                     ExcursionId = 1,
                     City = "Lviv",
+                    Date = new DateTime(2017, 01, 01),
+                    Description = "Cool excursion",
+                    Duration = 4,
+                    PeopleLimit = 6,
+                    Route = "Route",
+                    Price = 25,
                     Users = new List<User>()
                 });
 
@@ -40,27 +57,36 @@ namespace LetsTravelTests
             ExcursionForTraveller exc = new ExcursionForTraveller()
             {
                 ExcursionId = 1,
-                City = "Lviv"
+                City = "Lviv",
+                Date = new DateTime(2017, 01, 01),
+                Description = "Cool excursion",
+                Duration = 4,
+                PeopleLimit = 6,
+                Route = "Route",
+                Price = 25
+                
             };
             var result = travellerController.Subscribe(exc);
             mock.Verify(x => x.UpdateUser(It.Is<User>(y => y.UserName == "user1")), Times.Once);
-            mock.Verify(x => x.UpdateExcursion(It.Is<Excursion>(y=>y.ExcursionId == 1)), Times.Once);
+            mock.Verify(x => x.UpdateExcursion(It.Is<Excursion>(y => y.ExcursionId == 1)), Times.Once);
             Assert.AreEqual("ShowSubscribedExcursions", result.RouteValues["action"]);
         }
 
         [TestMethod]
         public void UnSubscribeTest()
         {
-            var controllerContext = new Mock<ControllerContext>();
-            var principal = new Mock<IPrincipal>();
-            principal.Setup(p => p.IsInRole("Traveller")).Returns(true);
-            principal.SetupGet(x => x.Identity.Name).Returns("user1");
-            controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
-
+            SetIdentityMocks();
             Excursion excursion = new Excursion()
             {
                 ExcursionId = 1,
-                City = "Lviv"
+                City = "Lviv",
+                Date = new DateTime(2017, 01, 01),
+                Description = "Cool excursion",
+                Duration = 4,
+                PeopleLimit = 6,
+                Route = "Route",
+                Price = 25,
+                Guide = "guide"
             };
 
             User user = new User
@@ -72,6 +98,11 @@ namespace LetsTravelTests
                 Excursions = new List<Excursion> { excursion }
             };
 
+            User guide = new User()
+            {
+                UserName = "guide",
+                Id = "guide"
+            };
             Mock<ITravelRepository> mock = new Mock<ITravelRepository>();
             mock.Setup(x => x.GetUserById(It.IsAny<string>())).Returns(user);
 
@@ -81,23 +112,26 @@ namespace LetsTravelTests
             ExcursionWithGuideInfoViewModel exc = new ExcursionWithGuideInfoViewModel
             {
                 ExcursionId = 1,
-                City = "Lviv"
+                City = "Lviv",
+                Date = new DateTime(2017,01,01),
+                Description = "Cool excursion",
+                Duration = 4,
+                PeopleLimit = 6,
+                Route = "Route",
+                ModalId = "#1",
+                Price = 25,
+                Guide = guide
             };
             var result = travellerController.UnSubscribe(exc);
             Assert.AreEqual("ShowSubscribedExcursions", result.RouteValues["action"]);
-            mock.Verify(x => x.UpdateUser(It.Is<User>(y=> y.UserName =="user1")), Times.Once);
+            mock.Verify(x => x.UpdateUser(It.Is<User>(y => y.UserName == "user1")), Times.Once);
 
         }
 
         [TestMethod]
         public void ShowSubscribedTest()
         {
-            var controllerContext = new Mock<ControllerContext>();
-            var principal = new Mock<IPrincipal>();
-            principal.Setup(p => p.IsInRole("Traveller")).Returns(true);
-            principal.SetupGet(x => x.Identity.Name).Returns("user1");
-            controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
-
+            SetIdentityMocks();
             List<Excursion> excursions = new List<Excursion>
             {
                 new Excursion()
@@ -120,6 +154,9 @@ namespace LetsTravelTests
                 Email = "email1@com",
                 FirstName = "Jack",
                 LastName = "Coper",
+                AboutMyself = "Cool person",
+                ImageData = null,
+                ImageMimeType = null,
                 Excursions = excursions
             };
 
@@ -159,12 +196,7 @@ namespace LetsTravelTests
         [TestMethod]
         public void ShowSubscribedIfNoSuchTest()
         {
-            var controllerContext = new Mock<ControllerContext>();
-            var principal = new Mock<IPrincipal>();
-            principal.Setup(p => p.IsInRole("Traveller")).Returns(true);
-            principal.SetupGet(x => x.Identity.Name).Returns("user1");
-            controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
-
+            SetIdentityMocks();
             User user = new User
             {
                 UserName = "user1",
@@ -180,11 +212,11 @@ namespace LetsTravelTests
                 ControllerContext = controllerContext.Object
             };
             mock.Setup(x => x.GetUserById(It.IsAny<string>())).Returns(user);
-          
+
 
             var result = travellerController.ShowSubscribedExcursions();
-            var listOfExcursions = (List<ExcursionWithGuideInfoViewModel>) result.ViewData.Model;
-            Assert.AreEqual(0, listOfExcursions.Count);   
+            var listOfExcursions = (List<ExcursionWithGuideInfoViewModel>)result.ViewData.Model;
+            Assert.AreEqual(0, listOfExcursions.Count);
             Assert.AreEqual("You haven't subscribed to any excursion yet", result.ViewBag.NoExcursions);
         }
     }

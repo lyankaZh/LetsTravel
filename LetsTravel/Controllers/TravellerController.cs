@@ -1,19 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Domain.Abstract;
-using Domain.Entities;
 using LetsTravel.Models;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace LetsTravel.Controllers
 {
     [Authorize(Roles = "Traveller")]
     public class TravellerController : Controller
     {
-
         private readonly ITravelRepository repository;
 
         public TravellerController(ITravelRepository repository)
@@ -71,7 +67,5 @@ namespace LetsTravel.Controllers
             repository.Save();
             return RedirectToAction("ShowSubscribedExcursions");
         }
-
-        private AppUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
     }
 }
