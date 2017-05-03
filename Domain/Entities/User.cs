@@ -22,5 +22,6 @@ namespace Domain.Entities
         public byte[] ImageData { get; set; }
         public string ImageMimeType { get; set; }
         public virtual List<Excursion> Excursions { get; set; }
+        public virtual BlockedUser BlockedUser { get; set; }
     }
 }

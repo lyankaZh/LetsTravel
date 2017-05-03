@@ -19,6 +19,7 @@ namespace Domain.Concrete
         }
 
         public DbSet<Excursion> Excursions { get; set; }
+        public DbSet<BlockedUser> BlockedUsers { get; set; }
         //public new DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

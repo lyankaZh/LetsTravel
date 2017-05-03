@@ -33,6 +33,10 @@
             <h2 class="profile-subtitle">City: @excursion.City</h2>
 
             <div class="vcard-profile-description-text">
+                @if (@excursion.Guide.BlockedUser != null)
+                {
+                    <label>Guide is currently blocked :(</label>
+                }
                 <p>Date: @excursion.Date.ToShortDateString()</p>
                 <p>Description: @excursion.Description</p>
                 <p>Duration: @excursion.Duration</p>
@@ -57,7 +61,7 @@
                         {
                             <label>About me:</label>  @excursion.Guide.AboutMyself
                         }
-
+                       
                     </p>
                 </div>
                 @*@Html.ActionLink("Cancel", "ShowOwnExcursions", "Guide", null, new { @class = "btn btn-default" })*@

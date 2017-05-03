@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -23,12 +24,22 @@ namespace LetsTravel.Controllers
 
         public ViewResult ShowUsersForAdmin()
         {
-            var users = from user in repository.GetUsers() select user;
-            var usersToDisplay = new List<User>();
-            foreach (var user in users)
-            {
-                usersToDisplay.Add(user);
+            List<UserForAdminViewModel> usersToDisplay = new List<UserForAdminViewModel>();
+            foreach (var user in repository.GetUsers())
+            {           
+                usersToDisplay.Add(
+                    new UserForAdminViewModel
+                    {
+                        Email = user.Email,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Id = user.Id,
+                        Nickname = user.UserName,
+                        CollapseId = "#"+user.Id,
+                        IsBlocked = repository.GetBlockedUsers().FirstOrDefault(x => x.User.Id == user.Id) != null
+            });
             }
+            
             return View("Users",usersToDisplay);
         }
 
@@ -107,7 +118,38 @@ namespace LetsTravel.Controllers
             return RedirectToAction("ShowExcursionsForAdmin");
         }
 
+        [HttpPost]
+        public ActionResult Block(UserForAdminViewModel user)
+        {
+            if (ModelState.IsValid)
+            {
+                var u = repository.GetUserById(user.Id);
+                repository.InsertBlockedUser(
+                    new BlockedUser
+                    {
+                        User = u,
+                        Reason = user.Reason
+                    });
+                repository.Save();
+                TempData["userDeleted"] = "User has been blocked";
+            }
+            else
+            {
+                TempData["userDeleted"] = "Specify reason for blocking";
+            }
+            return RedirectToAction("ShowUsersForAdmin");
 
+        }
+
+        public ActionResult Unblock(UserForAdminViewModel user)
+        {
+            var userToDelete = repository.GetBlockedUsers().FirstOrDefault(x => x.User.Id == user.Id);
+                repository.DeleteBlockedUser(userToDelete.BlockedUserId);
+            repository.Save();
+                TempData["userDeleted"] = "User has been unblocked";
+           
+            return RedirectToAction("ShowUsersForAdmin");
+        }
         private AppUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
         //public ActionResult Index()
         //{

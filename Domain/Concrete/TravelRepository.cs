@@ -85,6 +85,15 @@ namespace Domain.Concrete
              context.Excursions.Add(excursion);
         }
 
+        public void InsertBlockedUser(BlockedUser blockedUser)
+        {
+            context.BlockedUsers.Add(blockedUser);
+        }
+
+        public IEnumerable<BlockedUser> GetBlockedUsers()
+        {
+            return context.BlockedUsers.ToList();
+        }
         public void DeleteExcursion(int excursionId)
         {
             Excursion excursionToDelete = context.Excursions.Find(excursionId);
@@ -92,6 +101,16 @@ namespace Domain.Concrete
             {
                 context.Excursions.Remove(excursionToDelete);
             }          
+        }
+
+        public void DeleteBlockedUser(int userId)
+        {
+            BlockedUser userToDelete = context.BlockedUsers.Find(userId);
+            if (userToDelete != null)
+            {
+                context.BlockedUsers.Remove(userToDelete);
+            }
+           
         }
 
         public void DeleteUser(string userId)

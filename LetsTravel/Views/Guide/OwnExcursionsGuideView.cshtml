@@ -82,13 +82,26 @@
                             {
                                 foreach (var subscriber in excursion.Subscribers)
                                 {
-                                    <label>First Name:</label> @subscriber.FirstName
-                                    <br />
-                                    <label>Last Name:</label>  @subscriber.LastName
-                                    <br />
-                                        <label>Email:</label>  @subscriber.Email
-                                        <br />
-                                        <label>About me:</label>  @subscriber.AboutMyself
+                                    if (@subscriber.BlockedUser == null)
+
+                                    {
+
+                                        <label>First Name:</label>
+                                        @subscriber.FirstName
+                                        <br/>
+                                        <label>Last Name:</label>
+                                        @subscriber.LastName
+                                        <br/>
+                                        <label>Email:</label>
+                                        @subscriber.Email
+                                        <br/>
+                                        <label>About me:</label>
+                                        @subscriber.AboutMyself
+                                    }
+                                    else
+                                    {
+                                        @subscriber.FirstName<span> </span> @subscriber.LastName <span>is blocked.</span>
+                                    }
                                 }
                             }
                         </p>

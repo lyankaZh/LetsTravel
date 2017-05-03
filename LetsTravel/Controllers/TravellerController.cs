@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Web.Mvc;
 using Domain.Abstract;
 using LetsTravel.Models;
@@ -43,7 +44,12 @@ namespace LetsTravel.Controllers
             {
                 ViewBag.NoExcursions = "You haven't subscribed to any excursion yet";
             }
-            return View("TravellerView", subscribedExcursions);
+            if (repository.GetUserById(User.Identity.GetUserId()).BlockedUser == null)
+            {
+                return View("TravellerView", subscribedExcursions);
+            }
+            
+            return View("BlockView", repository.GetBlockedUsers().FirstOrDefault(x => x.User.Id == User.Identity.GetUserId()));
         }
 
         public RedirectToRouteResult Subscribe(ExcursionForTraveller model)

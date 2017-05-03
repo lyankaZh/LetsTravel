@@ -17,6 +17,7 @@ namespace LetsTravel.Models
         public int PeopleLimit { get; set; }
         public int Price { get; set; }
         public bool CouldBeSubscribed { get; set;}
-        public string ReasonForSubscribingDisability { get; set; }      
+        public string ReasonForSubscribingDisability { get; set; }
+        public User Guide { get; set; }
     }
 }

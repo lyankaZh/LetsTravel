@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Domain.Entities.User>
+﻿@using System.Reflection.Emit
+@model IEnumerable<LetsTravel.Models.UserForAdminViewModel>
 @{
     ViewBag.Title = "Users";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -24,13 +25,15 @@
             <th>Last Name</th>
             <th>Email</th>
             <th>Delete option</th>
+            <th>Block option</th>
         </tr>
+       
         @foreach (var user in Model)
         {
-            if (user.UserName != "Admin")
+            if (user.Nickname != "Admin")
             {
                 <tr>
-                    <td>@user.UserName</td>
+                    <td>@user.Nickname</td>
                     <td>@user.FirstName</td>
                     <td>@user.LastName</td>
                     <td>@user.Email</td>
@@ -41,8 +44,36 @@
                             <input type="submit"
                                    class="btn btn-default btn-xs"
                                    onclick="return confirm('Are you sure?');"
-                                   value="Delete"/>
+                                   value="Delete" />
                         }
+                    </td>
+                    <td>
+                        
+                        @*@Html.ValidationSummary()*@
+                        @if (@user.IsBlocked)
+                        {
+                            @Html.ActionLink("Unblock","Unblock","Admin", user, new { @class = "btn btn-default" })
+                        }
+                        else
+                        {
+                            <button class="btn btn-info" data-toggle="collapse" data-target=@user.CollapseId>Block</button>
+                            <div id=@user.Id class="collapse">
+                          
+
+                                @using (Html.BeginForm("Block", "Admin", FormMethod.Post))
+                                {
+                                    
+                                    @Html.HiddenFor(x => user.Id)
+                                   <span>Input reason, please.</span>
+                                    @Html.TextBoxFor(x => user.Reason)
+                               
+                                    <button style="margin-top:10px;" type="submit">OK</button>
+                                    <br/>
+                                }
+                            </div>
+                        }
+                    
+
                     </td>
                 </tr>
             }
