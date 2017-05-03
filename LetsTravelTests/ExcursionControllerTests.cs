@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Domain.Abstract;
 using Domain.Entities;
 using LetsTravel.Controllers;
-using LetsTravel.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 

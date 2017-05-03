@@ -30,7 +30,7 @@ namespace LetsTravel.Controllers
             if (image != null)
             {
                 string userId = User.Identity.GetUserId();
-                var user = (User)repository.GetUserById(userId);
+                var user = repository.GetUserById(userId);
                 user.ImageMimeType = image.ContentType;
                 user.ImageData = new byte[image.ContentLength];
                 image.InputStream.Read(user.ImageData, 0, image.ContentLength);
@@ -43,7 +43,7 @@ namespace LetsTravel.Controllers
 
         public FileContentResult GetImage(string id)
         {
-            var user = (User)repository.GetUsers().FirstOrDefault(p => p.Id == id);
+            var user = repository.GetUsers().FirstOrDefault(p => p.Id == id);
             if (user != null)
             {
                 return File(user.ImageData, user.ImageMimeType);
@@ -56,7 +56,7 @@ namespace LetsTravel.Controllers
 
         public ActionResult ShowProfile()
         {
-            var user = (User)repository.GetUserById(User.Identity.GetUserId());
+            var user = repository.GetUserById(User.Identity.GetUserId());
             ProfileModel model = new ProfileModel()
             {
                 Id = user.Id,
@@ -91,7 +91,7 @@ namespace LetsTravel.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = (User)repository.GetUserById(model.Id);
+                User user = repository.GetUserById(model.Id);
                 var amountOfUsersWithSameNick =
                     (from u in repository.GetUsers() where u.UserName == model.UserName && u.UserName!= user.UserName
                      select u).Count();
@@ -146,7 +146,7 @@ namespace LetsTravel.Controllers
                 if (isTraveller)
                 {
                     //TO DO - unsubscribe only from future excursions
-                    if (((User) repository.GetUserById(id)).Excursions.Count > 0)
+                    if (repository.GetUserById(id).Excursions.Count > 0)
                     {
                         TempData["deleteTravellerErrorMessage"] =
                             "Before deleting profile unsubscribe from all excursions";

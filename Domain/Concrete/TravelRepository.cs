@@ -55,22 +55,22 @@ namespace Domain.Concrete
             return query.ToList();
         }
         
-        public List<User> GetSubscribersByExcursionId(int excursionId, string guideId)
-        {
-            var res = new List<User> ();
-            var query = from user in context.Users
-                        where user.Id != guideId
-                        select user;            
-            List<IdentityUser> notGuidUsers = query.ToList();
-            foreach (IdentityUser user in notGuidUsers)
-            {
-              if (((User)user).Excursions.Contains(GetExcursionById(excursionId)))
-                {
-                    res.Add((User)user);
-                }                 
-            }
-            return res;
-        }
+        //public List<User> GetSubscribersByExcursionId(int excursionId, string guideId)
+        //{
+        //    var res = new List<User> ();
+        //    var query = from user in context.Users
+        //                where user.Id != guideId
+        //                select user;            
+        //    List<IdentityUser> notGuidUsers = query.ToList();
+        //    foreach (IdentityUser user in notGuidUsers)
+        //    {
+        //      if (((User)user).Excursions.Contains(GetExcursionById(excursionId)))
+        //        {
+        //            res.Add((User)user);
+        //        }                 
+        //    }
+        //    return res;
+        //}
         //public List<Excursion> GetExcursionsByTravellerId(string travellerId)
         //{
         //    var query = from user in context.Users
@@ -113,13 +113,13 @@ namespace Domain.Concrete
             context.Entry(user).State = EntityState.Modified;
         }
 
-        public IEnumerable<IdentityUser> GetUsers()
+        public IEnumerable<User> GetUsers()
         {
             var users = from user in context.Users select  user;
             return users.ToList();
         }
 
-        public IdentityUser GetUserById(string userId)
+        public User GetUserById(string userId)
         {
             var query = from user in context.Users
                         where user.Id == userId
