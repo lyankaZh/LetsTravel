@@ -13,7 +13,7 @@ namespace Domain.Concrete
     {
         private TravelDbContext context;
         private bool disposed = false;
-
+        
         public TravelRepository(TravelDbContext context)
         {
             this.context = context;

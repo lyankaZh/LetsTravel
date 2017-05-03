@@ -35,9 +35,8 @@
   padding-top: 20px;
   padding-bottom: 20px;
 }
-/* ==========================================================
-! 02. GENERAL 
-========================================================== */
+
+
 body {
     font-family: 'Montserrat', sans-serif;
     -webkit-font-smoothing: subpixel-antialiased;
@@ -48,11 +47,6 @@ body {
     background-image: url('../Images/cardsBackground.jpg');
 }
 
-
-
-/* ==========================================================
-! 06. SECTION: vCard Body
-========================================================== */
 .container {
   position: relative;
   padding-bottom: 80px;
@@ -181,7 +175,7 @@ body {
     width: 40%!important;
 }
 .section-vcardbody-width {
-    width: 20%;
+    width: 70%;
     margin: 0 auto;
     overflow-y: scroll;
     background:  repeat-x right top #f4f4f4;

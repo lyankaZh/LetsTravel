@@ -22,58 +22,6 @@ namespace LetsTravel.Controllers
             this.repository = repository;
         }
 
-        //public string Index()
-        //{
-        //    return "Hello";
-        //}
-
-     
-        //[HttpPost]
-        //public ActionResult AddExcursion(Excursion excursion)
-        //{
-        //    try
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            repository.InsertExcursion(excursion);
-        //            repository.Save();
-        //        }
-        //    }
-        //    catch (RetryLimitExceededException)
-        //    {
-        //        ModelState.AddModelError("",
-        //            "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-        //    }
-
-        //    return Json(excursion);
-        //}
-       
-        //public ActionResult GetExcursions()
-        //{
-        //    if (User.Identity.IsAuthenticated)
-        //    {
-        //        if (User.IsInRole("Guide"))
-        //        {
-        //            ViewBag.ButtonInMenu = "Create excursion";
-        //            var user = UserManager.FindByNameAsync(User.Identity.Name).Result;
-        //            return View("GuideView", repository.GetExcursionsByGuideId(user.Id));
-        //        }
-        //        else if (User.IsInRole("Traveller"))
-        //        {
-        //            var user = UserManager.FindByNameAsync(User.Identity.Name).Result;                
-        //            return View("TravellerView", user.Excursions.ToList());
-        //        }
-        //        else
-        //        {
-        //            return View("AdminView", repository.GetExcursions());
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return View("GuestPageView", repository.GetExcursions());
-        //    }
-        //}
-
         [AllowAnonymous]
         public ViewResult GetAllExcursionsForGuest()
         {
@@ -175,45 +123,6 @@ namespace LetsTravel.Controllers
             }
         }
 
-        //[HttpPost]
-        //[Authorize(Roles = "Guide")]
-        //public ActionResult CreateExcursion(ExcursionCreationModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        string id = User.Identity.GetUserId();
-        //        Excursion excursion = new Excursion()
-        //        {
-        //            City = model.City,
-        //            Date = model.Date,
-        //            Description = model.Description,
-        //            Duration = model.Duration,
-        //            PeopleLimit = model.PeopleLimit,
-        //            Route = model.Route,
-        //            Guide = id
-        //        };
-        //        repository.InsertExcursion(excursion);
-        //        repository.Save();
-        //        //var user = UserManager.FindByIdAsync(User.Identity.GetUserId()).Result;
-        //        //user.OwnedExcursions.Add(excursion);
-        //        //var result = await UserManager.UpdateAsync(user);
-
-        //        //if (!result.Succeeded)
-        //        //{
-        //        //    AddErrors(result);
-        //        //}
-
-        //        return GetExcursions();
-        //    }
-
-        //    return View("_PartialCreateExcursionView");
-        //}
-
-        //[HttpGet]
-        //public ViewResult CreateExcursion()
-        //{
-        // return View("_PartialCreateExcursionView");   
-        //}
 
         private void AddErrors(IdentityResult result)
         {
@@ -223,13 +132,6 @@ namespace LetsTravel.Controllers
             }
         }
 
-        //public ActionResult Subscribe(Excursion excursion)
-        //{
-        //    var user = UserManager.FindByNameAsync(User.Identity.Name).Result;
-        //    user.Excursions.Add(excursion);
-        //    //return ShowSubscribedExcursions();
-        //    return View("AllExcursions");
-        //}
     }
 
 }
