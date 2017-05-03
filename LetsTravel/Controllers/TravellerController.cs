@@ -25,10 +25,10 @@ namespace LetsTravel.Controllers
             this.repository = repository;
         }
 
-        public ActionResult ShowSubscribedExcursions()
+        public ViewResult ShowSubscribedExcursions()
         {
-
-            var user = UserManager.FindByNameAsync(User.Identity.Name).Result;
+            //var user = UserManager.FindByNameAsync(User.Identity.Name).Result;
+            var user = (User)repository.GetUserById(User.Identity.GetUserId());
             var subscribedExcursions = new List<ExcursionWithGuideInfoViewModel>();
 
             foreach (var excursion in user.Excursions.ToList())
@@ -43,14 +43,14 @@ namespace LetsTravel.Controllers
                 excursionToDisplay.Price = (int)excursion.Price;
                 excursionToDisplay.Route = excursion.Route;
                 excursionToDisplay.ExcursionId = excursion.ExcursionId;
-                excursionToDisplay.ModalId = "#" + excursion.ExcursionId.ToString();
+                excursionToDisplay.ModalId = "#" + excursion.ExcursionId;
                 excursionToDisplay.Guide = (User)repository.GetUsers().First(u => u.Id == excursion.Guide);
                 subscribedExcursions.Add(excursionToDisplay);
             }
             return View("TravellerView", subscribedExcursions);
         }
 
-        public ActionResult Subscribe(ExcursionForTraveller model)
+        public RedirectToRouteResult Subscribe(ExcursionForTraveller model)
         {
             var user = (User)repository.GetUserById(User.Identity.GetUserId());
             var excursion = repository.GetExcursionById(model.ExcursionId);
@@ -62,7 +62,7 @@ namespace LetsTravel.Controllers
             return RedirectToAction("ShowSubscribedExcursions");
         }
 
-        public ActionResult UnSubscribe(ExcursionWithGuideInfoViewModel excursion)
+        public RedirectToRouteResult UnSubscribe(ExcursionWithGuideInfoViewModel excursion)
         {
             var user = (User)repository.GetUserById(User.Identity.GetUserId());
             var excursionToDelete = user.Excursions.Find(x => x.ExcursionId == excursion.ExcursionId);
@@ -72,15 +72,6 @@ namespace LetsTravel.Controllers
             return RedirectToAction("ShowSubscribedExcursions");
         }
 
-
         private AppUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
-
-        private void AddErrors(IdentityResult result)
-        {
-            foreach (string error in result.Errors)
-            {
-                ModelState.AddModelError("", error);
-            }
-        }
     }
 }
