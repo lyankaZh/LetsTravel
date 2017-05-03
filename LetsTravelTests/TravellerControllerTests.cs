@@ -43,8 +43,8 @@ namespace LetsTravelTests
                 City = "Lviv"
             };
             var result = travellerController.Subscribe(exc);
-            mock.Verify(x => x.UpdateUser(It.IsAny<User>()), Times.Once);
-            mock.Verify(x => x.UpdateExcursion(It.IsAny<Excursion>()), Times.Once);
+            mock.Verify(x => x.UpdateUser(It.Is<User>(y => y.UserName == "user1")), Times.Once);
+            mock.Verify(x => x.UpdateExcursion(It.Is<Excursion>(y=>y.ExcursionId == 1)), Times.Once);
             Assert.AreEqual("ShowSubscribedExcursions", result.RouteValues["action"]);
         }
 
@@ -85,7 +85,7 @@ namespace LetsTravelTests
             };
             var result = travellerController.UnSubscribe(exc);
             Assert.AreEqual("ShowSubscribedExcursions", result.RouteValues["action"]);
-            mock.Verify(x => x.UpdateUser(It.IsAny<User>()), Times.Once);
+            mock.Verify(x => x.UpdateUser(It.Is<User>(y=> y.UserName =="user1")), Times.Once);
 
         }
 
@@ -129,7 +129,7 @@ namespace LetsTravelTests
                 ControllerContext = controllerContext.Object
             };
             mock.Setup(x => x.GetUserById(It.IsAny<string>())).Returns(user);
-            mock.Setup(x => x.GetUsers()).Returns(new List<IdentityUser>()
+            mock.Setup(x => x.GetUsers()).Returns(new List<User>()
             {
                 user,
                 new User

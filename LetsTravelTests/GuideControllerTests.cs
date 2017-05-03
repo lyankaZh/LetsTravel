@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
 using System.Web.Mvc;
 using Domain.Abstract;
@@ -29,9 +30,50 @@ namespace LetsTravelTests
         [TestMethod]
         public void CreateExcursionPostTest()
         {
+            Mock<ControllerContext> controllerContext = new Mock<ControllerContext>();
+            Mock<IPrincipal> principal = new Mock<IPrincipal>();
+            principal.Setup(p => p.IsInRole("Guide")).Returns(true);
+            principal.SetupGet(x => x.Identity.Name).Returns("guide");
+
+            controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
+
+            Mock<ITravelRepository> repository = new Mock<ITravelRepository>();
+            var guide = new User()
+            {
+                Id = "guide",
+                UserName = "guide"
+            };
+
+            GuideController controller = new GuideController(repository.Object)
+            {
+                ControllerContext = controllerContext.Object
+            };
+
+            ExcursionModel excursionModel = new ExcursionModel
+            {
+                ExcursionId = 1,
+                City = "Lviv",
+                Date = new DateTime(2017,5,4),
+                Description = "Great excursion",
+                Duration = 5,
+                PeopleLimit = 10,
+                Price = 60,
+                Route = "Route"
+            };
+
+            var result = (RedirectToRouteResult)controller.CreateExcursion(excursionModel);
+            repository.Verify(x => x.InsertExcursion(It.Is<Excursion>(y => y.City == "Lviv" &&
+                              y.Description == "Great excursion" && y.Route == "Route")),
+                                Times.Once );
+            Assert.AreEqual("ShowOwnExcursions", result.RouteValues["action"]);
 
         }
 
+        [TestMethod]
+        public void CreateExcursionPostWithInvalidModelTest()
+        {
+            
+        }
         [TestMethod]
         public void ShowOwnExcursionsTest()
         {
