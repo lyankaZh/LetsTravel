@@ -18,17 +18,17 @@ namespace LetsTravelTests
         [TestMethod]
         public void ShowUsersForAdminTest()
         {
-            Mock<ITravelRepository> mock = new Mock<ITravelRepository>();
-            mock.Setup(x => x.GetUsers()).Returns(new List<User>
-            {
-                new User {UserName = "user1", Email = "email1@com", FirstName = "Jack", LastName = "Coper"},
-                new User {UserName = "user2", Email = "email2@com", FirstName = "Martin", LastName = "Denis"}
-            });
-            AdminController adminController = new AdminController(mock.Object);
-            List<User> result = (List<User>)adminController.ShowUsersForAdmin().ViewData.Model;
-            Assert.AreEqual(result.Count, 2);
-            Assert.AreEqual("user1", result[0].UserName);
-            Assert.AreEqual("user2", result[1].UserName);
+            //Mock<ITravelRepository> mock = new Mock<ITravelRepository>();
+            //mock.Setup(x => x.GetUsers()).Returns(new List<User>
+            //{
+            //    new User {UserName = "user1", Email = "email1@com", FirstName = "Jack", LastName = "Coper"},
+            //    new User {UserName = "user2", Email = "email2@com", FirstName = "Martin", LastName = "Denis"}
+            //});
+            //AdminController adminController = new AdminController(mock.Object);
+            //List<User> result = (List<User>)adminController.ShowUsersForAdmin().ViewData.Model;
+            //Assert.AreEqual(result.Count, 2);
+            //Assert.AreEqual("user1", result[0].UserName);
+            //Assert.AreEqual("user2", result[1].UserName);
         }
 
         [TestMethod]

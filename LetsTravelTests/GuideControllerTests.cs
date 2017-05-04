@@ -25,15 +25,44 @@ namespace LetsTravelTests
         }
 
         [TestMethod]
-        public void CreateExcursionGetTest()
+        public void CreateExcursionGetForUnblockedUserTest()
         {
             SetIdentityMocks();
             Mock<ITravelRepository> repository = new Mock<ITravelRepository>();
+            repository.Setup(x => x.GetUserById(It.IsAny<string>())).Returns(
+                new User
+                {
+                    UserName = "guide",
+                    BlockedUser = null
+                });
 
-            GuideController controller = new GuideController(repository.Object);
+            GuideController controller = new GuideController(repository.Object)
+            {
+                ControllerContext = controllerContext.Object
+            };
 
             var result = controller.CreateExcursion().ViewName;
             Assert.AreEqual("CreateExcursionView", result);
+        }
+
+        [TestMethod]
+        public void CreateExcursionGetForBlockedUserTest()
+        {
+            SetIdentityMocks();
+            Mock<ITravelRepository> repository = new Mock<ITravelRepository>();
+            repository.Setup(x => x.GetUserById(It.IsAny<string>())).Returns(
+            new User
+            {
+                UserName = "guide",
+                BlockedUser = new BlockedUser()
+            });
+
+            GuideController controller = new GuideController(repository.Object)
+            {
+                ControllerContext = controllerContext.Object
+            };
+            var result = controller.CreateExcursion().ViewName;
+            Assert.AreEqual("BlockView", result);
         }
 
         [TestMethod]
@@ -311,7 +340,7 @@ namespace LetsTravelTests
             Assert.AreEqual("EditExcursionView", result.ViewName);
             Assert.AreEqual(excursionModel, result.ViewData.Model);
             Assert.AreEqual("There are more subscribers than in new limit of people value", controller.ModelState[""].Errors[0].ErrorMessage);
-            
+
         }
 
 
@@ -326,8 +355,9 @@ namespace LetsTravelTests
                 {
                     ExcursionId = 1,
                     City = "Lviv",
-                    Users = new List<User>() });
-          
+                    Users = new List<User>()
+                });
+
             GuideController controller = new GuideController(repository.Object)
             {
                 ControllerContext = controllerContext.Object
@@ -343,8 +373,8 @@ namespace LetsTravelTests
         {
             SetIdentityMocks();
             Mock<ITravelRepository> repository = new Mock<ITravelRepository>();
-            
-            repository.Setup(x => x.GetExcursionById(1)).Returns((Excursion) null);
+
+            repository.Setup(x => x.GetExcursionById(1)).Returns((Excursion)null);
 
             GuideController controller = new GuideController(repository.Object)
             {
@@ -367,7 +397,7 @@ namespace LetsTravelTests
                     ExcursionId = 1,
                     City = "Lviv",
                     Users = new List<User>
-                    { 
+                    {
                         new User()
                     }
                 });

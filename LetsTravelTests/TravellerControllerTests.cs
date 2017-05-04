@@ -193,6 +193,50 @@ namespace LetsTravelTests
             Assert.AreEqual("guide2", result[1].Guide.UserName);
         }
 
+
+        [TestMethod]
+        public void ShowSubscribedForBlockedUserTest()
+        {
+            SetIdentityMocks();
+            List<Excursion> excursions = new List<Excursion>
+            {
+                new Excursion()
+                {
+                    ExcursionId = 1,
+                    City = "Lviv",
+                    Guide = "guideId1"
+                },
+                 new Excursion()
+                {
+                    ExcursionId = 2,
+                    City = "Ternopil",
+                    Guide = "guideId2"
+                }
+            };
+
+            User user = new User
+            {
+                UserName = "user1",
+                Email = "email1@com",
+                FirstName = "Jack",
+                LastName = "Coper",
+                AboutMyself = "Cool person",
+                ImageData = null,
+                ImageMimeType = null,
+                Excursions = excursions,
+                BlockedUser = new BlockedUser()
+            };
+
+            Mock<ITravelRepository> mock = new Mock<ITravelRepository>();
+            TravellerController travellerController = new TravellerController(mock.Object)
+            {
+                ControllerContext = controllerContext.Object
+            };
+            mock.Setup(x => x.GetUserById(It.IsAny<string>())).Returns(user);
+            var result = travellerController.ShowSubscribedExcursions().ViewName;
+            Assert.AreEqual("BlockView", result);
+        }
+
         [TestMethod]
         public void ShowSubscribedIfNoSuchTest()
         {

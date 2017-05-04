@@ -21,7 +21,14 @@ namespace LetsTravel.Controllers
         public ViewResult ShowSubscribedExcursions()
         {
             //var user = UserManager.FindByNameAsync(User.Identity.Name).Result;
+            if (repository.GetUserById(User.Identity.GetUserId()).BlockedUser != null)
+            {
+                return View("BlockView",
+                    repository.GetBlockedUsers().FirstOrDefault(x => x.User.Id == User.Identity.GetUserId()));
+            }
+
             var user = repository.GetUserById(User.Identity.GetUserId());
+
             var subscribedExcursions = new List<ExcursionWithGuideInfoViewModel>();
 
             foreach (var excursion in user.Excursions.ToList())
@@ -44,12 +51,8 @@ namespace LetsTravel.Controllers
             {
                 ViewBag.NoExcursions = "You haven't subscribed to any excursion yet";
             }
-            if (repository.GetUserById(User.Identity.GetUserId()).BlockedUser == null)
-            {
-                return View("TravellerView", subscribedExcursions);
-            }
-            
-            return View("BlockView", repository.GetBlockedUsers().FirstOrDefault(x => x.User.Id == User.Identity.GetUserId()));
+
+            return View("TravellerView", subscribedExcursions);
         }
 
         public RedirectToRouteResult Subscribe(ExcursionForTraveller model)
