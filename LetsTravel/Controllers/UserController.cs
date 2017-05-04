@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Threading;
+﻿using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Domain.Abstract;
 using Domain.Concrete;
 using Domain.Entities;
 using LetsTravel.Models;
@@ -16,9 +13,9 @@ namespace LetsTravel.Controllers
     [Authorize]
     public class UserController : Controller
     {
-        private readonly TravelRepository repository;
+        private readonly ITravelRepository repository;
 
-        public UserController(TravelRepository repo)
+        public UserController(ITravelRepository repo)
         {
             repository = repo;
         }
@@ -54,7 +51,7 @@ namespace LetsTravel.Controllers
             }
         }
 
-        public ActionResult ShowProfile()
+        public ViewResult ShowProfile()
         {
             var user = repository.GetUserById(User.Identity.GetUserId());
             ProfileModel model = new ProfileModel()
@@ -80,9 +77,10 @@ namespace LetsTravel.Controllers
             return View("ProfileView", model);
         }
 
-        public ActionResult Edit()
+        public ViewResult Edit()
         {
-            User user = UserManager.FindByIdAsync(User.Identity.GetUserId()).Result;
+            //User user = UserManager.FindByIdAsync(User.Identity.GetUserId()).Result;
+            var user = repository.GetUserById(User.Identity.GetUserId());
             return View("EditProfileView", user);
         }
 
@@ -176,46 +174,6 @@ namespace LetsTravel.Controllers
                 repository.Save();
             }
             return new RedirectResult("/Home/Index");
-        }
-
-        private AppUserManager UserManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
-            }
-        }
-        //private readonly TravelDbContext _context = new TravelDbContext();
-
-        //// GET: User
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
-
-        //public ActionResult GetUsers()
-        //{
-        //    //return Json(context.Excursions.ToList(), JsonRequestBehavior.AllowGet);
-        //    return View(_context.Users.ToList());
-        //}
-
-        //[HttpPost]
-        //public ActionResult AddUser(User user)
-        //{
-        //    try
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            _context.Users.Add(user);
-        //            _context.SaveChanges();
-        //        }
-        //    }
-        //    catch (RetryLimitExceededException)
-        //    {               
-        //        ModelState.AddModelError("",
-        //            "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-        //    }
-        //    return Json(user);
-        //}
+        }      
     }
 }

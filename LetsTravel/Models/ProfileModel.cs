@@ -19,6 +19,5 @@ namespace LetsTravel.Models
 
         public int SubscribedExcursionsAmount { get; set; }
         public int OwnedExcursionsAmount { get; set; }
-        public int Mark { get; set; }
     }
 }
