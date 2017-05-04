@@ -25,7 +25,7 @@ namespace LetsTravel.Controllers
         [AllowAnonymous]
         public ViewResult GetAllExcursionsForGuest()
         {
-             List<Excursion> unblockedExcursions = new List<Excursion>();
+            List<Excursion> unblockedExcursions = new List<Excursion>();
             foreach (var excursion in repository.GetExcursions())
             {
                 if (repository.GetUserById(excursion.Guide).BlockedUser == null)
@@ -39,87 +39,56 @@ namespace LetsTravel.Controllers
         [Authorize(Roles = "Guide, Traveller, Admin")]
         public ViewResult GetAllExcursions()
         {
+
+
             if (User.IsInRole("Traveller"))
             {
                 List<ExcursionForTraveller> excursionsToDisplay = new List<ExcursionForTraveller>();
                 foreach (var excursion in repository.GetExcursions())
                 {
-                    if (repository.GetUserById(excursion.Guide) == null)
+                    if (repository.GetUserById(excursion.Guide).BlockedUser == null)
                     {
-                        if (User.IsInRole("Guide"))
+                        ExcursionForTraveller excursionForTraveller = new ExcursionForTraveller
                         {
-                            if (excursion.Guide == User.Identity.GetUserId())
-                            {
-                                excursionsToDisplay.Add(new ExcursionForTraveller()
-                                {
-                                    ExcursionId = excursion.ExcursionId,
-                                    City = excursion.City,
-                                    Date = excursion.Date,
-                                    Description = excursion.Description,
-                                    Duration = excursion.Duration,
-                                    Price = (int) excursion.Price,
-                                    PeopleLimit = excursion.PeopleLimit,
-                                    Route = excursion.Route,
-                                    CouldBeSubscribed = false,
-                                    ReasonForSubscribingDisability = "It is your excursion"
-                                });
-                            }
-                        }
-                        if (excursion.Users.Count == excursion.PeopleLimit)
+                            ExcursionId = excursion.ExcursionId,
+                            City = excursion.City,
+                            Date = excursion.Date,
+                            Description = excursion.Description,
+                            Duration = excursion.Duration,
+                            Price = (int)excursion.Price,
+                            PeopleLimit = excursion.PeopleLimit,
+                            Route = excursion.Route
+                        };
+
+                        if (User.IsInRole("Guide") && excursion.Guide == User.Identity.GetUserId())
                         {
 
-                            excursionsToDisplay.Add(new ExcursionForTraveller()
-                            {
-                                ExcursionId = excursion.ExcursionId,
-                                City = excursion.City,
-                                Date = excursion.Date,
-                                Description = excursion.Description,
-                                Duration = excursion.Duration,
-                                Price = (int) excursion.Price,
-                                PeopleLimit = excursion.PeopleLimit,
-                                Route = excursion.Route,
-                                CouldBeSubscribed = false,
-                                ReasonForSubscribingDisability = "There are no free places",
-                            });
+                            excursionForTraveller.CouldBeSubscribed = false;
+                            excursionForTraveller.ReasonForSubscribingDisability = "It is your excursion";
+                            excursionsToDisplay.Add(excursionForTraveller);
+
                         }
                         else if (excursion.Users.FirstOrDefault(x => x.Id == User.Identity.GetUserId()) != null)
                         {
-
-                            excursionsToDisplay.Add(new ExcursionForTraveller()
-                            {
-                                ExcursionId = excursion.ExcursionId,
-                                City = excursion.City,
-                                Date = excursion.Date,
-                                Description = excursion.Description,
-                                Duration = excursion.Duration,
-                                Price = (int) excursion.Price,
-                                PeopleLimit = excursion.PeopleLimit,
-                                Route = excursion.Route,
-                                CouldBeSubscribed = false,
-                                ReasonForSubscribingDisability = "You have already subcribed",
-                            });
+                            excursionForTraveller.CouldBeSubscribed = false;
+                            excursionForTraveller.ReasonForSubscribingDisability = "You have already subcribed";
+                            excursionsToDisplay.Add(excursionForTraveller);
                         }
-
-
+                        else if (excursion.Users.Count == excursion.PeopleLimit)
+                        {
+                            excursionForTraveller.CouldBeSubscribed = false;
+                            excursionForTraveller.ReasonForSubscribingDisability = "There are no free places";
+                            excursionsToDisplay.Add(excursionForTraveller);
+                        }
                         else
                         {
-
-                            excursionsToDisplay.Add(new ExcursionForTraveller()
-                            {
-                                ExcursionId = excursion.ExcursionId,
-                                City = excursion.City,
-                                Date = excursion.Date,
-                                Description = excursion.Description,
-                                Duration = excursion.Duration,
-                                Price = (int) excursion.Price,
-                                PeopleLimit = excursion.PeopleLimit,
-                                Route = excursion.Route,
-                                CouldBeSubscribed = true,
-                            });
+                            excursionForTraveller.CouldBeSubscribed = true;
+                            excursionsToDisplay.Add(excursionForTraveller);
                         }
                     }
                 }
-            
+                //тобто для юзера всі незаблоковані екскурсії
+                //а для заблокованого юзера не виводять жодні екскурсії, а BlockView
                 if (repository.GetUserById(User.Identity.GetUserId()).BlockedUser == null)
                 {
                     return View("AllExcursionsForTraveller", excursionsToDisplay);
@@ -129,20 +98,29 @@ namespace LetsTravel.Controllers
                     return View("BlockView", repository.GetBlockedUsers().FirstOrDefault(x => x.User.Id == User.Identity.GetUserId()));
                 }
             }
+
+            //для заблокованого гіда не відображаються усі екскурсії
             else if (User.IsInRole("Guide"))
             {
-                List<Excursion> unblockedExcursions = new List<Excursion>();
-                foreach (var excursion in repository.GetExcursions())
+                if (repository.GetUserById(User.Identity.GetUserId()).BlockedUser == null)
                 {
-                    if (repository.GetUserById(excursion.Guide).BlockedUser == null)
+                    List<Excursion> unblockedExcursions = new List<Excursion>();
+                    foreach (var excursion in repository.GetExcursions())
                     {
-                        unblockedExcursions.Add(excursion);
+                        if (repository.GetUserById(excursion.Guide).BlockedUser == null)
+                        {
+                            unblockedExcursions.Add(excursion);
+                        }
                     }
+                    return View("AllExcursionsForGuide", unblockedExcursions);
                 }
-                return View("AllExcursionsForGuide", unblockedExcursions);
+                else
+                {
+                    return View("BlockView", repository.GetBlockedUsers().FirstOrDefault(x => x.User.Id == User.Identity.GetUserId()));
+                }
             }
-            return View("AllExcursionsForAdmin", repository.GetExcursions().ToList());
 
+            return View("AllExcursionsForAdmin", repository.GetExcursions().ToList());
         }
 
 

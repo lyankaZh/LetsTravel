@@ -49,9 +49,17 @@ namespace LetsTravel.Controllers
         [HttpGet]
         public ViewResult CreateExcursion()
         {
-            return View("CreateExcursionView");
-        }
+            if (repository.GetUserById(User.Identity.GetUserId()).BlockedUser == null)
+            {
+                return View("CreateExcursionView");
+            }
+            else
+            {
+                return View("BlockView", repository.GetBlockedUsers().FirstOrDefault(x => x.User.Id == User.Identity.GetUserId()));
+            }
 
+           
+        }
 
         public ViewResult ShowOwnExcursions()
         {
