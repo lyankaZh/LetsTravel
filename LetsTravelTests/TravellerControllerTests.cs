@@ -28,27 +28,19 @@ namespace LetsTravelTests
         {
             SetIdentityMocks();
             Mock<ITravelRepository> mock = new Mock<ITravelRepository>();
-            mock.Setup(x => x.GetUserById(It.IsAny<string>())).Returns(
-                new User
-                {
-                    UserName = "user1",
-                    Email = "email1@com",
-                    FirstName = "Jack",
-                    LastName = "Coper",
-                    Excursions = new List<Excursion>()
-                }
-            );
+            var user = new User
+            {
+                UserName = "user1",
+                Email = "email1@com",
+                FirstName = "Jack",
+                LastName = "Coper",
+                Excursions = new List<Excursion>()
+            };
+            mock.Setup(x => x.GetUserById(It.IsAny<string>())).Returns(user);
             mock.Setup(x => x.GetExcursionById(1)).Returns(
                 new Excursion()
                 {
                     ExcursionId = 1,
-                    City = "Lviv",
-                    Date = new DateTime(2017, 01, 01),
-                    Description = "Cool excursion",
-                    Duration = 4,
-                    PeopleLimit = 6,
-                    Route = "Route",
-                    Price = 25,
                     Users = new List<User>()
                 });
 
@@ -64,9 +56,10 @@ namespace LetsTravelTests
                 PeopleLimit = 6,
                 Route = "Route",
                 Price = 25
-                
+
             };
             var result = travellerController.Subscribe(exc);
+            Assert.AreEqual(1, user.Excursions.Count);
             mock.Verify(x => x.UpdateUser(It.Is<User>(y => y.UserName == "user1")), Times.Once);
             mock.Verify(x => x.UpdateExcursion(It.Is<Excursion>(y => y.ExcursionId == 1)), Times.Once);
             Assert.AreEqual("ShowSubscribedExcursions", result.RouteValues["action"]);
@@ -113,7 +106,7 @@ namespace LetsTravelTests
             {
                 ExcursionId = 1,
                 City = "Lviv",
-                Date = new DateTime(2017,01,01),
+                Date = new DateTime(2017, 01, 01),
                 Description = "Cool excursion",
                 Duration = 4,
                 PeopleLimit = 6,
@@ -124,6 +117,7 @@ namespace LetsTravelTests
             };
             var result = travellerController.UnSubscribe(exc);
             Assert.AreEqual("ShowSubscribedExcursions", result.RouteValues["action"]);
+            Assert.AreEqual(0, user.Excursions.Count);
             mock.Verify(x => x.UpdateUser(It.Is<User>(y => y.UserName == "user1")), Times.Once);
 
         }
@@ -193,7 +187,6 @@ namespace LetsTravelTests
             Assert.AreEqual("guide2", result[1].Guide.UserName);
         }
 
-
         [TestMethod]
         public void ShowSubscribedForBlockedUserTest()
         {
@@ -240,7 +233,7 @@ namespace LetsTravelTests
             {
                 ControllerContext = controllerContext.Object
             };
-            
+
             var result = (BlockedUser)travellerController.ShowSubscribedExcursions().ViewData.Model;
             Assert.AreEqual("user1", result.User.UserName);
         }

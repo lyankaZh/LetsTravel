@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Domain.Abstract;
-using Domain.Concrete;
 using Domain.Entities;
 using LetsTravel.Models;
 using Microsoft.AspNet.Identity;
@@ -39,7 +37,6 @@ namespace LetsTravel.Controllers
                         IsBlocked = repository.GetBlockedUsers().FirstOrDefault(x => x.User.Id == user.Id) != null
             });
             }
-            
             return View("Users",usersToDisplay);
         }
 
@@ -72,9 +69,9 @@ namespace LetsTravel.Controllers
             User user = repository.GetUserById(userId);
             if (user != null)
             {
-                if (UserManager.IsInRole(user.Id, "Guide"))
+                if (repository.IsInRole("Guide", user))
                 {
-                    var excursionsOfGuide = repository.GetExcursionsByGuideId(user.Id);
+                    var excursionsOfGuide = repository.GetExcursions().Where(x => x.Guide == user.Id);
                     foreach (var excursion in excursionsOfGuide)
                     {
                         foreach (var u in excursion.Users)
@@ -84,7 +81,7 @@ namespace LetsTravel.Controllers
                         repository.DeleteExcursion(excursion.ExcursionId);
                     }
                 }
-                if (UserManager.IsInRole(user.Id, "Traveller"))
+                if (repository.IsInRole("Traveller", user))
                 {
                     foreach (var excursion in user.Excursions)
                     {
@@ -99,7 +96,6 @@ namespace LetsTravel.Controllers
 
             return RedirectToAction("ShowUsersForAdmin");
         }
-
 
         [HttpPost]
         public ActionResult DeleteExcursion(int excursionId)
@@ -138,144 +134,18 @@ namespace LetsTravel.Controllers
                 TempData["userDeleted"] = "Specify reason for blocking";
             }
             return RedirectToAction("ShowUsersForAdmin");
-
         }
 
         public ActionResult Unblock(UserForAdminViewModel user)
         {
             var userToDelete = repository.GetBlockedUsers().FirstOrDefault(x => x.User.Id == user.Id);
+            if (userToDelete != null)
+            {
                 repository.DeleteBlockedUser(userToDelete.BlockedUserId);
-            repository.Save();
+                repository.Save();
                 TempData["userDeleted"] = "User has been unblocked";
-           
+            }
             return RedirectToAction("ShowUsersForAdmin");
-        }
-        private AppUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
-        //public ActionResult Index()
-        //{
-        //    return View(UserManager.Users);
-        //}
-
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public async Task<ActionResult> Delete(string id)
-        //{
-        //    AppUser user = await UserManager.FindByIdAsync(id);
-        //    if (user != null)
-        //    {
-        //        IdentityResult result = await UserManager.DeleteAsync(user);
-        //        if (result.Succeeded)
-        //        {
-        //            return RedirectToAction("Index");
-        //        }
-        //        else
-        //        {
-        //            return View("Error", result.Errors);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return View("Error", new string[] { "User Not Found" });
-        //    }
-        //}
-
-
-
-        //public async Task<ActionResult> Edit(string id)
-        //{
-        //    AppUser user = await UserManager.FindByIdAsync(id);
-        //    if (user != null)
-        //    {
-        //        return View(user);
-        //    }
-        //    else
-        //    {
-        //        return RedirectToAction("Index");
-        //    }
-        //}
-        //[HttpPost]
-        //public async Task<ActionResult> Edit(string id, string email, string password)
-        //{
-        //    AppUser user = await UserManager.FindByIdAsync(id);
-        //    if (user != null)
-        //    {
-        //        user.Email = email;
-        //        IdentityResult validEmail
-        //        = await UserManager.UserValidator.ValidateAsync(user);
-        //        if (!validEmail.Succeeded)
-        //        {
-        //            AddErrorsFromResult(validEmail);
-        //        }
-        //        IdentityResult validPass = null;
-        //        if (password != string.Empty)
-        //        {
-        //            validPass
-        //            = await UserManager.PasswordValidator.ValidateAsync(password);
-        //            if (validPass.Succeeded)
-        //            {
-        //                user.PasswordHash =
-        //                UserManager.PasswordHasher.HashPassword(password);
-        //            }
-        //            else
-        //            {
-        //                AddErrorsFromResult(validPass);
-        //            }
-        //        }
-        //        if ((validEmail.Succeeded && validPass == null) || (validEmail.Succeeded
-        //        && password != string.Empty && validPass.Succeeded))
-        //        {
-        //            IdentityResult result = await UserManager.UpdateAsync(user);
-        //            if (result.Succeeded)
-        //            {
-        //                return RedirectToAction("Index");
-        //            }
-        //            else
-        //            {
-        //                AddErrorsFromResult(result);
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        ModelState.AddModelError("", "User Not Found");
-        //    }
-        //    return View(user);
-        //}
-        //[HttpPost]
-        //public async Task<ActionResult> Create(CreateModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        AppUser user = new AppUser { UserName = model.Name, Email = model.Email };
-        //        IdentityResult result = await UserManager.CreateAsync(user,
-        //        model.Password);
-
-        //    if (result.Succeeded)
-        //        {
-        //            return RedirectToAction("Index");
-        //        }
-        //        AddErrorsFromResult(result);
-        //    }
-        //    return View(model);
-        //}
-        //private void AddErrorsFromResult(IdentityResult result)
-        //{
-        //    foreach (string error in result.Errors)
-        //    {
-        //        ModelState.AddModelError("", error);
-        //    }
-        //}
-
-        //private AppUserManager UserManager
-        //{
-        //    get
-        //    {
-        //        return HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
-        //    }
-        //}
+        }      
     }
 }

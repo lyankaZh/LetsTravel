@@ -1,13 +1,10 @@
-﻿using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Domain.Abstract;
 using Domain.Entities;
 using LetsTravel.Models;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.WebPages;
 
 namespace LetsTravel.Controllers
 {

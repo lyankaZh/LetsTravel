@@ -140,7 +140,6 @@ namespace LetsTravel.Controllers
                 bool isTraveller = User.IsInRole("Traveller");
                 if (isTraveller)
                 {
-                    //TO DO - unsubscribe only from future excursions
                     if (repository.GetUserById(id).Excursions.Count > 0)
                     {
                         TempData["deleteTravellerErrorMessage"] =

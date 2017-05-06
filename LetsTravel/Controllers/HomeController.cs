@@ -28,11 +28,7 @@ namespace LetsTravel.Controllers
                 ViewBag.LogInOrOutText = "Log in";
                 return View("GuestHomeView");
             }
-            //FormCorrectTextOnMenuButtons();
-            //return View();
         }
-
-      
 
         public ActionResult Register()
         {
