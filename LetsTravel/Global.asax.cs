@@ -14,7 +14,7 @@ namespace LetsTravel
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
+            //ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
         }
     }
 }

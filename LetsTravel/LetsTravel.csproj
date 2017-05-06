@@ -277,7 +277,6 @@
     </Compile>
     <Compile Include="Identity\IdentityConfig.cs" />
     <Compile Include="Infrastructure\Binders\DecimalModelBinder.cs" />
-    <Compile Include="Infrastructure\Helper.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\ExcursionModel.cs" />
     <Compile Include="Models\ExcursionForTraveller.cs" />

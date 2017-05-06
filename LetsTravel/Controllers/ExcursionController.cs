@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using Domain.Abstract;
 using Domain.Entities;
-using System.Web;
 using LetsTravel.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace LetsTravel.Controllers
 {
@@ -24,6 +19,11 @@ namespace LetsTravel.Controllers
 
         [AllowAnonymous]
         public ViewResult GetAllExcursionsForGuest()
+        { 
+            return View("AllExcursionsForGuest", GetExcursionsOfUnblockedUsers());
+        }
+
+        public List<Excursion> GetExcursionsOfUnblockedUsers()
         {
             List<Excursion> unblockedExcursions = new List<Excursion>();
             foreach (var excursion in repository.GetExcursions())
@@ -33,13 +33,21 @@ namespace LetsTravel.Controllers
                     unblockedExcursions.Add(excursion);
                 }
             }
-            return View("AllExcursionsForGuest", unblockedExcursions);
+            return unblockedExcursions;
         }
 
         [Authorize(Roles = "Guide, Traveller, Admin")]
         public ViewResult GetAllExcursions()
         {
+            if (User.IsInRole("Admin"))
+            {
+                return View("AllExcursionsForAdmin", repository.GetExcursions().ToList());
+            }
 
+            if (repository.GetUsers().First(x => x.UserName == User.Identity.Name).BlockedUser != null)
+            {
+                return View("BlockView", repository.GetBlockedUsers().FirstOrDefault(x => x.User.Id == User.Identity.Name));
+            }
 
             if (User.IsInRole("Traveller"))
             {
@@ -60,15 +68,15 @@ namespace LetsTravel.Controllers
                             Route = excursion.Route
                         };
 
-                        if (User.IsInRole("Guide") && excursion.Guide == User.Identity.GetUserId())
+                        if (User.IsInRole("Guide")
+                            && excursion.Guide == repository.GetUsers().
+                            First(x => x.UserName == User.Identity.Name).Id)
                         {
-
                             excursionForTraveller.CouldBeSubscribed = false;
                             excursionForTraveller.ReasonForSubscribingDisability = "It is your excursion";
                             excursionsToDisplay.Add(excursionForTraveller);
-
                         }
-                        else if (excursion.Users.FirstOrDefault(x => x.Id == User.Identity.GetUserId()) != null)
+                        else if (excursion.Users.FirstOrDefault(x => x.UserName == User.Identity.Name) != null)
                         {
                             excursionForTraveller.CouldBeSubscribed = false;
                             excursionForTraveller.ReasonForSubscribingDisability = "You have already subcribed";
@@ -87,60 +95,20 @@ namespace LetsTravel.Controllers
                         }
                     }
                 }
-                //тобто для юзера всі незаблоковані екскурсії
-                //а для заблокованого юзера не виводять жодні екскурсії, а BlockView
-                if (repository.GetUserById(User.Identity.GetUserId()).BlockedUser == null)
-                {
-                    return View("AllExcursionsForTraveller", excursionsToDisplay);
-                }
-                else
-                {
-                    return View("BlockView", repository.GetBlockedUsers().FirstOrDefault(x => x.User.Id == User.Identity.GetUserId()));
-                }
+
+                return View("AllExcursionsForTraveller", excursionsToDisplay);
+
             }
 
-            //для заблокованого гіда не відображаються усі екскурсії
             else if (User.IsInRole("Guide"))
             {
-                if (repository.GetUserById(User.Identity.GetUserId()).BlockedUser == null)
-                {
-                    List<Excursion> unblockedExcursions = new List<Excursion>();
-                    foreach (var excursion in repository.GetExcursions())
-                    {
-                        if (repository.GetUserById(excursion.Guide).BlockedUser == null)
-                        {
-                            unblockedExcursions.Add(excursion);
-                        }
-                    }
-                    return View("AllExcursionsForGuide", unblockedExcursions);
-                }
-                else
-                {
-                    return View("BlockView", repository.GetBlockedUsers().FirstOrDefault(x => x.User.Id == User.Identity.GetUserId()));
-                }
+                return View("AllExcursionsForGuide", GetExcursionsOfUnblockedUsers());
             }
-
-            return View("AllExcursionsForAdmin", repository.GetExcursions().ToList());
-        }
-
-
-        private AppUserManager UserManager
-        {
-            get
+            else
             {
-                return HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
+                return View("AllExcursionsForAdmin", repository.GetExcursions().ToList());
             }
         }
-
-
-        private void AddErrors(IdentityResult result)
-        {
-            foreach (string error in result.Errors)
-            {
-                ModelState.AddModelError("", error);
-            }
-        }
-
     }
 
 }

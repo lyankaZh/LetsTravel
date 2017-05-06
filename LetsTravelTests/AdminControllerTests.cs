@@ -19,11 +19,8 @@ namespace LetsTravelTests
         Mock<IPrincipal> principal = new Mock<IPrincipal>();
         public void SetIdentityMocks()
         {
-            //principal.SetupGet(x => x.Identity.Name).Returns("user");
             controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
-
             principal.Setup(p => p.IsInRole("Admin")).Returns(true);
-
         }
 
         [TestMethod]
