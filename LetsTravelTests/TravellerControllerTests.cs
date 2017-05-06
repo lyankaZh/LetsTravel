@@ -228,13 +228,21 @@ namespace LetsTravelTests
             };
 
             Mock<ITravelRepository> mock = new Mock<ITravelRepository>();
+            mock.Setup(x => x.GetUserById(It.IsAny<string>())).Returns(user);
+            mock.Setup(x => x.GetBlockedUsers()).Returns(
+            new List<BlockedUser> {
+                new BlockedUser
+            {
+               User = user
+            }});
+
             TravellerController travellerController = new TravellerController(mock.Object)
             {
                 ControllerContext = controllerContext.Object
             };
-            mock.Setup(x => x.GetUserById(It.IsAny<string>())).Returns(user);
-            var result = travellerController.ShowSubscribedExcursions().ViewName;
-            Assert.AreEqual("BlockView", result);
+            
+            var result = (BlockedUser)travellerController.ShowSubscribedExcursions().ViewData.Model;
+            Assert.AreEqual("user1", result.User.UserName);
         }
 
         [TestMethod]

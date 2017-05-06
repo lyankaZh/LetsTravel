@@ -55,7 +55,7 @@ namespace LetsTravel.Controllers
             }
             else
             {
-                return View("BlockView", repository.GetBlockedUsers().FirstOrDefault(x => x.User.Id == User.Identity.GetUserId()));
+                return View("BlockView", repository.GetBlockedUsers().FirstOrDefault(x => x.User.UserName == User.Identity.Name));
             }
 
            

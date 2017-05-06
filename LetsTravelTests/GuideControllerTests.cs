@@ -50,19 +50,25 @@ namespace LetsTravelTests
         {
             SetIdentityMocks();
             Mock<ITravelRepository> repository = new Mock<ITravelRepository>();
-            repository.Setup(x => x.GetUserById(It.IsAny<string>())).Returns(
-            new User
+            var user = new User
             {
                 UserName = "guide",
                 BlockedUser = new BlockedUser()
-            });
+            };
+            repository.Setup(x => x.GetUserById(It.IsAny<string>())).Returns(user);
+            repository.Setup(x => x.GetBlockedUsers()).Returns(
+            new List<BlockedUser> { 
+                new BlockedUser
+            {
+               User = user
+            }});
 
             GuideController controller = new GuideController(repository.Object)
             {
                 ControllerContext = controllerContext.Object
             };
-            var result = controller.CreateExcursion().ViewName;
-            Assert.AreEqual("BlockView", result);
+            var result = (BlockedUser)controller.CreateExcursion().ViewData.Model;
+            Assert.AreEqual("guide", result.User.UserName);
         }
 
         [TestMethod]

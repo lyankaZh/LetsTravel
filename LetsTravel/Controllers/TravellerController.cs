@@ -24,7 +24,7 @@ namespace LetsTravel.Controllers
             if (repository.GetUserById(User.Identity.GetUserId()).BlockedUser != null)
             {
                 return View("BlockView",
-                    repository.GetBlockedUsers().FirstOrDefault(x => x.User.Id == User.Identity.GetUserId()));
+                    repository.GetBlockedUsers().FirstOrDefault(x => x.User.UserName == User.Identity.Name));
             }
 
             var user = repository.GetUserById(User.Identity.GetUserId());

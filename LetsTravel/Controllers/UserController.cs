@@ -2,11 +2,9 @@
 using System.Web;
 using System.Web.Mvc;
 using Domain.Abstract;
-using Domain.Concrete;
 using Domain.Entities;
 using LetsTravel.Models;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace LetsTravel.Controllers
 {
@@ -20,27 +18,26 @@ namespace LetsTravel.Controllers
             repository = repo;
         }
 
-        [HttpPost]
-        public ActionResult LoadImage(HttpPostedFileBase image = null)
-        {
-
-            if (image != null)
-            {
-                string userId = User.Identity.GetUserId();
-                var user = repository.GetUserById(userId);
-                user.ImageMimeType = image.ContentType;
-                user.ImageData = new byte[image.ContentLength];
-                image.InputStream.Read(user.ImageData, 0, image.ContentLength);
-                repository.UpdateUser(user);
-                repository.Save();
-            }
-            return View("/Views/Excursion/AllExcursionsForTraveller.cshtml");
-        }
+        //[HttpPost]
+        //public ActionResult LoadImage(HttpPostedFileBase image = null)
+        //{
+        //    if (image != null)
+        //    {
+        //        string userId = User.Identity.GetUserId();
+        //        var user = repository.GetUserById(userId);
+        //        user.ImageMimeType = image.ContentType;
+        //        user.ImageData = new byte[image.ContentLength];
+        //        image.InputStream.Read(user.ImageData, 0, image.ContentLength);
+        //        repository.UpdateUser(user);
+        //        repository.Save();
+        //    }
+        //    return View("/Views/Excursion/AllExcursionsForTraveller.cshtml");
+        //}
 
 
         public FileContentResult GetImage(string id)
         {
-            var user = repository.GetUsers().FirstOrDefault(p => p.Id == id);
+            var user = repository.GetUserById(id);
             if (user != null)
             {
                 return File(user.ImageData, user.ImageMimeType);
@@ -130,7 +127,7 @@ namespace LetsTravel.Controllers
                 repository.Save();
                 return RedirectToAction("ShowProfile");
             }
-            return Edit();
+            return RedirectToAction("Edit");
         }
 
         [HttpPost]
@@ -155,7 +152,8 @@ namespace LetsTravel.Controllers
                 {
                     //дозволити видалення коли є екскурсії, на які ніхто не підписався. в такому разі видаляємо і екскурсії
                     //якщо є активні екскурсії, на які хто-небудь підписався - заборонити видаляти
-                    var excursionsOfGuideWithDependencies = from exc in repository.GetExcursionsByGuideId(id)
+                    var excursionsOfGuideWithDependencies =
+                        from exc in repository.GetExcursions().Where(x => x.Guide == id)
                         where exc.Users.Count > 0
                         select exc;
                     if (excursionsOfGuideWithDependencies.Any())
@@ -164,16 +162,15 @@ namespace LetsTravel.Controllers
                             "You can`t delete your profile because you have active excursions with subscribers";
                         return RedirectToAction("ShowProfile");
                     }
-                    foreach (var excursion in repository.GetExcursionsByGuideId(id))
+                    foreach (var excursion in repository.GetExcursions().Where(x => x.Guide == id))
                     {
                         repository.DeleteExcursion(excursion.ExcursionId);
                     }
                 }
-                HttpContext.GetOwinContext().Authentication.SignOut();
                 repository.DeleteUser(id);
                 repository.Save();
             }
-            return new RedirectResult("/Home/Index");
-        }      
+            return RedirectToAction("Logout","Account");
+        }        
     }
 }
