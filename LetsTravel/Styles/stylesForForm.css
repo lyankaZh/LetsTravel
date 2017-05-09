@@ -1,43 +1,45 @@
 ﻿body {
-   
     background-size: cover;
     font-family: Montserrat;
+    font-family: 'Roboto', sans-serif;
 }
 
 .body-login-back {
-     background: url('http://i.imgur.com/Eor57Ae.jpg') no-repeat fixed center center;
+    background: url('http://i.imgur.com/Eor57Ae.jpg') no-repeat fixed center center;
 }
 
 .modal-body important! {
+    text-align: left;
     position: relative;
     padding: 30px;
 }
 
 .form-group {
+    text-align: left;
     margin-bottom: 5px;
-     font-family: "Times New Roman", Times, serif;
+    /*font-family: "Times New Roman", Times, serif;*/
 }
 
 #username {
-       width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
+    width: 100%;
+    padding: 5px 10px 5px 10px;
+    margin: 0px;
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
-    
 }
 
-::-webkit-input-placeholder {
+/*::-webkit-input-placeholder {
   padding-left: 20px;
-}
+}*/
 
-#font-added{
-     font-family: "Times New Roman", Times, serif;
-         font-size: 20px;
+#font-added {
+    /*font-family: "Times New Roman", Times, serif;*/
+    font-size: 20px;
     margin-left: 100px;
     font-weight: 300;
 }
+
 .login-block {
     width: 320px;
     padding: 20px;
@@ -86,11 +88,10 @@
             background-size: 16px 80px;
         }
 
-            .login-block input#password {
-                background: #fff url('http://i.imgur.com/Qf83FTt.png') 20px bottom no-repeat;
-                background-size: 16px 80px;
-
-            }
+        .login-block input#password {
+            background: #fff url('http://i.imgur.com/Qf83FTt.png') 20px bottom no-repeat;
+            background-size: 16px 80px;
+        }
 
         .login-block input:active, .login-block input:focus {
             border: 1px solid #ff656c;
@@ -113,22 +114,17 @@
         margin: 5px;
     }
 
-   
+
         .login-block button:hover {
             background: #ff7b81;
         }
-   
-a:-webkit-any-link {
-    color: white;
-    text-decoration: none;
-}
 
 select, select[size="0"], select[size="1"] {
     width: 100%;
     /*outline: 1px solid #ccc;*/
     color: gray;
-      height: 40px;
-border-radius: 5px;
+    height: 40px;
+    border-radius: 5px;
     display: inline-block;
     padding: 6px 12px;
     margin-bottom: 0;
@@ -148,7 +144,6 @@ border-radius: 5px;
     background-image: none;
 }
 
-select, select[size="0"], select[size="1"] {
-    border-color: rgb(204, 204, 204) !important;
-}
-
+    select, select[size="0"], select[size="1"] {
+        border-color: rgb(204, 204, 204) !important;
+    }

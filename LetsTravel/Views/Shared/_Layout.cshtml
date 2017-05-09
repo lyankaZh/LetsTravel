@@ -1,15 +1,11 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Let's travel</title>
+    <title>@ViewBag.Title</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-    <link href="~/Styles/bootstrap.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
     <style>
         /* Set black background color, white text and some padding */
         footer {
@@ -30,11 +26,7 @@
         }
     </style>
 </head>
-
-
 <body>
-
-
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -53,9 +45,9 @@
                     </li>
 
                     <li>
-                       
-                            @Html.ActionLink("Profile", "ShowProfile", "User")
-                        
+
+                        @Html.ActionLink("Profile", "ShowProfile", "User")
+
                     </li>
 
 
@@ -106,10 +98,7 @@
     <div class="container text-center">
         <div class="container">
             <div class="row">
-
-                <div class="col-sm-7">
-                    @RenderBody()
-                </div>
+                @RenderBody()
             </div>
         </div>
     </div>
@@ -117,48 +106,46 @@
     @*<footer class="container-fluid text-center">
             <p>© ¡Lets Travel!</p>
         </footer>*@
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 
+    <script type="text/javascript">
 
+        $(document).ready(function () {
+            $('li.active').removeClass('active');
+            $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
+        });
+    </script>
 </body>
 
 </html>
 
 
+@*$(function () {
+            // Initialize numeric spinner input boxes
+            //$(".numeric-spinner").spinedit();
 
+            // Initalize modal dialog
+            // attach modal-container bootstrap attributes to links with .modal-link class.
+            // when a link is clicked with these attributes, bootstrap will display the href content in a modal dialog.
+            $('body').on('click', '.modal-link', function (e) {
+                e.preventDefault();
+                $(this).attr('data-target', '#modal-container');
+                $(this).attr('data-toggle', 'modal');
+            });
 
+            // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
+            $('body').on('click', '.modal-close-btn', function () {
+                $('#modal-container').modal('hide');
+            });
 
-<script type="text/javascript">
+            //clear modal cache, so that new content can be loaded
+            $('#modal-container').on('hidden.bs.modal', function () {
+                $(this).removeData('bs.modal');
+            });
 
-    $(document).ready(function () {
-        $('li.active').removeClass('active');
-        $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
-    });
-    </script>
-    @*$(function () {
-        // Initialize numeric spinner input boxes
-        //$(".numeric-spinner").spinedit();
-
-        // Initalize modal dialog
-        // attach modal-container bootstrap attributes to links with .modal-link class.
-        // when a link is clicked with these attributes, bootstrap will display the href content in a modal dialog.
-        $('body').on('click', '.modal-link', function (e) {
-            e.preventDefault();
-            $(this).attr('data-target', '#modal-container');
-            $(this).attr('data-toggle', 'modal');
+            $('#CancelModal').on('click', function () {
+                return false;
+            });
         });
-
-        // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
-        $('body').on('click', '.modal-close-btn', function () {
-            $('#modal-container').modal('hide');
-        });
-
-        //clear modal cache, so that new content can be loaded
-        $('#modal-container').on('hidden.bs.modal', function () {
-            $(this).removeData('bs.modal');
-        });
-
-        $('#CancelModal').on('click', function () {
-            return false;
-        });
-    });
-</script>*@
+    </script>*@

@@ -168,13 +168,23 @@ body {
   opacity: 1;
   overflow-y: auto;
 }
+
+.inline {
+    display: inline-flex;
+}
+
+.card {
+    width: 100%;
+
+}
+
 .vcard-profile-pic {
-  width: 200px;
-  height: 200px;
-  overflow: hidden;
-  margin: 0 auto;
-  margin-bottom: 20px;
-  position: relative;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    position: relative;
 }
 #container
 {

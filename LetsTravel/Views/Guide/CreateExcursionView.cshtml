@@ -3,50 +3,41 @@
     ViewBag.Title = "CreateExcursionView";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<link href="~/Styles/bootstrap.css" rel="stylesheet" />
+<link href="~/Styles/ValidationStyles.css" rel="stylesheet" />
+<link href="~/Styles/stylesForForm.css" rel="stylesheet" />
 
-<!DOCTYPE html>
-<html>
-<head>
-    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-    <link href="~/Styles/bootstrap.css" rel="stylesheet" />
-    <link href="~/Styles/ValidationStyles.css" rel="stylesheet" />
-    <link href="~/Styles/stylesForForm.css" rel="stylesheet" />
+<style>
+    .textarea {
+        width: 100% !important;
+        height: 50px !important;
+        border: 1px solid #ccc;
+        resize: none;
+    }
 
-    <meta charset="UTF-8">
+    .text-box {
+        width: 100% !important;
+        height: 50px !important;
+        border: 1px solid #ccc;
+        resize: none;
+        padding-left: 10px;
+    }
+</style>
 
-    <title>Create excursion</title>
-    <style>
-        .textarea {
-            width: 100% !important;
-            height: 50px !important;
-            border: 1px solid #ccc;
-            resize: none;
-        }
-
-        .text-box {
-            width: 100% !important;
-            height: 50px !important;
-            border: 1px solid #ccc;
-            resize: none;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="modal-body">
-
-        <label>
-            <b id="font-added">
-                Please enter information about excursion!
-            </b>
+<div class="modal-body">
+    <div class="row">
+        <label id="font-added">
+            Please enter information about excursion!
         </label>
-        @Html.ValidationSummary()
-        @using (Html.BeginForm("CreateExcursion", "Guide", FormMethod.Post))
-        {
-            <div class="form-group">
-                <label><b>City</b></label>
-                @Html.TextBoxFor(x => x.City, new { @id = "username", placeholder = "Enter " + Html.DisplayNameFor(n => n.City) })
-            </div>
+    </div>
+    @Html.ValidationSummary()
+    @using (Html.BeginForm("CreateExcursion", "Guide", FormMethod.Post))
+    {
+        <div class="form-group">
+            <label><b>City</b></label>
+            @Html.TextBoxFor(x => x.City, new { @id = "username", placeholder = "Enter " + Html.DisplayNameFor(n => n.City) })
+        </div>
             <div class="form-group">
                 <label><b>Date</b></label>
                 @Html.TextBoxFor(x => x.Date, new { @id = "username", placeholder = "Enter " + Html.DisplayNameFor(n => n.Date) })
@@ -55,10 +46,10 @@
                 <label><b>Duration</b></label>
                 @Html.TextBoxFor(x => x.Duration, new { @id = "username", placeholder = "Enter " + Html.DisplayNameFor(n => n.Duration) })
             </div>
-                    <div class="form-group">
-                        <label><b>Route</b></label>
-                        @Html.TextBoxFor(x => x.Route, new { @id = "username", placeholder = "Enter " + Html.DisplayNameFor(n => n.Route) })
-                    </div>
+            <div class="form-group">
+                <label><b>Route</b></label>
+                @Html.TextBoxFor(x => x.Route, new { @id = "username", placeholder = "Enter " + Html.DisplayNameFor(n => n.Route) })
+            </div>
                     <div class="form-group">
                         <label><b>People limit</b></label>
                         @Html.TextBoxFor(x => x.PeopleLimit, new { @id = "username", placeholder = "Enter " + "People Limit" })
@@ -73,12 +64,12 @@
                         @Html.EditorFor(x => x.Description, new { htmlAttributes = new { placeholder = "Enter " + Html.DisplayNameFor(n => n.Description) } })
 
                     </div>
-            <div class="row">
-                
-                <div class="col-md-4 col-md-offset-4">
-                    <button type="submit" class="btn btn-danger">Save</button>
-                    @Html.ActionLink("Cancel", "GetAllExcursions", "Excursion", null, new {@class = "btn btn-default"})
-                </div>
-            </div>
-        }
-    </div>
+                    <div class="row">
+
+                        <div class="col-md-4 col-md-offset-4">
+                            <button type="submit" class="btn btn-danger">Save</button>
+                            @Html.ActionLink("Cancel", "GetAllExcursions", "Excursion", null, new { @class = "btn btn-default" })
+                        </div>
+                    </div>
+    }
+</div>
