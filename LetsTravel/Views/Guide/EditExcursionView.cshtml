@@ -3,7 +3,7 @@
     ViewBag.Title = "EditExcursionView";
     Layout = "~/Views/Shared/_Layout.cshtml";
     <link href="~/Styles/profileStyles.css" rel="stylesheet" />
-    <link href = "~/Styles/ValidationStyles.css" rel = "stylesheet" />
+    <link href="~/Styles/ValidationStyles.css" rel="stylesheet" />
 }
 
 <html>
@@ -41,7 +41,7 @@
 
         @using (Html.BeginForm("Edit", "Guide", FormMethod.Post))
         {
-            
+
             <div class="section-vcardbody section-home container-fluid" id="section-home">
                 <div class="vcard-profile-description">
                     <div class="vcard-profile-description-text" id="font-style">
@@ -75,7 +75,7 @@
                         <p>
                             @Html.EditorFor(x => Model.PeopleLimit)
                         </p>
-                        
+
                         <p>
                             <label>Route: </label>
                         </p>
