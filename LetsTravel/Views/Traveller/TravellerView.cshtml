@@ -48,15 +48,14 @@
                                     <label>Email:</label> @excursion.Guide.Email
                                     <br />
                                     @if (!@excursion.Guide.AboutMyself.IsNullOrEmpty())
-                                        {
+                                    {
                                         <label>About me:</label>  @excursion.Guide.AboutMyself
-                                        }
+                                    }
 
                                 </p>
                             </div>
                             @*@Html.ActionLink("Cancel", "ShowOwnExcursions", "Guide", null, new { @class = "btn btn-default" })*@
                             @Html.ActionLink("UnSubscribe", "UnSubscribe", "Traveller", excursion, new { @class = "btn btn-danger" })
-
                         </div>
                     </div>
                 </div>

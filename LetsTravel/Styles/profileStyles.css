@@ -14,12 +14,13 @@ html {
     height: 100%
 }
 
-.section-home {
+#section-home {
     z-index: 88;
     opacity: 1;
     overflow-y: auto;
+    position: center !important;
+    width:490px !important;
 }
-
 
 .section-vcardbody {
     position: absolute;
@@ -89,7 +90,7 @@ div {
     padding: 0px;
     padding-top: 0px;
     margin-bottom: 5px;
-    text-align:left
+    text-align:left;
 }
 
 img {
@@ -109,6 +110,7 @@ img {
  .display-in-line 
         {
             display: inline-flex !important;
+            position:center !important;
         }
  .btn-with-padding {
      padding-right: 2px !important;
