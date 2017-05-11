@@ -58,9 +58,7 @@
                         <p>
                             <label>Date: </label>
                         </p>
-                        <p>
-                          <!--Html.EditorFor(x =>DateTime.Parse( String.Format("{0:dd/MM/yyyy HH:mm:ss}",  Model.Date))) -->
-                            <!--Html.EditorFor( x => Model.Date)-->
+                        <p>   
                             @Html.TextBoxFor(x => Model.Date, new { @Value = Model.Date.ToString("dd.MM.yyyy HH:mm:ss")})
                         </p>
 
