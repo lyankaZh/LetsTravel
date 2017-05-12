@@ -59,7 +59,7 @@
                             <label>Date: </label>
                         </p>
                         <p>
-                            @Html.EditorFor(x => Model.Date)
+                            @Html.TextBoxFor(x => Model.Date, new { @Value = Model.Date.ToString("dd.MM.yyyy HH:mm:ss") })
                         </p>
 
                         <p>

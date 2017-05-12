@@ -15,21 +15,27 @@ html {
 }
 
 #section-home {
-    border:
-    z-index: 88;
+    padding: inherit;
     opacity: 1;
     overflow-y: auto;
     margin: 5px;
-    border: 1px solid #ccc;
     float: left;
     width: 350px;
 }
 
-#section-vcardbody section-home{
-    padding:0px;
-} 
+#section-vcardbody section-home {
+    
+    opacity: 1;
+    overflow-y: auto;
+    margin: 5px;
+    float: left;
+    width: 350px;
+}
 
 .section-vcardbody {
+    margin: 5px;
+    float: left;
+    width: 350px;
     position: absolute;
     margin-top: 30px;
     left: 30%;

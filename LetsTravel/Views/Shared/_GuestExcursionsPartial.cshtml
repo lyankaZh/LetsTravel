@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -17,7 +20,6 @@
             <div class="vcard-profile-description">
                 <!-- Profile title -->
                 <h2 class="profile-subtitle">City: @excursion.City</h2>
-
                 <div class="vcard-profile-description-text">
                     <p>Date: @excursion.Date.ToShortDateString()</p>
                     <p>Description: @excursion.Description</p>
