@@ -186,8 +186,10 @@ body {
     z-index: 88;
     opacity: 1;
     overflow-y: auto;
-    position: center !important;
-    width: 550px !important;
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 350px;
 }
 
 .inline {
