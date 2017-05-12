@@ -1,77 +1,67 @@
-﻿
+﻿@using Castle.Core.Internal
+@model IEnumerable<LetsTravel.Models.ExcursionWithGuideInfoViewModel>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-@using Castle.Core.Internal
-@model IEnumerable<LetsTravel.Models.ExcursionWithGuideInfoViewModel>
-<head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <link href="~/Styles/bootstrap.css" rel="stylesheet" />
-    <link href="~/Styles/excursionCardStyles.css" rel="stylesheet" />
-    <title>Excursions</title>
-</head>
-@{
     ViewBag.Title = "Excursions";
 }
 
-<h2 align="left"><span class="profile-title">My Excursions:</span></h2>
-@if (ViewBag.NoExcursions != null)
-{
-    <h2>@ViewBag.NoExcursions</h2>
-}
-@foreach (var excursion in Model)
-{
-    <div class="section-vcardbody section-home" id="section-home" data-ps-id="e1e33774-dcb3-1f4c-b285-f77d195d9137">
-        <!-- Description -->
-        <div class="vcard-profile-description">
-            <!-- Profile title -->
-            <h1 class="profile-title">
-                Hi! <span class="color1">Excursion @excursion.ExcursionId</span>
-            </h1>
-            <h2 class="profile-subtitle">City: @excursion.City</h2>
 
-            <div class="vcard-profile-description-text">
-                @if (@excursion.Guide.BlockedUser != null)
-                {
-                    <label>Guide is currently blocked :(</label>
-                }
-                <p>Date: @excursion.Date.ToShortDateString()</p>
-                <p>Description: @excursion.Description</p>
-                <p>Duration: @excursion.Duration</p>
-                <p>Limit of people: @excursion.PeopleLimit</p>
-                <p>Price: @excursion.Price $</p>
-                <p>Route: @excursion.Route</p>
-            </div>
-            <div class="vcard-profile-description-text">
-                <!-- item -->
-                <button class="btn btn-info" data-toggle="collapse" data-target=@excursion.ModalId>View Guide info</button>
-                <div id=@excursion.ExcursionId class="collapse">
-                    <p class="list-group-item-text">
-                        <label>Nickname:</label> @excursion.Guide.UserName
-                        <br />
-                        <label>First Name:</label> @excursion.Guide.FirstName
-                        <br />
-                        <label>Last Name:</label> @excursion.Guide.LastName
-                        <br />
-                        <label>Email:</label> @excursion.Guide.Email
-                        <br />
-                        @if (!@excursion.Guide.AboutMyself.IsNullOrEmpty())
-                        {
-                            <label>About me:</label>  @excursion.Guide.AboutMyself
-                        }
-                       
-                    </p>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<link href="~/Styles/bootstrap.css" rel="stylesheet" />
+<link href="~/Styles/excursionCardStyles.css" rel="stylesheet" />
+
+<span class="profile-title">My Excursions:</span>
+
+<div class="row">
+    @foreach (var excursion in Model)
+    {
+        <div class="col-md-6">
+            <div class="card">
+                <div class="section-vcardbody section-home" id="section-home" data-ps-id="e1e33774-dcb3-1f4c-b285-f77d195d9137">
+                    <!-- Description -->
+                    <div class="vcard-profile-description">                        
+                        <h2 class="profile-subtitle">City: @excursion.City</h2>
+
+                        <div class="vcard-profile-description-text">
+                            <p>Date: @excursion.Date.ToShortDateString()</p>
+                            <p>Description: @excursion.Description</p>
+                            <p>Duration: @excursion.Duration</p>
+                            <p>Limit of people: @excursion.PeopleLimit</p>
+                            <p>Price: @excursion.Price $</p>
+                            <p>Route: @excursion.Route</p>
+                        </div>
+                        <div class="vcard-profile-description-text">
+                            <!-- item -->
+                            <button class="btn btn-info" data-toggle="collapse" data-target=@excursion.ModalId>View Guide info</button>
+                            <div id=@excursion.ExcursionId class="collapse">
+                                <p class="list-group-item-text">
+                                    <label>Nickname:</label> @excursion.Guide.UserName
+                                    <br />
+                                    <label>First Name:</label> @excursion.Guide.FirstName
+                                    <br />
+                                    <label>Last Name:</label> @excursion.Guide.LastName
+                                    <br />
+                                    <label>Email:</label> @excursion.Guide.Email
+                                    <br />
+                                    @if (!@excursion.Guide.AboutMyself.IsNullOrEmpty())
+                                    {
+                                        <label>About me:</label>  @excursion.Guide.AboutMyself
+                                    }
+
+                                </p>
+                            </div>
+                            @*@Html.ActionLink("Cancel", "ShowOwnExcursions", "Guide", null, new { @class = "btn btn-default" })*@
+                            @Html.ActionLink("UnSubscribe", "UnSubscribe", "Traveller", excursion, new { @class = "btn btn-danger" })
+                        </div>
+                    </div>
+
                 </div>
                 @*@Html.ActionLink("Cancel", "ShowOwnExcursions", "Guide", null, new { @class = "btn btn-default" })*@
                 @Html.ActionLink("UnSubscribe", "UnSubscribe", "Traveller", excursion, new { @class = "btn btn-danger" })
 
             </div>
         </div>
-    </div>
-}
-
-
-
+    }
+</div>
 

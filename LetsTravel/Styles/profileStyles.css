@@ -1,10 +1,10 @@
 ﻿body {
     background-image: url('../Images/profileBackground.jpg');
-     overflow-y: auto ! important;
-        overflow-x: auto ! important;
+    overflow-y: auto !important;
+    overflow-x: auto !important;
     -webkit-font-smoothing: subpixel-antialiased;
-    background-size:     cover;                     
-    background-repeat:   repeat;
+    background-size: cover;
+    background-repeat: repeat;
     background-size: 100% 100%;
     line-height: 1.42857143;
     color: #333;
@@ -14,14 +14,28 @@ html {
     height: 100%
 }
 
-.section-home {
-    z-index: 88;
+#section-home {
+    padding: inherit;
     opacity: 1;
     overflow-y: auto;
+    margin: 5px;
+    float: left;
+    width: 350px;
 }
 
+#section-vcardbody section-home {
+    
+    opacity: 1;
+    overflow-y: auto;
+    margin: 5px;
+    float: left;
+    width: 350px;
+}
 
 .section-vcardbody {
+    margin: 5px;
+    float: left;
+    width: 350px;
     position: absolute;
     margin-top: 30px;
     left: 30%;
@@ -78,6 +92,7 @@ div {
     color: #021533;
     font-style: italic;
 }
+
 .profile-subtitle {
     text-align: center;
     margin-top: 0;
@@ -85,11 +100,12 @@ div {
     font-weight: bold;
     margin-bottom: 20px;
 }
+
 .vcard-profile-description-text {
     padding: 0px;
     padding-top: 0px;
     margin-bottom: 5px;
-    text-align:left
+    text-align: left;
 }
 
 img {
@@ -106,17 +122,19 @@ img {
     font-family: "Libre Baskerville", serif !important;
 }
 
- .display-in-line 
-        {
-            display: inline-flex !important;
-        }
- .btn-with-padding {
-     padding-right: 2px !important;
- }
- #normal-button {
-     display: inline-flex;
- }
- 
- .btn-success {
-     margin-right: 10px !important;
- }
+.display-in-line {
+    display: inline-flex !important;
+    position: center !important;
+}
+
+.btn-with-padding {
+    padding-right: 2px !important;
+}
+
+#normal-button {
+    display: inline-flex;
+}
+
+.btn-success {
+    margin-right: 10px !important;
+}

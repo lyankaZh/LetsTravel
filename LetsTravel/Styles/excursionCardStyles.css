@@ -3,37 +3,45 @@
 }
 
 .color1 {
-  color: #08aeac;
+    color: #08aeac;
 }
+
 .color2 {
-  color: #021533;
+    color: #021533;
 }
+
 .color3 {
-  color: #d9212a;
+    color: #d9212a;
 }
+
 .font1 {
-  font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
+
 .bold {
-  font-weight: bold;
+    font-weight: bold;
 }
+
 .bg-cover {
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
+
 .box-shadow {
-  -webkit-box-shadow: 0px 2px 6px 0px rgba(50, 50, 50, 0.3);
-  -moz-box-shadow: 0px 2px 6px 0px rgba(50, 50, 50, 0.3);
-  box-shadow: 0px 2px 6px 0px rgba(50, 50, 50, 0.3);
+    -webkit-box-shadow: 0px 2px 6px 0px rgba(50, 50, 50, 0.3);
+    -moz-box-shadow: 0px 2px 6px 0px rgba(50, 50, 50, 0.3);
+    box-shadow: 0px 2px 6px 0px rgba(50, 50, 50, 0.3);
 }
+
 .responsive-image {
-  width: 100%;
+    width: 100%;
 }
+
 .section {
-  padding-top: 20px;
-  padding-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 
@@ -48,137 +56,139 @@ body {
 }
 
 .container {
-  position: relative;
-  padding-bottom: 80px;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
+    position: relative;
+    padding-bottom: 80px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
+
 @media (min-width:992px) {
-  .container {
-    min-height: 680px;
-  }
+    .container {
+        min-height: 680px;
+    }
 }
+
 .section-vcardbody {
-  width: 99%;
-  margin: 0 auto;
-  overflow-y: scroll;
-  background: url('../img/bg-card2.png') repeat-x right top #f4f4f4;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding: 20px;
-  border-top: 6px solid #111;
-  -webkit-transition: all 0.6s ease-in-out;
-  -moz-transition: all 0.6s ease-in-out;
-  transition: all 0.6s ease-in-out;
-  border-radius: 0px;
-  -moz-border-radius: 0px;
-  -webkit-border-radius: 0px;
-  -webkit-box-shadow: 0px 6px 18px 0px rgba(0, 0, 0, 0.46);
-  -moz-box-shadow: 0px 6px 18px 0px rgba(0, 0, 0, 0.46);
-  box-shadow: 0px 6px 18px 0px rgba(0, 0, 0, 0.46);
-  border-bottom: 15px solid #f4f4f4;
-}
-@media (min-width:992px) {
-  .section-vcardbody {
-    margin-top: 30px;
-    left: 30%;
-    max-height: 570px;
-    width: 70%;
-    padding: 20px;
-    padding-bottom: 0px;
-  }
-}
-@media (min-width: 1400px) {
-  .section-vcardbody {
-    margin-top: 180px;
-  }
-}
-.section-vcardbody-pgactive {
-  left: 15%;
-}
-@media (min-width:992px) {
-  .section-page-single {
-    left: 55%;
-    transform: translateY(-200px);
-    -moz-transform: translateY(-200px);
-    -webkit-transform: translateY(-200px);
-    visibility: hidden;
-    padding: 20px;
-    padding-top: 0px;
-  }
-}
-@media (min-width:992px) {
-  .section-page {
-    z-index: 11;
-    opacity: 0;
-  }
-}
-@media (min-width:992px) {
-  .page-mask {
-    position: absolute;
-    top: 605px;
-    left: 30%;
-    display: block;
-    width: 20%;
-    height: 20px;
-    background: #333;
-    z-index: 77;
-    opacity: 0;
+    background: url('../img/bg-card2.png') repeat-x right top #f4f4f4;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-top: 6px solid #111;
     -webkit-transition: all 0.6s ease-in-out;
     -moz-transition: all 0.6s ease-in-out;
     transition: all 0.6s ease-in-out;
-  }
+    border-radius: 0px;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -webkit-box-shadow: 0px 6px 18px 0px rgba(0, 0, 0, 0.46);
+    -moz-box-shadow: 0px 6px 18px 0px rgba(0, 0, 0, 0.46);
+    box-shadow: 0px 6px 18px 0px rgba(0, 0, 0, 0.46);
+    border-bottom: 15px solid #f4f4f4;
+    margin: 5px;
+    float: left;
+    width: 350px;
 }
-.page-mask-active {
-  left: 55%;
-  opacity: 1;
-  margin-left: 10px;
-}
-.section-page-active {
-  opacity: 1;
-  z-index: 22;
-  left: 55%;
-  visibility: visible;
-  transform: translateY(0px);
-  -moz-transform: translateY(0px);
-  -webkit-transform: translateY(0px);
-}
+
 @media (min-width:992px) {
-  .section-page-active {
-    margin-top: 30px;
+    .section-page-single {
+        left: 55%;
+        transform: translateY(-200px);
+        -moz-transform: translateY(-200px);
+        -webkit-transform: translateY(-200px);
+        visibility: hidden;
+        padding: 20px;
+        padding-top: 0px;
+    }
+}
+
+@media (min-width:992px) {
+    .section-page {
+        z-index: 11;
+        opacity: 0;
+    }
+}
+
+@media (min-width:992px) {
+    .page-mask {
+        position: absolute;
+        top: 605px;
+        left: 30%;
+        display: block;
+        width: 20%;
+        height: 20px;
+        background: #333;
+        z-index: 77;
+        opacity: 0;
+        -webkit-transition: all 0.6s ease-in-out;
+        -moz-transition: all 0.6s ease-in-out;
+        transition: all 0.6s ease-in-out;
+    }
+}
+
+.page-mask-active {
+    left: 55%;
+    opacity: 1;
     margin-left: 10px;
-  }
 }
+
+.section-page-active {
+    opacity: 1;
+    z-index: 22;
+    left: 55%;
+    visibility: visible;
+    transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+}
+
+@media (min-width:992px) {
+    .section-page-active {
+        margin-top: 30px;
+        margin-left: 10px;
+    }
+}
+
 @media (min-width: 1400px) {
-  .section-page-active {
-    margin-top: 180px;
-  }
+    .section-page-active {
+        margin-top: 180px;
+    }
 }
 
-
-.section-home {
-  z-index: 88;
-  opacity: 1;
-  overflow-y: auto;
+#section-home {
+    z-index: 88;
+    opacity: 1;
+    overflow-y: auto;
+    margin: 5px;
+    float: left;
+    width: 350px;
+    padding: inherit;
 }
+
+.inline {
+    display: inline-flex;
+}
+
+.card {
+    width: 100%;
+}
+
 .vcard-profile-pic {
-  width: 200px;
-  height: 200px;
-  overflow: hidden;
-  margin: 0 auto;
-  margin-bottom: 20px;
-  position: relative;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    position: relative;
 }
-#container
-{
-    width: 40%!important;
+
+#container {
+    width: 40% !important;
 }
 .section-vcardbody-width {
     width: 70%;
     margin: 0 auto;
     overflow-y: scroll;
-    background:  repeat-x right top #f4f4f4;
+    background: repeat-x right top #f4f4f4;
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 20px;
@@ -193,97 +203,112 @@ body {
     -moz-box-shadow: 0px 6px 18px 0px rgba(0, 0, 0, 0.46);
     box-shadow: 0px 6px 18px 0px rgba(0, 0, 0, 0.46);
     border-bottom: 15px solid #f4f4f4;
+    padding: inherit;
 }
+
 .profileActive {
-  opacity: 1!important;
+    opacity: 1 !important;
 }
+
 .vcard-profile-description {
-  text-align: left;
-  padding: initial;
+    text-align: center;
+    padding: initial;
 }
+
 .profile-title {
-  text-align: center;
-  font-weight: bold;
-  margin-top: 0;
-  font-size: 36px;
-  letter-spacing: -2px;
-  margin-bottom: 0px;
-  color: #021533;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 0;
+    font-size: 36px;
+    letter-spacing: -2px;
+    margin-bottom: 0px;
+    color: #021533;
 }
+
 .profile-subtitle {
-  text-align: center;
-  margin-top: 0;
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 20px;
+    text-align: center;
+    margin-top: 0;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
-.vcard-profile-description-text {
-  padding: 5px;
-  padding-top: 0px;
-  margin-bottom: 0px;
+
+#vcard-profile-description-text {
+    padding: 0px;
+    padding-top: 0px;
+    margin-bottom: 5px;
+    text-align: left;
 }
+
+
+
 .vcard-profile-description-text p {
-  font-size: 13px;
+    font-size: 13px;
 }
 
 .vcard-profile-description-ft-item {
-  margin-bottom: 0px;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+    margin-bottom: 0px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
 }
+
 h3, .h3 {
     font-size: 14px;
     margin-top: 1px;
     margin-bottom: 1px;
 }
+
 .vcard-profile-description-ft-item p {
-  margin-bottom: 0;
-  color: #ffffff;
-  font-size: 12px;
+    margin-bottom: 0;
+    color: #ffffff;
+    font-size: 12px;
 }
 /* ==========================================================
 ! 09. Content
 ========================================================== */
 .section-title {
-  color: #021533;
-  text-transform: uppercase;
-  font-size: 22px;
-  line-height: 26px;
-  font-weight: bold;
-  margin-top: 0;
-  border-bottom: 1px solid #021533;
-  padding-bottom: 10px;
-  margin-bottom: 40px;
+    color: #021533;
+    text-transform: uppercase;
+    font-size: 22px;
+    line-height: 26px;
+    font-weight: bold;
+    margin-top: 0;
+    border-bottom: 1px solid #021533;
+    padding-bottom: 10px;
+    margin-bottom: 40px;
 }
+
 .section-title2 {
-  font-weight: bold;
-  color: #08aeac;
-  font-size: 20px;
-  line-height: 24px;
-  letter-spacing: -1px;
-  padding-bottom: 10px;
-  padding-left: 15px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border-left: 4px solid #08aeac;
+    font-weight: bold;
+    color: #08aeac;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -1px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-left: 4px solid #08aeac;
 }
+
 .resume-item {
-  padding: 15px;
-  border: 4px double #ccc;
-  margin-bottom: 15px;
+    padding: 15px;
+    border: 4px double #ccc;
+    margin-bottom: 15px;
 }
+
 .section-item-title-1 {
-  font-weight: bold;
-  color: #021533;
-  color: #333;
-  padding-left: 0;
-  margin-left: 0;
-  font-size: 18px;
-  line-height: 22px;
-  margin: 0;
-  margin-bottom: 8px;
-  letter-spacing: -1px;
+    font-weight: bold;
+    color: #021533;
+    color: #333;
+    padding-left: 0;
+    margin-left: 0;
+    font-size: 18px;
+    line-height: 22px;
+    margin: 0;
+    margin-bottom: 8px;
+    letter-spacing: -1px;
 }
 
 /*============================================================================
@@ -291,78 +316,88 @@ h3, .h3 {
   ============================================================================
 */
 .section-education {
-  margin-bottom: 40px;
+    margin-bottom: 40px;
 }
+
 .resume-buttons {
-  margin-bottom: 30px;
+    margin-bottom: 30px;
 }
+
 .header-page-buttons {
-  margin-top: -20px;
+    margin-top: -20px;
 }
+
 .page-footer {
-  border-top: 1px solid #ccc;
-  padding-top: 20px;
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
 }
+
 .footer-quote {
-  color: #444;
-  font-size: 11px;
-  border-top: 1px solid #ccc;
-  padding-top: 10px;
+    color: #444;
+    font-size: 11px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
 }
 
 
 
 .progress-bar {
-  background: #08aeac;
-  width: 20%;
+    background: #08aeac;
+    width: 20%;
 }
+
 .progress-bar-2 {
-  background: #021533;
+    background: #021533;
 }
+
 .progress-bar-3 {
-  background: #d9212a;
+    background: #d9212a;
 }
 
 .project-description {
-  position: absolute;
-  top: 50%;
-  margin-top: -55px;
-  width: 100%;
+    position: absolute;
+    top: 50%;
+    margin-top: -55px;
+    width: 100%;
 }
+
 .project-title {
-  text-transform: uppercase;
-  font-size: 20px;
-  transform: translateY(10px);
-  -webkit-transform: translateY(10px);
-  -moz-transform: translateY(10px);
-  -webkit-transition: all 0.4s ease-in-out;
-  -moz-transition: all 0.4s ease-in-out;
-  transition: all 0.4s ease-in-out;
+    text-transform: uppercase;
+    font-size: 20px;
+    transform: translateY(10px);
+    -webkit-transform: translateY(10px);
+    -moz-transform: translateY(10px);
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
 }
-.project-title:after {
-  content: '';
-  display: block;
-  height: 1px;
-  border-bottom: 1px solid #ffffff;
-  width: 50%;
-  margin: 0 auto;
-  opacity: 0.5;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
+
+    .project-title:after {
+        content: '';
+        display: block;
+        height: 1px;
+        border-bottom: 1px solid #ffffff;
+        width: 50%;
+        margin: 0 auto;
+        opacity: 0.5;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
 
 
 .section-header-image {
-  margin-bottom: 40px;
+    margin-bottom: 40px;
 }
-.section-header-image img {
-  width: 100%;
-}
+
+    .section-header-image img {
+        width: 100%;
+    }
+
 .section-pagination {
-  font-size: 12px;
-  padding-bottom: 20px;
+    font-size: 12px;
+    padding-bottom: 20px;
 }
 
 #normal-button {
-     display: inline-flex !important;
- }
+    display: inline-flex !important;
+}

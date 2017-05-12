@@ -3,7 +3,7 @@
 }
 
 .img-center {
-	margin: 0 auto;
+    margin: 0 auto;
 }
 
 footer {
@@ -17,5 +17,4 @@ footer {
 .img-circle {
     height: 200pt;
     width: 150pt;
-
 }

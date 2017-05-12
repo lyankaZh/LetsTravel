@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -13,24 +16,20 @@
     
     @foreach (var excursion in Model)
     {
-        
-            <div class="section-vcardbody-width section-home" id="section-home" data-ps-id="e1e33774-dcb3-1f4c-b285-f77d195d9137">
-                <!-- Description -->
-                <div class="vcard-profile-description">
-                    <!-- Profile title -->
-                    <h1 class="profile-title">
-                        Hi! <span class="color1">Excursion @excursion.ExcursionId</span>
-                    </h1>
-                    <h2 class="profile-subtitle">City: @excursion.City</h2>
 
-                    <div class="vcard-profile-description-text">
-                        <p>Date: @excursion.Date.ToShortDateString()</p>
-                        <p>Description: @excursion.Description</p>
-                        <p>Duration: @excursion.Duration</p>
-                        <p>Limit of people: @excursion.PeopleLimit</p>
-                        <p>Price: @excursion.Price $</p>
-                        <p>Route: @excursion.Route</p>
-                    </div>
+        <div class="section-vcardbody-width section-home" id="section-home" data-ps-id="e1e33774-dcb3-1f4c-b285-f77d195d9137">
+            <!-- Description -->
+            <div class="vcard-profile-description">
+                <!-- Profile title -->
+                <h2 class="profile-subtitle">City: @excursion.City</h2>
+                <div class="vcard-profile-description-text">
+                    <p>Date: @excursion.Date.ToShortDateString()</p>
+                    <p>Description: @excursion.Description</p>
+                    <p>Duration: @excursion.Duration</p>
+                    <p>Limit of people: @excursion.PeopleLimit</p>
+                    <p>Price: @excursion.Price $</p>
+                    <p>Route: @excursion.Route</p>
+                </div>
 
                 </div>
             </div>

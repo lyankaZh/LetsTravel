@@ -2,39 +2,34 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Excursions";
 }
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <link href="~/Styles/excursionCardStyles.css" rel="stylesheet" />
-    <title>All Excursions</title>
-</head>
-<body>
+<link href="~/Styles/excursionCardStyles.css" rel="stylesheet" />
 
-<h2 align="left"><span class="profile-title">All Excursions:</span>
+<h2 align="left">
+    <span class="profile-title">All Excursions:</span>
 </h2>
-@foreach (var excursion in Model)
-{
-    <div class="section-vcardbody section-home" id="section-home" data-ps-id="e1e33774-dcb3-1f4c-b285-f77d195d9137">
-        <!-- Description -->
-        <div class="vcard-profile-description">
-            <!-- Profile title -->
-            <h1 class="profile-title">Hi! <span class="color1">Excursion @excursion.ExcursionId</span>
-            </h1>
-            <h2 class="profile-subtitle">City: @excursion.City</h2>
 
-            <div class="vcard-profile-description-text">
-                <p>Date: @excursion.Date.ToShortDateString()</p>
-                <p>Description: @excursion.Description</p>
-                <p>Duration: @excursion.Duration</p>
-                <p>Limit of people: @excursion.PeopleLimit</p>
-                <p>Price: @excursion.Price $</p>
-                <p>Route: @excursion.Route</p>
+<div class="row">
+    @foreach (var excursion in Model)
+    {
+        <div class="col-md-6">
+            <div class="card">
+                <div class="section-vcardbody section-home">
+                    <div class="vcard-profile-description">
+                        <h2 class="profile-subtitle">City: @excursion.City</h2>
+                        <div class="vcard-profile-description-text">
+                            <p>Date: @excursion.Date.ToShortDateString()</p>
+                            <p>Description: @excursion.Description</p>
+                            <p>Duration: @excursion.Duration</p>
+                            <p>Limit of people: @excursion.PeopleLimit</p>
+                            <p>Price: @excursion.Price $</p>
+                            <p>Route: @excursion.Route</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-}
-</body>
-</html>
+    }
+</div>
