@@ -46,7 +46,7 @@ namespace LetsTravel.Controllers
 
             if (repository.GetUsers().First(x => x.UserName == User.Identity.Name).BlockedUser != null)
             {
-                return View("BlockView", repository.GetBlockedUsers().FirstOrDefault(x => x.User.Id == User.Identity.Name));
+                return View("BlockView", repository.GetBlockedUsers().FirstOrDefault(x => x.User.UserName == User.Identity.Name));
             }
 
             if (User.IsInRole("Traveller"))
