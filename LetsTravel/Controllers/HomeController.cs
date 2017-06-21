@@ -3,12 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Domain.Abstract;
+using Domain.Entities;
 using LetsTravel.Helpers;
+using LetsTravel.Models;
 
 namespace LetsTravel.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ITravelRepository repository;
+
+        public HomeController(ITravelRepository repository)
+        {
+            this.repository = repository;
+        }
+
         [AllowAnonymous]
         public ActionResult Index()
         {
@@ -33,13 +43,13 @@ namespace LetsTravel.Controllers
 
         public ActionResult Register()
         {
-           return new RedirectResult("/Account/Register");
+            return new RedirectResult("/Account/Register");
         }
 
         public ActionResult About()
         {
             FormCorrectTextOnMenuButtons();
-            return View();
+            return View("About");
         }
 
         public void FormCorrectTextOnMenuButtons()
@@ -79,5 +89,25 @@ namespace LetsTravel.Controllers
             return Redirect(Request.UrlReferrer.ToString());
         }
 
+        [HttpGet]
+        public ActionResult GiveFeedback()
+        {
+            return View("Feedback");
+        }
+       
+        [HttpPost]
+        public ActionResult GiveFeedback(FeedbackModel model)
+        {
+            if (ModelState.IsValid)
+            {Feedback feedback= new Feedback();
+                feedback.FeedbackMessage = model.FeedbackMessage;
+                feedback.FeedbackAuthorName = model.FeedbackAuthorName;
+                feedback.Date=DateTime.Now;
+                repository.InsertFeedback(feedback);
+                repository.Save();
+                return RedirectToAction("About");
+            }
+            return View("Feedback");
+        }
     }
 }

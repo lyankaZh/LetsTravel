@@ -23,5 +23,9 @@ namespace Domain.Abstract
         void DeleteUser(string userId);
         bool IsInRole(string roleName, User user);
         void Save();
+
+        IEnumerable<Feedback> GetFeedbacks();
+        void InsertFeedback(Feedback feedback);
+        
     }
 }

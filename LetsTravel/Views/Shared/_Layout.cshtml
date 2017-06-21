@@ -64,6 +64,12 @@
                             @Html.ActionLink("Excursion Management", "ShowExcursionsForAdmin", "Admin")
                         </li>
                     }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>
+                            @Html.ActionLink("Feedbacks", "ShowFeedbacksForAdmin", "Admin")
+                        </li>
+                    }
                     @if (User.IsInRole("Guide"))
                     {
                         <li>

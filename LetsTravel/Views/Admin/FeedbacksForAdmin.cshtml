@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Domain.Entities.Feedback>
+@{
+    ViewBag.Title = "FeedbacksForAdmin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Feedbacks</h2>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="~/Styles/adminStyles.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <div>
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Feedack</th>
+                <th>Date</th>
+
+            </tr>
+            @foreach (var excursion in Model)
+            {
+                <tr>
+                    <td>@excursion.FeedbackAuthorName</td>
+                    <td>@excursion.FeedbackMessage</td>
+                    <td>@excursion.Date.ToShortDateString()</td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</body>
+</html>

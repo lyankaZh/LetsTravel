@@ -24,7 +24,7 @@ namespace LetsTravel.Controllers
         {
             List<UserForAdminViewModel> usersToDisplay = new List<UserForAdminViewModel>();
             foreach (var user in repository.GetUsers())
-            {           
+            {
                 usersToDisplay.Add(
                     new UserForAdminViewModel
                     {
@@ -33,11 +33,11 @@ namespace LetsTravel.Controllers
                         LastName = user.LastName,
                         Id = user.Id,
                         Nickname = user.UserName,
-                        CollapseId = "#"+user.Id,
+                        CollapseId = "#" + user.Id,
                         IsBlocked = repository.GetBlockedUsers().FirstOrDefault(x => x.User.Id == user.Id) != null
-            });
+                    });
             }
-            return View("Users",usersToDisplay);
+            return View("Users", usersToDisplay);
         }
 
         public ViewResult ShowExcursionsForAdmin()
@@ -50,16 +50,22 @@ namespace LetsTravel.Controllers
                 excursionsToDisplay.Add(
                     new ExcursionModelForAdmin()
                     {
-                       ExcursionId = exc.ExcursionId,
-                       City = exc.City,
-                       Date = exc.Date,
-                       Price = exc.Price,
-                       GuideNickname = guide.UserName,
-                       GuideFirstName = guide.FirstName,
-                       GuideLastName = guide.LastName
+                        ExcursionId = exc.ExcursionId,
+                        City = exc.City,
+                        Date = exc.Date,
+                        Price = exc.Price,
+                        GuideNickname = guide.UserName,
+                        GuideFirstName = guide.FirstName,
+                        GuideLastName = guide.LastName
                     });
             }
             return View("Excursions", excursionsToDisplay);
+        }
+
+        public ViewResult ShowFeedbacksForAdmin()
+        {
+            var feedbacks = repository.GetFeedbacks();
+            return View("FeedbacksForAdmin", feedbacks);
         }
 
 
@@ -146,6 +152,6 @@ namespace LetsTravel.Controllers
                 TempData["userDeleted"] = "User has been unblocked";
             }
             return RedirectToAction("ShowUsersForAdmin");
-        }      
+        }
     }
 }

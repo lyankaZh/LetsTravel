@@ -1,0 +1,56 @@
+﻿@model LetsTravel.Models.FeedbackModel
+@{
+    ViewBag.Title = "Feedback";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<link href="~/Styles/bootstrap.css" rel="stylesheet" />
+<link href="~/Styles/ValidationStyles.css" rel="stylesheet" />
+<link href="~/Styles/stylesForForm.css" rel="stylesheet" />
+
+<style>
+    .textarea {
+        width: 100% !important;
+        height: 50px !important;
+        border: 1px solid #ccc;
+        resize: none;
+    }
+
+    .text-box {
+        width: 100% !important;
+        height: 50px !important;
+        border: 1px solid #ccc;
+        resize: none;
+        padding-left: 10px;
+    }
+</style>
+
+<div class="modal-body">
+<div class="row">
+    <label id="font-added">
+        Please enter your feedback
+    </label>
+</div>
+
+@using (Html.BeginForm("GiveFeedback", "Home", FormMethod.Post))
+{
+    <div class="form-group">
+        <label><b>Your name</b></label>
+        @Html.TextBoxFor(x => x.FeedbackAuthorName, new { @id = "username", style = "color: black" })
+    </div>
+
+    <div class="form-group">
+        <label><b>Text of feedback</b></label>
+
+        @Html.TextBoxFor(x => x.FeedbackMessage, new { @id = "username", style ="color: black"})
+
+    </div>
+    <div class="row">
+
+        <div class="col-md-4 col-md-offset-4">
+            <button type="submit" class="btn btn-danger">Save</button>
+            @Html.ActionLink("Cancel", "About","Home", null, new { @class = "btn btn-default" })
+        </div>
+    </div>
+}
+</div>

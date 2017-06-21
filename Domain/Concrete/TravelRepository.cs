@@ -41,6 +41,11 @@ namespace Domain.Concrete
         {
             return context.Excursions.ToList();
         }
+        public IEnumerable<Feedback> GetFeedbacks()
+        {
+            return context.Feedbacks.ToList();
+        }
+
 
         public Excursion GetExcursionById(int excursionId)
         {
@@ -75,7 +80,12 @@ namespace Domain.Concrete
         context.Excursions.Add(excursion);
     }
 
-    public void InsertBlockedUser(BlockedUser blockedUser)
+    public void InsertFeedback(Feedback feedback)
+    {
+            context.Feedbacks.Add(feedback);
+    }
+
+        public void InsertBlockedUser(BlockedUser blockedUser)
     {
         context.BlockedUsers.Add(blockedUser);
     }

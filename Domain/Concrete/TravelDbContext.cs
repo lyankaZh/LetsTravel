@@ -8,7 +8,7 @@ namespace Domain.Concrete
 {
     public class TravelDbContext: IdentityDbContext<User>
     {
-        public TravelDbContext(): base("TravelDb") 
+        public TravelDbContext(): base("TravelDbTest") 
         {
             Database.SetInitializer(new TravelDInitializer());
         }
@@ -17,7 +17,7 @@ namespace Domain.Concrete
         {
             return new TravelDbContext();
         }
-
+        public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Excursion> Excursions { get; set; }
         public DbSet<BlockedUser> BlockedUsers { get; set; }
         //public new DbSet<User> Users { get; set; }

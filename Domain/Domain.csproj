@@ -117,6 +117,7 @@
     <Compile Include="Entities\AppUserManager.cs" />
     <Compile Include="Entities\BlockedUser.cs" />
     <Compile Include="Entities\Excursion.cs" />
+    <Compile Include="Entities\Feedback.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
